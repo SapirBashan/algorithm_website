@@ -1,0 +1,19 @@
+.button {
+    display: inline-block;
+    padding: 40px 40px; /* Larger padding for a bigger button */
+    font-weight: bold;
+    font-size: 24px; /* Increased font size for larger text */
+    /*make the botton on the top left of the screen*/
+    text-align: center;
+    text-decoration: none;
+    background-color: #4c59af;
+    color: #ffffff;
+    border-radius: 15px; /* Rounded edges */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #a06045;
+}
