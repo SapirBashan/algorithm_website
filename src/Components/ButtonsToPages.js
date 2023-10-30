@@ -14,9 +14,14 @@ export default class ButtonsToPages extends React.Component {
     return (
       <button className="button" onClick={() => navigateTo(this.props.link)}>
         {this.props.text}
+        {/* image  src is the image that will be used for the button, alt is the text that will be displayed if the image doesn't load */}
+        <img className="button-image" src={this.props.image} alt="no image" />
       </button>
     );
   }
+
+
+  
   
 
   //this is the prop types that will be used
