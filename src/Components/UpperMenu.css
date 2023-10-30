@@ -26,7 +26,7 @@
 }
 
 .upper-menu__search {
-  font-size: 14px; /* Decrease the font size for slimness */
+  font-size: 15px; /* Decrease the font size for slimness */
 }
 
 .upper-menu__right {
@@ -41,4 +41,63 @@
 
 .upper-menu__cart {
   font-size: 14px; /* Decrease the font size for slimness */
+}
+
+.search {
+  max-width: 34px; /* Set the maximum width for the search button */
+  max-height: 34px; /* Set the maximum height for the search button */
+  display: flex;
+  align-items: center;
+  border-radius: 0 10px 10px 0;
+  justify-content: center;
+  cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+}
+
+.search img {
+  width: 100%; /* Make sure the image takes 100% width of the button */
+  height: auto; /* Maintain the aspect ratio */
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Styles for the search results container */
+.search-results-container {
+  position: absolute;
+  top: 64%; /* Position the container below the search input */
+  left: 0;
+  width: 192px; /* Set a specific width for the dropdown menu */
+  max-height: 200px; /* Set a maximum height for the dropdown menu */
+  overflow-y: auto; /* Enable vertical scrolling within the container */
+  background-color: white;
+  text-align: left;
+  color: #21252b;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: slide-down 0.3s ease; /* Apply the slide-down animation */
+  z-index: 1; /* Ensure the results container is above other content */
+  margin-left: 80px; /* Adjust the left margin to align it more left */
+}
+
+
+/* Styles for search results list */
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: 8px; /* Adjust padding of individual items */
+  font-size: 16px; /* Adjust font size of items */
+}
+
+.search-results li {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.search-results li:last-child {
+  border-bottom: none;
 }

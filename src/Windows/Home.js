@@ -10,13 +10,6 @@ function Home() {
 		<div className="App">
 		<UpperMenu />
 		<BrowserRouter>
-
-			{/*
-			switch used to render only the first
-			route that matches the location rather 
-			than rendering all matching routes.
-			 */}
-
 			<Routes>
 				{/*Route to render the home page*/}
 				<Route exact path='/' element={
