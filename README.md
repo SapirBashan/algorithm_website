@@ -69,7 +69,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
 מבנה נתונים א:
 Insertion sort
 Bubble sort
@@ -99,10 +98,11 @@ Hofman algorithm
 Graphs
 2–3 tree
 B Tree
-Find the I value 
+Find the I value
+BFS
 
 מבוא לבינה מלאכותית:
-A  star
+A star
 ID search
 Hill climbing search
 Gradient descent
@@ -112,6 +112,3 @@ Regression
 KNN
 Decision tree
 K means
-
-
-
