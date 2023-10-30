@@ -3,9 +3,12 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './Home.css'
 import ButtonsToPages from '../components/ButtonsToPages.js';
 import { routeData ,buttonsData } from '../components/data.js';
+import UpperMenu from '../components/UpperMenu';
 
 function Home() {
 	return (
+		<div className="App">
+		<UpperMenu />
 		<BrowserRouter>
 
 			{/*
@@ -33,6 +36,7 @@ function Home() {
 				))}
 			</Routes>
 		</BrowserRouter>
+		</div>
 	)
 }
 

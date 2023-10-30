@@ -1,0 +1,44 @@
+/* Add CSS for the UpperMenu component */
+.upper-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4c59af;
+  color: white;
+  height: 60px; /* Set the desired height for the slim menu */
+  padding: 10px 20px; /* Adjust the padding to your liking */
+  z-index: 1000; /* Set a z-index to ensure it's above other content */
+}
+
+.upper-menu__left {
+  display: flex;
+  align-items: center;
+}
+
+.upper-menu__logo {
+  font-size: 18px; /* Decrease the font size for slimness */
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.upper-menu__search {
+  font-size: 14px; /* Decrease the font size for slimness */
+}
+
+.upper-menu__right {
+  display: flex;
+  align-items: center;
+}
+
+.upper-menu__user {
+  font-size: 14px; /* Decrease the font size for slimness */
+  margin-right: 20px;
+}
+
+.upper-menu__cart {
+  font-size: 14px; /* Decrease the font size for slimness */
+}
