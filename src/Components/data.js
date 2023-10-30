@@ -2,6 +2,7 @@ import React from 'react';
 import InsertionSort from '../windows/InsertionSort';
 import BubbleSort from '../windows/BubbleSort';
 import BFS from '../windows/BFS';
+import DFS from '../windows/DFS';
 import SelectionSort from '../windows/SelectionSort';
 import MergeSort from '../windows/MergeSort';
 import HeapSort from '../windows/HeapSort';
@@ -35,6 +36,7 @@ import CSP from '../windows/CSP';
 import Regression from '../windows/Regression';
 import KNN from '../windows/KNN';
 import KMeans from '../windows/KMeans';
+
 
 
 // Import images with fixed paths
@@ -73,12 +75,15 @@ import RadixSortImage from '../icons/Radix Sort.png';
 import SelectionSortImage from '../icons/Selection sort.png';
 import StackImage from '../icons/stack.png';
 import TrieImage from '../icons/Trie.png';
+import BFSIMG from '../icons/BFS.png';
+import DFSIMG from '../icons/DFS.png';
 
 
 export const buttonsData = [
   { text: 'Insertion Sort', link: '/src/windows/InsertionSort', image: InsertionSortImage },
   { text: 'Bubble Sort', link: '/src/windows/BubbleSort', image: BubbleSortImage },
-  { text: 'BFS', link: '/src/windows/BFS', image: GraphsImage },
+  { text: 'BFS', link: '/src/windows/BFS', image: BFSIMG },
+  { text: 'DFS', link: '/src/windows/DFS', image: DFSIMG },
   { text: 'Selection Sort', link: '/src/windows/SelectionSort', image: SelectionSortImage },
   { text: 'Merge Sort', link: '/src/windows/MergeSort', image: MergeSortImage },
   { text: 'Heap Sort', link: '/src/windows/HeapSort', image: HeapSortImage },
@@ -158,6 +163,7 @@ export const routeData = [
   { path: '/src/windows/InsertionSort', element: <InsertionSort /> },
   { path: '/src/windows/BubbleSort', element: <BubbleSort /> },
   { path: '/src/windows/BFS', element: <BFS />},
+  { path : '/src/windows/DFS', element: <DFS/>},
   { path: '/src/windows/SelectionSort', element: <SelectionSort /> },
   { path: '/src/windows/MergeSort', element: <MergeSort /> },
   { path: '/src/windows/HeapSort', element: <HeapSort /> },
