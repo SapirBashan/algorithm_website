@@ -2,8 +2,6 @@ import React from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './Home.css'
 import ButtonsToPages from '../components/ButtonsToPages.js';
-import BubbleSort from './BubbleSort.js';
-import BFS from './BFS.js';
 import { routeData ,buttonsData } from '../components/data.js';
 
 function Home() {
