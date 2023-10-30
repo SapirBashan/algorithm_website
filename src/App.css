@@ -2,6 +2,35 @@
   text-align: center;
 }
 
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 2fr)); /* Responsive grid with minimum column width of 150px */
+  grid-gap: 20px; /* Gap between grid items */
+  max-width: 1500px; /* Maximum width of the grid */
+  padding: 20px; /* Padding around the grid */
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #4CAF50;
+  color: #ffffff;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

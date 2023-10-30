@@ -35,3 +35,6 @@ function navigateTo(path) {
   //refresh the page
   window.location.reload();
 }
+
+
+// in javascript write the code to stop the dainasor google game
