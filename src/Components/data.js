@@ -1,0 +1,33 @@
+const buttonsData = [
+	{ text: 'bubbleSort', link: '/src/windows/bubbleSort' },
+	{ text: 'BFS', link: '/src/windows/BFS' },
+	{ text: 'Button 3', link: '/button3' },
+	{ text: 'Button 4', link: '/button2' },
+	{ text: 'Button 5', link: '/button2' },
+	{ text: 'Button 5', link: '/button2' },
+	{ text: 'Button 6', link: '/button2' },
+	{ text: 'Button 7', link: '/button2' },
+	{ text: 'Button 8', link: '/button2' },
+	{ text: 'Button 9', link: '/button2' },
+	{ text: 'Button 10', link: '/button2' },
+	{ text: 'Button 11', link: '/button2' },
+	{ text: 'Button 12', link: '/button2' },
+	{ text: 'Button 13', link: '/button2' },
+  ];
+
+  const routeData = [
+	{ path: "/src/windows/bubbleSort", element: <BubbleSort/> },
+	{ path: "/src/windows/BFS", element: <BFS/> },
+	{ path: 'Button 3', element: '/button3' },
+	{ path: 'Button 4', element: '/button2' },
+	{ path: 'Button 5', element: '/button2' },
+	{ path: 'Button 5', element: '/button2' },
+	{ path: 'Button 6', element: '/button2' },
+	{ path: 'Button 7', element: '/button2' },
+	{ path: 'Button 8', element: '/button2' },
+	{ path: 'Button 9', element: '/button2' },
+	{ path: 'Button 10', element: '/button2' },
+	{ path: 'Button 11', element: '/button2' },
+	{ path: 'Button 12', element: '/button2' },
+	{ path: 'Button 13', element: '/button2' },
+  ];
