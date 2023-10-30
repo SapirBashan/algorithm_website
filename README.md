@@ -68,3 +68,50 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+מבנה נתונים א:
+Insertion sort
+Bubble sort
+Selection sort
+Merge sort
+Heap sort
+Quick sort
+Binary sort
+Counting sort
+Radix sort
+Bucket sort
+
+Linked list
+Stack
+Queue
+BST
+AVL
+Heap
+Max/Min heap
+Priority queue
+
+מבנה נתונים ב:
+Decision tree
+Hash table
+Trie
+Hofman algorithm
+Graphs
+2–3 tree
+B Tree
+Find the I value 
+
+מבוא לבינה מלאכותית:
+A  star
+ID search
+Hill climbing search
+Gradient descent
+Minimax
+CSP
+Regression
+KNN
+Decision tree
+K means
+
+
+
