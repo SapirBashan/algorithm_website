@@ -35,3 +35,12 @@
 .button:active {
     transform: scale(1);
 }
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 2fr));
+    grid-gap: 20px;
+    max-width: 1500px;
+    padding: 20px;
+    margin-top: 80px; /* Height of the fixed UpperMenu */
+}

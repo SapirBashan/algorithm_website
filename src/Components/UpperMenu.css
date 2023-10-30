@@ -9,7 +9,6 @@
   align-items: center;
   background-color: 	#0d3674;
   color: white;
-  border-radius: 0 0 10px 10px; /* Set border-radius for top-left and top-right corners */
   height: 60px; /* Set the desired height for the slim menu */
   padding: 10px 20px; /* Adjust the padding to your liking */
   z-index: 1000; /* Set a z-index to ensure it's above other content */
