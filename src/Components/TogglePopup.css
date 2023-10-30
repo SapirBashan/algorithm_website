@@ -1,0 +1,92 @@
+.popup-container {
+  position: relative;
+  display: inline-block;
+}
+
+.toggle-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  height: 30%; /* 30% of the screen height */
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.toggle-button {
+  width: 30px;
+  height: 30px;
+  background-color: #e9eaf2;
+  border: none;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.toggle-button:hover {
+  background-color: #a06045;
+}
+
+.toggle-button img {
+  width: 100%; /* Set the width to 100% to fit the button */
+  height: 100%; /* Set the height to 100% to fit the button */
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.2s ease;
+}
+
+.popup {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 300px; /* Adjust the width as needed */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Set a high z-index to ensure it's displayed on top */
+}
+
+.popup-header {
+  background-color: #4c59af;
+  color: #fff;
+  padding: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.popup-header button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.popup-content {
+  padding: 10px; /* Reduce the padding for the content */
+}
+
+.popup-upper {
+  background-color: #f0f0f0; /* Set the background color for the upper part */
+  padding: 10px; /* Adjust the padding for the upper part */
+  border-bottom: 1px solid #ccc; /* Add a separator between upper and lower parts */
+}
+
+.popup-lower {
+  background-color: #fff; /* Set the background color for the lower part */
+}
+
+.tab {
+  padding: 10px; /* Reduce the padding for the tabs */
+  cursor: pointer;
+  border-bottom: 1px solid #ccc; /* Add a separator between tabs */
+  transition: background-color 
+}
