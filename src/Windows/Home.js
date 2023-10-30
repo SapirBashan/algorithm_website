@@ -20,7 +20,7 @@ function Home() {
 						<div className="App">
 							<div className="button-grid">
 								{buttonsData.map((button, index) => (
-								<ButtonsToPages key={index} text={button.text} link={button.link} />
+								<ButtonsToPages key={index} text={button.text} link={button.link}  image={button.image}/>
 								))}
 							</div>
 						</div>

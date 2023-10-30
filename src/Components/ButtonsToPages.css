@@ -1,17 +1,25 @@
 .button {
     display: inline-block;
-    padding: 40px 40px; /* Larger padding for a bigger button */
+    padding: 10px 20px; /* Adjust padding to your preference */
     font-weight: bold;
-    font-size: 24px; /* Increased font size for larger text */
-    /*make the botton on the top left of the screen*/
+    font-size: 18px; /* Adjust font size to your preference */
+    /* Position the button at the top left of the screen */
     text-align: center;
     text-decoration: none;
     background-color: #4c59af;
     color: #ffffff;
-    border-radius: 15px; /* Rounded edges */
+    border-radius: 15px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: relative;
+}
+
+.button img {
+    max-width: 100%; /* Ensure images don't exceed button width */
+    max-height: 100%; /* Ensure images don't exceed button height */
+    display: block; /* Center the image within the button */
+    margin: 0 auto; /* Center horizontally */
 }
 
 .button:hover {

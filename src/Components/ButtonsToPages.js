@@ -28,6 +28,7 @@ export default class ButtonsToPages extends React.Component {
   static propTypes = {
     text: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired
   };
 }
 
