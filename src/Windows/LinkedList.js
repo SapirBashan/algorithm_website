@@ -93,7 +93,37 @@ class LinkedList extends React.Component {
   }
 
   RandomNode(value) {
-      this.setState({ inputVal: Math.floor(Math.random() * 100) + 1})
+      // this.setState({ inputVal: Math.floor(Math.random() * 100) + 1})
+      for (let i = 0; i < value; i++) {
+        let rand = Math.floor(Math.random() * 100) + 1;
+
+        if (value === "") {
+         alert("Please enter a value");
+         return;
+       }
+       if (isNaN(value)) {
+         alert("Please enter a number");
+         return;
+       }
+       if (value > 100 || value < 1) {
+         alert("Please enter a number between 1 and 100");
+         return;
+       }
+       this.setState({ inputVal: rand})
+       const newNode = new Node(rand);
+       if (!this.state.head) {
+         this.setState({ head: newNode});
+       } else {
+         let current = this.state.head;
+         while (current.next) {
+           current = current.next;
+         }
+         current.next = newNode;
+       }
+       setTimeout(() => {
+         this.setState({ inputVal: ""})
+      }); 
+      }
    }
 
 
@@ -129,7 +159,8 @@ class LinkedList extends React.Component {
         <button onClick={() => this.deleteNode(this.state.inputVal)}>Delete</button>
         <button onClick={() => this.insertNode()}>Insert</button>
         <button onClick={() => this.findNode(this.state.inputVal)}>Find</button>
-        <button onClick={() => this.RandomNode(this.state.inputVal)}>Random</button>
+        {/* <button onClick={() => this.RandomNode(this.state.inputVal)}>Random</button> */}
+         <button onClick={() => this.setState({ head: null })}>Clear</button>
         <h1> </h1>
         <div className="linked-list-container">
           {nodes.map((node, index) => (
@@ -144,5 +175,7 @@ class LinkedList extends React.Component {
     );
   }
 }
+
+
 
 export default LinkedList;
