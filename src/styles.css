@@ -1,0 +1,8 @@
+body {
+ background-color: #282c34;
+    color: #f8b133;
+    /* make the text 10 pixals left*/
+    margin-left: 20px;
+    /* make the text 50 pixals down*/
+    margin-top: 90px;
+}

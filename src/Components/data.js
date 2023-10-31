@@ -80,6 +80,7 @@ import DFSIMG from '../icons/DFS.png';
 
 
 export const buttonsData = [
+  { text: 'Linked List', link: '/src/windows/LinkedList', image: LinkedListImage },
   { text: 'Insertion Sort', link: '/src/windows/InsertionSort', image: InsertionSortImage },
   { text: 'Bubble Sort', link: '/src/windows/BubbleSort', image: BubbleSortImage },
   { text: 'BFS', link: '/src/windows/BFS', image: BFSIMG },
@@ -92,7 +93,6 @@ export const buttonsData = [
   { text: 'Counting Sort', link: '/src/windows/CountingSort', image: CountingSortImage },
   { text: 'Radix Sort', link: '/src/windows/RadixSort', image: RadixSortImage },
   { text: 'Bucket Sort', link: '/src/windows/BucketSort', image: BucketSortImage },
-  { text: 'Linked List', link: '/src/windows/LinkedList', image: LinkedListImage },
   { text: 'Stack', link: '/src/windows/Stack', image: StackImage },
   { text: 'Queue', link: '/src/windows/Queue', image: QueueImage },
   { text: 'Binary Search Tree', link: '/src/windows/BST', image: BSTImage },
