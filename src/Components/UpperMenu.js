@@ -98,12 +98,9 @@ class UpperMenu extends Component {
       }
     }
 
-    <BrowserRouter>
-      <Routes>
-        <Route exact path={myLink} element={buttonsData.find(button => button.link === myLink)} />
-        <Route exact path={myLink} element={myRoute} />
-      </Routes>
-    </BrowserRouter>
+    console.log(myLink);
+
+    this.props.onRouteChange(".."+myLink, myRoute);
   };
 
   render() {
