@@ -35,52 +35,7 @@ export default class TogglePopup extends React.Component {
             </div>
             <div className="popup-content">
               <div className="popup-upper">
-                {/* Content for the upper part */}
-               <br />
-                Huffman Algorithm is a lossless compression algorithm
-                <br />
-                it is a greedy algorithm
-                <br />
-                it is optimal
-                <br />
-                it is used in zip files
-                <br />
-                it is used in jpeg files
-                <br />
-                it is used in mp3 files
-                <br />
-                it is used in video files
-                <br />
-                it is used in png files
-                <br />
-                it is used in gif files
-                <br />
-                it is used in pdf files
-                <br />
-                it is used in exe files
-                <br />
-                it is used in rar files
-                <br />
-                it is used in tar files
-                <br />
-                it is used in gzip files
-                <br />
-                it is used in 7z files
-                <br />
-                it is used in bz2 files
-                <br />
-                it is used in xz files
-                <br />
-                it is used in cab files
-                <br />
-                the way it works is that it takes the most frequent characters and gives them the shortest codes
-                <br />
-                and the least frequent characters and gives them the longest codes
-                <br />
-                this way the most frequent characters will be compressed the most
-                <br />
-                and the least frequent characters will be compressed the least
-                <br />
+                {this.props.text}
               </div>
               <div className="popup-lower">
                 <div className="tab">

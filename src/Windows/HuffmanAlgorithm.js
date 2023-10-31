@@ -6,10 +6,9 @@ class HuffmanAlgorithm extends React.Component {
   render() {
     return (
       <div className="HoffmanAlgorithm">
-        <div className="toggle-popup">
-          <TogglePopup />
-        </div>
-        <h1>HoffmanAlgorithm</h1>
+        
+        <h1>HoffmanAlgorithm some words here some w deeref  hgrfvh fr ufryv fy vy7g hy y7grh 7ugr huyhy ty tyg </h1>
+        <TogglePopup />
       </div>
     );
   }
