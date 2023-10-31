@@ -47,10 +47,11 @@
   position: fixed;
   top: 80px; /* Adjust the top position to be just below the upper menu */
   right: 0;
-  width: 30%; /* 30% of the window width */
+  width: 40%; /* 30% of the window width */
   height: calc(100% - 60px); /* Adjust for the height below the upper menu */
   background-color: #fff;
   border: 1px solid #ccc;
+  color: #000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000; /* Set a high z-index to ensure it's displayed on top */
 }
