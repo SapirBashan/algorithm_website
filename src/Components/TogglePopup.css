@@ -17,8 +17,8 @@
 .toggle-button {
   width: 30px;
   height: 30px;
-  background-color: #e9eaf2;
-  border: none;
+  background-color: white;
+  border: 2px solid #ffcc00;
   border-radius: 50%;
   color: #ffffff;
   display: flex;
@@ -26,67 +26,110 @@
   justify-content: center;
   cursor: pointer;
   overflow: hidden;
+  position: fixed;
+  top: 90px; /* Adjust the top position as needed */
+  right: 10px; /* Adjust the left position as needed */
 }
 
 .toggle-button:hover {
-  background-color: #a06045;
+  background: linear-gradient(to bottom, #f8b133, #ffcc00); /* Gradient background on hover */
 }
 
 .toggle-button img {
-  width: 100%; /* Set the width to 100% to fit the button */
-  height: 100%; /* Set the height to 100% to fit the button */
+  width: 1100%; /* Set the width to 100% to fit the button */
+  height: 108%; /* Set the height to 100% to fit the button */
   display: block;
-  margin: 0 auto;
+  margin: 0.4px auto 0 auto;
   transition: transform 0.2s ease;
 }
 
 .popup {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  width: 300px; /* Adjust the width as needed */
+  position: fixed;
+  top: 80px; /* Adjust the top position to be just below the upper menu */
+  right: 0;
+  width: 30%; /* 30% of the window width */
+  height: calc(100% - 60px); /* Adjust for the height below the upper menu */
   background-color: #fff;
   border: 1px solid #ccc;
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000; /* Set a high z-index to ensure it's displayed on top */
 }
 
 .popup-header {
-  background-color: #4c59af;
   color: #fff;
-  padding: 8px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
   display: flex;
   justify-content: flex-end;
 }
 
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .popup-header button {
-  background: none;
+  background: black;
   border: none;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-}
-
-.popup-content {
-  padding: 10px; /* Reduce the padding for the content */
+  font-size: 14px; /* Set the desired font size */
+  font: 400 13.3333px Arial;
 }
 
 .popup-upper {
-  background-color: #f0f0f0; /* Set the background color for the upper part */
-  padding: 10px; /* Adjust the padding for the upper part */
-  border-bottom: 1px solid #ccc; /* Add a separator between upper and lower parts */
+  background-color: #f0f0f0;
+  height: 50%; /* Set the height to 50% */
+  width: 100%; /* Full width */
+  border-bottom: 1px solid #ccc;
+  overflow-y: auto;
+  overflow-x: auto;
+  
 }
 
 .popup-lower {
-  background-color: #fff; /* Set the background color for the lower part */
+  background-color: #ccc;
+  height: 50%; /* Set the height to 50% */
+  width: 100%; /* Full width */
+  border-top: 1px solid #f0f0f0; /* Add a top border to separate from the upper part */
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .tab {
-  padding: 10px; /* Reduce the padding for the tabs */
+  display: inline-block;
   cursor: pointer;
-  border-bottom: 1px solid #ccc; /* Add a separator between tabs */
-  transition: background-color 
+  border-bottom: 1px solid #ccc;
+  transition: background-color;
+}
+
+.tab button {
+  background-color: #f0f0f0;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tab button:focus {
+  outline: none;
+  background-color:#ccc;
+}
+
+
+.tab button:hover {
+  background-color: #fff;
+}
+
+.tab-content {
+  outline: none;
+  background-color: #ccc;
+  white-space: nowrap; /* Prevent tabs from wrapping to the next line */
+  overflow: auto; /* Enable horizontal scrolling if needed */
+}
+
+/* Apply the 'active' class to the visible content */
+.tab-content > div.active {
+  display: block;
 }
