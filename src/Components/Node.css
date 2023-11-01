@@ -1,0 +1,30 @@
+/* Node.css */
+
+.Node {
+  display: flex;
+  align-items: center;
+  background-color: #0074cc;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.Node-data {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.Node-next {
+  width: 20px;
+  height: 20px;
+  background-color: #0074cc;
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  margin-left: 10px;
+}
