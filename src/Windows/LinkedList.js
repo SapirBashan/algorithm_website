@@ -2,7 +2,13 @@ import React from "react";
 import "./LinkedList.css";
 import "../styles.css";
 import TogglePopup from "../components/TogglePopup.js";
-import Node from "../components/Node.js";
+
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
+}
 
 class LinkedList extends React.Component {
   constructor(props) {

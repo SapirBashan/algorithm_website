@@ -1,5 +1,3 @@
-/* Node.css */
-
 .Node {
   display: flex;
   align-items: center;
@@ -13,21 +11,21 @@
 .Node-data {
   font-size: 18px;
   margin-right: 10px;
-  background-color: #0099cc; /* Background color for the data container */
-  padding: 5px 10px; /* Padding for the data container */
-  border-radius: 15px; /* Rounded edges for the data container */
+  background-color: #0099cc;
+  padding: 5px 10px;
+  border-radius: 15px;
 }
 
 .Node-next {
   width: 20px;
   height: 20px;
-  background-color: #0074cc; /* Background color of the arrow */
+  background-color: #0074cc;
   clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
   transform: rotate(45deg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff; /* Color of the arrow */
-  font-size: 14px; /* Font size of the arrow */
+  color: #fff;
+  font-size: 14px;
   margin-left: 10px;
 }
