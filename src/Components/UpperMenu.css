@@ -14,6 +14,11 @@
   z-index: 1000; /* Set a z-index to ensure it's above other content */
 }
 
+.logo{
+  width: 40px;
+  height: 40px;
+}
+
 .upper-menu__left {
   display: flex;
   align-items: center;
@@ -26,6 +31,9 @@
 }
 
 .upper-menu__search {
+  border-radius: 10px 0px 0px 10px;
+
+    margin-left: 20px;
   font-size: 15px; /* Decrease the font size for slimness */
 }
 
@@ -47,7 +55,6 @@
   max-width: 34px; /* Set the maximum width for the search button */
   max-height: 34px; /* Set the maximum height for the search button */
   display: flex;
-  align-items: center;
   border-radius: 0 10px 10px 0;
   justify-content: center;
   cursor: pointer; /* Add cursor pointer to indicate it's clickable */
