@@ -3,7 +3,9 @@ import './UpperMenu.css';
 import magnifier from"../icons/magnifier.png"
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { routeData ,buttonsData } from '../components/data.js';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import logo from "../icons/logo.png"
 
 
 class UpperMenu extends Component {
@@ -106,46 +108,30 @@ class UpperMenu extends Component {
     this.props.onRouteChange(".."+myLink, myRoute);
   };
 
+  
+
+
   render() {
+    const currentURL = window.location.href;
     const searchResults = this.filterSearchResults(this.state.searchQuery);
     const showResults = searchResults.length > 0;
 
     return (
       <div className="upper-menu">
         <div className="upper-menu__left">
-          <div className="upper-menu__logo">Logo</div>
-          <input
-            type="text"
-            className="upper-menu__search"
-            value={this.state.searchQuery}
-            onChange={this.handleInputChange}
-            placeholder="Search"
-          />
-          <button onClick={this.search} className='search'>
-            <img src={magnifier} alt="Search" />
-          </button>
-
-          {/* Container for search results with slide-down animation */}
-          {/* {showResults && this.state.searchQuery && (
-            <div className="search-results-container">
-              <ul className="search-results">
-                {searchResults.map((result, index) => (
-                  <li key={index}>
-                    <button
-                      className="search-result-button"
-                      onClick={() => this.handleSearchResultClick(result)}
-                    >
-                      {result}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )} */}
-        </div>
+        <Link to="http://localhost:3000/" >
+            <img src={logo} alt="Logo" className='logo'/>
+        </Link>
+            <input
+              type="text"
+              className="upper-menu__search"
+              value={this.state.searchQuery}
+              onChange={this.handleInputChange}
+              placeholder="Search" /><button onClick={this.search} className='search'>
+                <img src={magnifier} alt="Search" />
+              </button>
+          </div>
         <div className="upper-menu__right">
-          <div className="upper-menu__user">User</div>
-          <div className="upper-menu__cart">Cart</div>
         </div>
       </div>
     );

@@ -7,7 +7,12 @@ import UpperMenu from '../components/UpperMenu';
 
 function Home() {
   const [currentRoute, setCurrentRoute] = useState('/');
-  const [filteredButtons, setFilteredButtons] = useState(buttonsData); // Initialize with all buttons
+  const [filteredButtons, setFilteredButtons] = useState(buttonsData);
+
+  // Reset search bar state when the component is re-rendered
+  useEffect(() => {
+    setFilteredButtons(buttonsData);
+  }, []); // Empty dependency array ensures the effect runs only once after initial render
 
   const handleRouteChange = (newRoute) => {
     setCurrentRoute(newRoute);
@@ -17,10 +22,11 @@ function Home() {
     setFilteredButtons(filteredButtons);
   };
 
+
   return (
     <div className="App">
       <BrowserRouter>
-        <UpperMenu onRouteChange={handleRouteChange} onSearch={handleOnSearch} />
+        <UpperMenu onRouteChange={handleRouteChange} onSearch={handleOnSearch}/>
         <Routes>
           {/* Route to render the home page */}
           <Route
