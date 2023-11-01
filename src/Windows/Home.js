@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './Home.css';
 import ButtonsToPages from '../components/ButtonsToPages.js';
@@ -7,15 +7,20 @@ import UpperMenu from '../components/UpperMenu';
 
 function Home() {
   const [currentRoute, setCurrentRoute] = useState('/');
+  const [filteredButtons, setFilteredButtons] = useState(buttonsData); // Initialize with all buttons
 
   const handleRouteChange = (newRoute) => {
     setCurrentRoute(newRoute);
   };
 
+  const handleOnSearch = (filteredButtons) => {
+    setFilteredButtons(filteredButtons);
+  };
+
   return (
     <div className="App">
       <BrowserRouter>
-        <UpperMenu onRouteChange={handleRouteChange} />
+        <UpperMenu onRouteChange={handleRouteChange} onSearch={handleOnSearch} />
         <Routes>
           {/* Route to render the home page */}
           <Route
@@ -24,7 +29,7 @@ function Home() {
             element={
               <div className="App">
                 <div className="button-grid">
-                  {buttonsData.map((button, index) => (
+                  {filteredButtons.map((button, index) => (
                     <ButtonsToPages
                       key={index}
                       text={button.text}
@@ -36,7 +41,6 @@ function Home() {
               </div>
             }
           />
-
           {/* Shorter way to write the routes */}
           {routeData.map((route, index) => (
             <Route key={index} exact path={route.path} element={route.element} />

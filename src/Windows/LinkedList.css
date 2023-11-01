@@ -15,15 +15,18 @@
   }
   
 
-.arrow {
+  .arrow {
     display: inline-block;
     width: 0;
     height: 0;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-left: 10px solid #f8b133;
+    border-bottom-width: 5px; /* Add this line to create the bottom border */
     margin: 0 5px;
   }
+  
+  
 
   .found {
     background-color: green;
