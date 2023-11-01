@@ -7,6 +7,11 @@ class Node {
     this.next = null;
   }
 
+  constructor(data, next) {
+    Node(data);
+    this.next = next;
+  }
+
   render() {
     return (
       <div className="Node">
