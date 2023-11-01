@@ -31,4 +31,11 @@
     color: white;
     transition: background-color 0.5s ease; /* Add transition for background-color property */
   }
+
+  .linked-list-container {
+    /*make the list more down*/
+    margin-top: 80px;
+
+
+  }
   
