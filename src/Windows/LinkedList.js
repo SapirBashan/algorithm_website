@@ -46,7 +46,8 @@ class LinkedList extends React.Component {
     const newNode = new Node(this.state.inputVal);
     if (!this.state.head) {
       this.setState({ head: newNode});
-    } else {
+    } 
+    else {
       let current = this.state.head;
       while (current.next) {
         current = current.next;
@@ -80,9 +81,13 @@ class LinkedList extends React.Component {
 
 
   findNode(value) {
+    if (value === "") {
+      alert("Please enter a value");
+      return false;
+    }
     let current = this.state.head;
     while (current !== null) {
-      if (current.data === value) {
+      if (current.data === parseInt(value, 10)) {
          this.setState({ foundKey: current.data }); // Update foundKey state with the key of the found node
         return true;
       }
@@ -93,8 +98,40 @@ class LinkedList extends React.Component {
   }
 
   RandomNode(value) {
-      this.setState({ inputVal: Math.floor(Math.random() * 100) + 1})
-   }
+    if (value === "") {
+      alert("Please enter a value");
+      return;
+    }
+    if (isNaN(value)) {
+      alert("Please enter a number");
+      return;
+    }
+    if (value > 100 || value < 1) {
+      alert("Please enter a number between 1 and 100");
+      return;
+    }
+
+    if(this.state.head !== null) {
+      var head = this.state.head;
+      var current = this.state.head;
+    }
+  
+    for (let i = 0; i < value; i++) {
+      let rand = Math.floor(Math.random() * 100) + 1;
+      const newNode = new Node(rand);
+  
+      if (!head) {
+        head = newNode;
+        current = head;
+      } else {
+        current.next = newNode;
+        current = current.next;
+      }
+    }
+  
+    this.setState({ head: head, inputVal: "" });
+  }
+  
 
 
   render() {
@@ -130,6 +167,7 @@ class LinkedList extends React.Component {
         <button onClick={() => this.insertNode()}>Insert</button>
         <button onClick={() => this.findNode(this.state.inputVal)}>Find</button>
         <button onClick={() => this.RandomNode(this.state.inputVal)}>Random</button>
+         <button onClick={() => this.setState({ head: null })}>Clear</button>
         <h1> </h1>
         <div className="linked-list-container">
           {nodes.map((node, index) => (
@@ -144,5 +182,7 @@ class LinkedList extends React.Component {
     );
   }
 }
+
+
 
 export default LinkedList;

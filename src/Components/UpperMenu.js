@@ -71,15 +71,18 @@ class UpperMenu extends Component {
 
   
   handleInputChange = (event) => {
-    this.setState({ searchQuery: event.target.value }); // Update the searchQuery state as the user types
+    const searchQuery = event.target.value;
+    const filteredButtons = buttonsData.filter(
+      (button) => button.text.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    this.props.onSearch(filteredButtons === null ? "" : filteredButtons ); // Pass filtered buttons to parent component
+    this.setState({ searchQuery, showResults: filteredButtons.length > 0 });
   };
 
   search = () => {
     console.log('Searching for:', this.state.searchQuery);
     this.setState({ showResults: true });
   };
-
-
 
 
   handleSearchResultClick = (result) => {
@@ -123,7 +126,7 @@ class UpperMenu extends Component {
           </button>
 
           {/* Container for search results with slide-down animation */}
-          {showResults && this.state.searchQuery && (
+          {/* {showResults && this.state.searchQuery && (
             <div className="search-results-container">
               <ul className="search-results">
                 {searchResults.map((result, index) => (
@@ -138,7 +141,7 @@ class UpperMenu extends Component {
                 ))}
               </ul>
             </div>
-          )}
+          )} */}
         </div>
         <div className="upper-menu__right">
           <div className="upper-menu__user">User</div>
