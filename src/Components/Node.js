@@ -3,7 +3,6 @@ import './Node.css';
 
 class Node {
   constructor(props) {
-    super(props);
     this.state = {
       pointers: [null],
       data: props.data,
