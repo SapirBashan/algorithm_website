@@ -15,18 +15,40 @@ class LinkedList extends React.Component {
     super(props);
     this.state = {
       inputVal: "",
+      inputValIndex: "",
       head: null,
       foundKey: null, // New state variable to store the key of the found node
     };
+    
+    this.handleInput = this.handleInput.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleInputIndex = this.handleInputIndex.bind(this);
+    this.handleKeyPressIndex = this.handleKeyPressIndex.bind(this);
   }
 
   handleInput(e) {
-    this.setState({ inputVal: e.target.value, foundKey: null }); // Reset foundKey state when input changes
+    this.setState({ inputVal: e.target.value, foundKey: null });
   }
 
   handleKeyPress(e) {
     if (e.key === "Enter" && this.state.inputVal !== "") {
       this.insertNode();
+    }
+  }
+
+  handleInputIndex(e) {
+    this.setState({ inputValIndex: e.target.value });
+  }
+
+  handleKeyPress(e) {
+    if (e.key === "Enter" && this.state.inputVal !== "") {
+      this.insertNode();
+    }
+  }
+
+  handleKeyPressIndex(e) {
+    if (e.key === "Enter" && this.state.inputValIndex !== "") {
+      this.insertNodeAfterIndex(this.state.inputValIndex);
     }
   }
 
@@ -77,6 +99,14 @@ class LinkedList extends React.Component {
    }
    alert("Node not found");
  }
+
+  deleteFirstNode() {
+    if (this.state.head === null) {
+      alert("List is empty");
+      return;
+    }
+    this.setState({ head: this.state.head.next });
+  }
  
 
 
@@ -131,8 +161,49 @@ class LinkedList extends React.Component {
   
     this.setState({ head: head, inputVal: "" });
   }
-  
 
+  handleInputIndex(e) {
+    this.setState({ inputValIndex: e.target.valueIndex });
+  }
+
+  insertNodeAfterIndex(value, index) {
+    if (value === "") {
+      alert("Please enter a value");
+      return;
+    }
+  
+    const newNode = new Node(value);
+    let current = this.state.head;
+    let currentIndex = 0;
+  
+    // Handle the case where index is 0 separately
+    if (index === 0) {
+      newNode.next = current;
+      this.setState({ inputValIndex: "", head: newNode });
+      return;
+    }
+  
+    // Traverse the list to find the node at the specified index
+    while (currentIndex < index && current !== null) {
+      current = current.next;
+      currentIndex++;
+    }
+  
+    // If current is null, the index is out of range
+    if (current === null) {
+      alert("Index out of range");
+      return;
+    }
+  
+    // Insert the new node after the current node
+    newNode.next = current.next;
+    current.next = newNode;
+  
+    this.setState({ inputValIndex: "", head: this.state.head });
+    this.setState({ inputVal: "" });
+  }
+  
+  
 
   render() {
     let nodes = [];
@@ -157,7 +228,7 @@ class LinkedList extends React.Component {
     return (
       <div className="LinkedList">
         <h1>Linked List</h1>
-        <input
+        <input className="insert-node"
           type="text"
           value={this.state.inputVal}
           onChange={(e) => this.handleInput(e)}
@@ -167,8 +238,19 @@ class LinkedList extends React.Component {
         <button onClick={() => this.insertNode()}>Insert</button>
         <button onClick={() => this.findNode(this.state.inputVal)}>Find</button>
         <button onClick={() => this.RandomNode(this.state.inputVal)}>Random</button>
-         <button onClick={() => this.setState({ head: null })}>Clear</button>
+        <button onClick={() => this.deleteFirstNode()}>Delete First</button>
+        <button onClick={() => this.setState({ head: null })}>Clear</button>
         <h1> </h1>
+        <input
+          className="insert-after-index"
+          type="text"
+          value={this.state.inputValIndex}
+          onChange={(e) => this.handleInputIndex(e)} // Use handleInputIndex for this input field
+          onKeyPress={(e) => this.handleKeyPressIndex(e)}
+        />
+        <button onClick={() => this.insertNodeAfterIndex(this.state.inputVal, parseInt(this.state.inputValIndex, 10))}>
+          Insert After Index
+        </button>
         <div className="linked-list-container">
           {nodes.map((node, index) => (
             <React.Fragment key={index}>
