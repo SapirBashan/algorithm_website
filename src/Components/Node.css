@@ -13,18 +13,21 @@
 .Node-data {
   font-size: 18px;
   margin-right: 10px;
+  background-color: #0099cc; /* Background color for the data container */
+  padding: 5px 10px; /* Padding for the data container */
+  border-radius: 15px; /* Rounded edges for the data container */
 }
 
 .Node-next {
   width: 20px;
   height: 20px;
-  background-color: #0074cc;
+  background-color: #0074cc; /* Background color of the arrow */
   clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
   transform: rotate(45deg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 14px;
+  color: #fff; /* Color of the arrow */
+  font-size: 14px; /* Font size of the arrow */
   margin-left: 10px;
 }
