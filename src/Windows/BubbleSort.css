@@ -1,0 +1,31 @@
+.BubbleSort {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+array-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 200px; /* Adjust the height as needed */
+}
+
+.array-bar {
+  background-color: #3498db;
+  color: white;
+  width: 40px;
+  margin: 0 2px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5px;
+  border-radius: 5px;
+}
