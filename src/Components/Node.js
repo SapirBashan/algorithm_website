@@ -10,7 +10,7 @@ class Node extends React.Component {
       transition={{duration: this.props.duration}}
         >
         <div className='Node'>{this.props.data}</div>
-        <div className='pointer'>&rarr;</div>
+        {this.props.showPointer && <div className='pointer'>&rarr;</div>}
       </motion.div>
     );
   }
@@ -20,7 +20,8 @@ class Node extends React.Component {
     pointers: this.props.pointers,
     Xmovment: this.props.Xmovment,
     Ymovment: this.props.Ymovment,
-    duration: this.props.duration
+    duration: this.props.duration,
+    showPointer: this.props.showPointer,
   }
 }
 

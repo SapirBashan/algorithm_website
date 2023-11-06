@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import "./BubbleSort.css";
 import Node from "../components/Node";
+import { m } from "framer-motion";
 
 class BubbleSort extends Component {
   constructor(props) {
@@ -16,74 +17,98 @@ class BubbleSort extends Component {
         { data: 3, Xmovment: [], Ymovment: [0] , index: 5},
       ],
       newNumber: "",
+      newNodes: [],
     };
   }
 
-  addYMovementToNode = (nodeIndex, movement) => {
-    const { nodes } = this.state;
+  addYMovementToNode = (nodeIndex, movement , nodes) => {
   
     if (nodeIndex >= 0 && nodeIndex < nodes.length) {
+      // Create a copy of the nodes array
       const updatedNodes = [...nodes];
-      updatedNodes[nodeIndex].Ymovment.push(movement); // Add -50 to the Ymovment array
-  
-      this.setState({ nodes: updatedNodes });
+      // Create a copy of the node at the nodeIndex
+      const updatedNode = { ...updatedNodes[nodeIndex] };
+      // Create a copy of the Ymovment array
+      const updatedYmovment = [...updatedNode.Ymovment];
+      // Add the movement value to the Ymovment array
+      const value = updatedYmovment[updatedYmovment.length - 1];
+      // Add the movement value to the Ymovment array
+      const movementValue = movement + value; 
+      // Add the movement value to the Ymovment array
+      updatedNodes[nodeIndex].Ymovment.push(movementValue);
     }
   };
 
-  bubbleSort = async () => {
+  bubbleSort = () => {
+    // create a copy of the nodes array
     const nodes = [...this.state.nodes];
+    // set the nomber of nodes
     let n = nodes.length;
+
+    // create a variable to check if the array is sorted
     let swapped;
+
+    // create a variable to check if the node is moving
+    let move;
   
+    // Loop through the array n times
     for (let i = 0; i < n - 1; i++) {
       swapped = false;
+      // Loop through the array from 0 to n - i - 1
       for (let j = 0; j < n - i - 1; j++) {
+        move = false;
+        // If the node at the current index is greater than the node at the next index
         if (nodes[j].data > nodes[j + 1].data) {
-          
-          // Swap the nodes on the screen with smooth animation
-          this.addYMovementToNode(j, nodes[j].Ymovment[nodes[j].Ymovment.length - 1] - 70);
-          this.addYMovementToNode(j + 1, nodes[j + 1].Ymovment[nodes[j + 1].Ymovment.length - 1]+ 70);
-          //add unmovment to the nodes that are not moving
-
-          for(let k = 0; k <= n-1; k++) {
-            if(k !== j && k !== j+1) {
-              this.addYMovementToNode(k, nodes[k].Ymovment[nodes[k].Ymovment.length - 1]);
-            }
-          }
-  
-          // // Wait for 1 second using async/await
-          // await new Promise((resolve) => setTimeout(resolve, 1000));
-  
+          move = true;
+          //add movment to the nodes that are moving
+          //take the last element in the Ymovment array and decrease its value by 70 to move it down
+          this.addYMovementToNode(j, 50, nodes);
+          //take the last element in the Ymovment array and add 70 to its value to move it up
+          this.addYMovementToNode(j + 1,-50 , nodes);
           // Swap the nodes in the data array
           [nodes[j], nodes[j + 1]] = [nodes[j + 1], nodes[j]];
           swapped = true;
         }
+        //add movment in place of the nodes that are not moving
+        for(let k = 0; k < n; k++) {
+            // if the node is not moving or if there was no swap
+            if((k !== j && k !== j + 1) || move === false) {
+                //add the last element in the Ymovment array to the Ymovment array
+              this.addYMovementToNode(k, 0 , nodes);
+            }
+        }
+        // If no two elements were swapped
+        // by inner loop, then break
       }
-  
-      if (!swapped) {
-        break; // If no swaps were made in this pass, the array is already sorted
+        if (swapped === false)
+            break;
       }
-    }
-  
-    this.setState({ nodes });
+
+    //this.setState({ nodes: nodes });
   };
-  
+
+  animate = () => {
+    // call the bubbleSort function that will sort the array in the function only and add the movment to the nodes array
+    this.bubbleSort();
+    this.setState({ newNodes: this.state.nodes });
+  }
 
   render() {
-    const { nodes, newNumber } = this.state;
+    const {newNodes , nodes, newNumber } = this.state;
 
     return (
       <div className="BubbleSort">
         <h1>Bubble Sort</h1>
-        <button className="button" onClick={this.bubbleSort}>Sort Array</button>
+        <button className="button" onClick={this.animate} >Sort Array</button>
         <br />
         <div className="array-container">
-          {nodes.map((node, index) => (
+          {newNodes.map((node, index) => (
             <Node
               data={node.data}
               Xmovment={node.Xmovment}
               Ymovment={node.Ymovment}
-              duration={5}
+              duration={15}
+              showPointer={false}
               key={index}
             />
           ))}
