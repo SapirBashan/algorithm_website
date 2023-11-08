@@ -2,26 +2,33 @@
 import React, { Component } from "react";
 import "./BubbleSort.css";
 import Node from "../components/Node";
-import { m } from "framer-motion";
 
 class BubbleSort extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nodes: [
-        { data: 6, Xmovment: [], Ymovment: [0] , index: 0},
-        { data: 2, Xmovment: [], Ymovment: [0] , index: 1},
-        { data: 9, Xmovment: [], Ymovment: [0] , index: 2},
-        { data: 1, Xmovment: [], Ymovment: [0] , index: 3},
-        { data: 5, Xmovment: [], Ymovment: [0] , index: 4},
-        { data: 3, Xmovment: [], Ymovment: [0] , index: 5},
+      backNodes: [
+        { data: 6, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 2, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 9, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 1, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 5, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 3, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
       ],
       newNumber: "",
-      newNodes: [],
+      frontNodes: [
+        { data: 6, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 2, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 9, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 1, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 5, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+        { data: 3, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+      ],
+      sorted: false,
     };
   }
 
-  addYMovementToNode = (nodeIndex, movement , nodes) => {
+  addYMovementToNode = (nodeIndex, movement , nodes ,color) => {
   
     if (nodeIndex >= 0 && nodeIndex < nodes.length) {
       // Create a copy of the nodes array
@@ -30,18 +37,31 @@ class BubbleSort extends Component {
       const updatedNode = { ...updatedNodes[nodeIndex] };
       // Create a copy of the Ymovment array
       const updatedYmovment = [...updatedNode.Ymovment];
+      // create a copy of the color array
+      const updatedColor = [...updatedNode.color];
       // Add the movement value to the Ymovment array
       const value = updatedYmovment[updatedYmovment.length - 1];
       // Add the movement value to the Ymovment array
       const movementValue = movement + value; 
       // Add the movement value to the Ymovment array
       updatedNodes[nodeIndex].Ymovment.push(movementValue);
+      // Add the color value to the color array
+      updatedNodes[nodeIndex].color.push(color);
     }
   };
 
   bubbleSort = () => {
+    // if the array is sorted return
+    if(this.state.sorted === true) {
+      return;
+    }
     // create a copy of the nodes array
-    const nodes = [...this.state.nodes];
+    const nodes = [...this.state.backNodes];
+    this.cleanArray(this.state.backNodes);
+
+    let green = 'hsl(120, 100, 25)';
+    let blue = 'hsl(196, 100, 40)';
+
     // set the nomber of nodes
     let n = nodes.length;
 
@@ -62,9 +82,9 @@ class BubbleSort extends Component {
           move = true;
           //add movment to the nodes that are moving
           //take the last element in the Ymovment array and decrease its value by 70 to move it down
-          this.addYMovementToNode(j, 50, nodes);
+          this.addYMovementToNode(j, 70, nodes, green);
           //take the last element in the Ymovment array and add 70 to its value to move it up
-          this.addYMovementToNode(j + 1,-50 , nodes);
+          this.addYMovementToNode(j + 1,-70 , nodes, green);
           // Swap the nodes in the data array
           [nodes[j], nodes[j + 1]] = [nodes[j + 1], nodes[j]];
           swapped = true;
@@ -74,7 +94,13 @@ class BubbleSort extends Component {
             // if the node is not moving or if there was no swap
             if((k !== j && k !== j + 1) || move === false) {
                 //add the last element in the Ymovment array to the Ymovment array
-              this.addYMovementToNode(k, 0 , nodes);
+              if(k === j || k === j + 1)
+              {
+                this.addYMovementToNode(k, 0 , nodes, green);
+              }
+              else{
+                this.addYMovementToNode(k, 0 , nodes, blue);
+              }
             }
         }
         // If no two elements were swapped
@@ -83,37 +109,119 @@ class BubbleSort extends Component {
         if (swapped === false)
             break;
       }
-
-    //this.setState({ nodes: nodes });
+      // add a blue color in the end of color array to all the nodes
+      for(let i = 0; i < n; i++) {
+        this.addYMovementToNode(i, 0 , nodes, blue);
+      }
+    this.setState({
+      sorted: true,
+    });
   };
 
   animate = () => {
-    // call the bubbleSort function that will sort the array in the function only and add the movment to the nodes array
+    const nodesCopy = [...this.state.backNodes]; // Create a copy of the nodes array
     this.bubbleSort();
-    this.setState({ newNodes: this.state.nodes });
+    this.setState({
+      frontNodes: nodesCopy, 
+      sorting: true
+    });
+  }
+
+  handleChange = (e) => {
+    this.setState({ newNumber: e.target.value });
+  };
+
+  addNumber = () => {
+    const { newNumber, frontNodes , backNodes , sorted} = this.state;
+    this.cleanArray(frontNodes);
+    this.cleanArray(backNodes);
+    if (newNumber) {
+      const newData = parseInt(newNumber);
+      const newNode = {
+        data: newData,
+        Xmovment: [],
+        Ymovment: [0],
+        color: ['hsl(196, 100, 40)']
+      };
+      
+      let addedArray = [...frontNodes];
+
+      if(sorted === true) {
+        addedArray = addedArray.sort((a, b) => a.data - b.data);
+      }
+
+      this.setState({
+        frontNodes: [...addedArray , newNode], // Update nodes with the new data
+        backNodes: [...addedArray, newNode],  // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
+        newNumber: "", // Clear the input field
+        sorted: false,
+      });
+    }
+  };
+
+  shuffleArray = () => {
+    const { frontNodes , backNodes } = this.state;
+    this.cleanArray(frontNodes);
+    this.cleanArray(backNodes);
+    const shuffledNodes = [...frontNodes];
+    for (let i = shuffledNodes.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledNodes[i], shuffledNodes[j]] = [shuffledNodes[j], shuffledNodes[i]];
+    }
+
+    this.setState({
+      frontNodes: shuffledNodes,
+      backNodes: shuffledNodes,
+      sorted: false,
+    });
+  };
+
+  cleanArray = (nodes) => {
+    for (let i = 0; i < nodes.length; i++) {
+      nodes[i].Ymovment = [0];
+      nodes[i].color = ['hsl(196, 100, 40)'];
+    }
   }
 
   render() {
-    const {newNodes , nodes, newNumber } = this.state;
+    const {frontNodes , newNumber} = this.state;
 
     return (
       <div className="BubbleSort">
-        <h1>Bubble Sort</h1>
-        <button className="button" onClick={this.animate} >Sort Array</button>
-        <br />
-        <div className="array-container">
-          {newNodes.map((node, index) => (
-            <Node
-              data={node.data}
-              Xmovment={node.Xmovment}
-              Ymovment={node.Ymovment}
-              duration={15}
-              showPointer={false}
-              key={index}
-            />
-          ))}
-        </div>
-      </div>
+    <h1>Bubble Sort</h1>
+    <div className="input-section">
+      <input
+        type="number"
+        value={newNumber}
+        onChange={this.handleChange}
+        placeholder="Enter a number"
+      />
+      <br />
+      <button className="button" onClick={this.addNumber}>
+        Add Number
+      </button>
+      <br />
+      <button className="button" onClick={this.shuffleArray}>
+            Shuffle
+      </button>
+    </div>
+    <div className="sort-button">
+      <button className="button" onClick={this.animate}>Sort Array</button>
+    </div>
+    <div className="array-container">
+      {frontNodes.map((node, index) => (
+        <Node
+          data={node.data}
+          Xmovment={node.Xmovment}
+          Ymovment={node.Ymovment}
+          color={node.color}
+          duration={node.Ymovment.length}
+          showPointer={false}
+        />
+      ))}
+    </div>
+  </div>
+      
     );
   }
 }
