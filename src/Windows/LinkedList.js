@@ -39,6 +39,8 @@ class LinkedList extends React.Component {
   insertNode() {
     const { newNumber, frontNodes , backNodes } = this.state;
     const linkedList = [...backNodes];
+    console.log(this.state.linkedListleangth);
+
     if(newNumber === "") {
       alert("Please enter a number");
       this.state.newNumber = ""
@@ -68,7 +70,7 @@ class LinkedList extends React.Component {
           frontNodes: [newNode],
           backNodes: [newNode],
           newNumber: "",
-          linkedlistleangth: this.state.linkedlistleangth + 1,
+          linkedlistleangth: this.state.linkedListleangth + 1,
 
         });
        this.state.head = new Node(newNumber);
@@ -95,7 +97,7 @@ class LinkedList extends React.Component {
           frontNodes: [...addedArray , newNode], // Update nodes with the new data
           backNodes: [...addedArray, newNode],  // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
           newNumber: "",
-          linkedlistleangth: this.state.linkedlistleangth + 1,
+          linkedlistleangth: this.state.linkedListleangth + 1,
         });
      }
     }    
@@ -105,30 +107,30 @@ class LinkedList extends React.Component {
   deleteNodeAfterIndex() {
     const { newNumber, frontNodes , backNodes, head } = this.state;
     const linkedList = [...backNodes];
+    console.log(this.state.linkedListleangth);
     
     if(newNumber === "") {
       alert("Please enter a number");
       this.state.newNumber = ""
       return;
     }
-    if(isNaN(newNumber)) {
+    else if(isNaN(newNumber)) {
       alert("Please enter a number");
       this.state.newNumber = ""
       return;
     }
-    if(newNumber < 0)
+    else if(newNumber < 0)
     {
       alert("Please enter a positive number");
       this.state.newNumber = ""
       return;
     }
-    if(newNumber - 1 > this.state.linkedlistleangth)
-    {
+    else if(newNumber > linkedList.length) {
       alert("Please enter a number smaller then the linked list length");
       this.state.newNumber = ""
       return;
     }
-
+    else{
     //delete the node in the index with animation
     let newFrontNodes = [...frontNodes];
     let newBackNodes = [...backNodes];
@@ -148,6 +150,7 @@ class LinkedList extends React.Component {
       linkedlistleangth: this.state.linkedlistleangth - 1,
       newNumber: "",
     });
+  }
   }
 
   //this function is used to delete the first node from the linked list
