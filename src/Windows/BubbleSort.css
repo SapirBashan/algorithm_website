@@ -1,0 +1,45 @@
+.BubbleSort {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.input-section {
+  /* location of the input section is on the left side of the screen */
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 30px;
+  height: 50px;
+}
+
+.sort-button {
+  position: absolute;
+  align-self: flex-end;
+}
+
+.array-container {
+  display: flex;
+  flex-direction: column; /* Display the array elements vertically */
+  align-items: center;
+  height: 200px; /* Adjust the height as needed */
+}
+
+.array-bar {
+  background-color: #3498db;
+  color: white;
+  width: 40px;
+  margin: 2px 0; /* Adjust margin to separate array elements vertically */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5px;
+  border-radius: 5px;
+}
