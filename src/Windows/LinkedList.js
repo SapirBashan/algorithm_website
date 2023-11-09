@@ -63,7 +63,6 @@ class LinkedList extends React.Component {
           Xmovment: [0],
           Ymovment: [],
           color: ['hsl(196, 100, 40)'],
-          showPointer: false
         };
         this.setState({
           head: newNode,
@@ -84,7 +83,7 @@ class LinkedList extends React.Component {
         const newData = parseInt(newNumber);
         const newNode = {
           data: newData,
-          Xmovment: [ (-75 + (-25*this.state.linkedListleangth)),6,8,0],
+          Xmovment: [ (-75 + (-40*linkedList.length)),6,8,0],
           Ymovment: [50,50,0],
           color: ['hsl(196, 100, 40)']
         };
@@ -158,6 +157,16 @@ class LinkedList extends React.Component {
      const { newNumber, frontNodes , backNodes, head } = this.state;
     const linkedList = [...backNodes];
 
+    if(this.state.head === null) {
+      alert("The linked list is empty");
+      return;
+    }
+    if(linkedList.length === 0) {
+      alert("The linked list is empty");
+      return;
+    }
+
+
     let newHead = linkedList[1]; 
     let newFrontNodes = [...frontNodes];
     let newBackNodes = [...backNodes];
@@ -175,23 +184,20 @@ class LinkedList extends React.Component {
       frontNodes: newFrontNodes,
       backNodes: newBackNodes,
       head: newHead,
-      linkedlistleangth: this.state.linkedlistleangth - 1,
     });
 
-    if(this.state.linkedlistleangth === 1) {
+    if(linkedList.length === 1) {
       this.setState({
         head: null,
         frontNodes: [],
         backNodes: [],
         newNumber: "",
-        linkedlistleangth: 1,
       });
     }
 
     
   }
    
- 
   //this function is used to find a node in the linked list
   findNode() {
 
@@ -239,7 +245,7 @@ class LinkedList extends React.Component {
                 data={node.data}
                 Xmovment={node.Xmovment}
                 Ymovment={node.Ymovment}
-                duration={5 + this.state.linkedListleangth}
+                duration={5}
                 showPointer={node.showPointer}
               />
             ))
