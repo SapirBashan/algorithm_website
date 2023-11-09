@@ -200,6 +200,29 @@ class LinkedList extends React.Component {
    
   //this function is used to find a node in the linked list
   findNode() {
+    const { newNumber, frontNodes , backNodes, head } = this.state;
+    const linkedList = [...backNodes];
+    let listOfNodes = [];
+
+    for(let i = 0; i < linkedList.length; i++) {
+      if(linkedList[i].data === parseInt(newNumber)) {
+        listOfNodes.push(i);
+      }
+    }
+    if(listOfNodes.length === 0) {
+      alert("The number is not in the linked list");
+      return;
+    }
+    else{
+      for(let i = 0; i < listOfNodes.length; i++) {
+        frontNodes[listOfNodes[i]].color = ['hsl(0, 100, 50)'];
+      }
+    }
+
+    alert(listOfNodes)
+
+
+
 
   }
 
