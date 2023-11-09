@@ -232,6 +232,7 @@ class LinkedList extends React.Component {
 
   render() {
     const { frontNodes, newNumber, node } = this.state;
+    
   
     return (
       <div className="LinkedList">
@@ -266,7 +267,69 @@ class LinkedList extends React.Component {
             ))
           )}
         </div>
-        <TogglePopup />
+        <TogglePopup 
+        tab1 = 
+        {<div>
+          <h1>python code</h1>
+          <h2># Create a Node class to create a node</h2>
+          <h2>class Node:</h2>
+          <h2>def __init__(self, data):</h2>
+          <h2>self.data = data</h2>
+          <h2> self.next = None</h2>
+
+          <h2># Create a LinkedList class</h2>
+
+
+          <h2>class LinkedList:</h2>
+          <h2>def __init__(self):</h2>
+          <h2> self.head = None</h2>
+
+          <h2> # Method to add a node at the end of LL</h2>
+
+          <h2>  def insertAtEnd(self, data):</h2>
+          <h2>   new_node = Node(data)</h2>
+          <h2>   if self.head is None:</h2>
+          <h2>    self.head = new_node</h2>
+          <h2>     return</h2>
+
+          <h2>current_node = self.head</h2>
+          <h2>   while(current_node.next):</h2>
+          <h2>     current_node = current_node.next</h2>
+
+          <h2>   current_node.next = new_node</h2>
+
+            
+
+          <h2> # Method to remove first node of linked list</h2>
+
+          <h2> def remove_first_node(self):</h2>
+          <h2>   if(self.head == None):</h2>
+          <h2>     return</h2>
+
+          <h2>   self.head = self.head.next</h2>
+
+
+          <h2> # Method to remove at given index</h2>
+          <h2> def remove_at_index(self, index):</h2>
+          <h2>   if self.head == None:</h2>
+          <h2>     return</h2>
+
+          <h2>   current_node = self.head</h2>
+          <h2>  position = 0</h2>
+          <h2> if position == index:</h2>
+          <h2>    self.remove_first_node()</h2>
+          <h2>  else:</h2>
+          <h2>   while(current_node != None and position+1 != index):</h2>
+          <h2>      position = position+1</h2>
+          <h2>       current_node = current_node.next</h2>
+          <h2></h2>
+          <h2>    if current_node != None:</h2>
+          <h2>       current_node.next = current_node.next.next</h2>
+          <h2>    else:</h2>
+          <h2>       print("Index not present")</h2>
+
+        </div>}
+        tab2 = "java" tab3 = "C++" tab4 = "psudo"/>
       </div>
     );
   }
