@@ -112,3 +112,6 @@ Regression
 KNN
 Decision tree
 K means
+
+motion show case:
+https://www.framer.com/motion/

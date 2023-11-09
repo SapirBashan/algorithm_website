@@ -37,7 +37,14 @@
   .linked-list-container {
     /*make the list more down*/
     margin-top: 80px;
-
-
   }
+
+  .array-container{
+    position: relative;
+    display: flex; /* Use flexbox layout for horizontal arrangement */
+    /*MOVE RIFGHT*/
+    margin-left: 50px;
+  }
+
+  
   

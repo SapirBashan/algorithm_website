@@ -2,269 +2,155 @@ import React from "react";
 import "./LinkedList.css";
 import "../styles.css";
 import TogglePopup from "../components/TogglePopup.js";
+import Node from "../components/Node";
 
-class Node {
-  constructor(data) {
-    this.data = data;
-    this.next = null;
-  }
-}
-
+//this class is the linked list itself and it has all the functions for the linked list 
 class LinkedList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputVal: "",
-      inputValIndex: "",
-      head: null,
-      foundKey: null, // New state variable to store the key of the found node
-    };
-    
-    this.handleInput = this.handleInput.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleInputIndex = this.handleInputIndex.bind(this);
-    this.handleKeyPressIndex = this.handleKeyPressIndex.bind(this);
-  }
 
-  handleInput(e) {
-    this.setState({ inputVal: e.target.value, foundKey: null });
+
+  //this constructer is incharge of the state of the linked list 
+    constructor(props) {
+      super(props);
+      this.state = {
+        linkedListleangth: 0,
+        head: null,
+        backNodes: [
+          { data: 6, Xmovment: [0], Ymovment: [] , color: null},
+        ],
+        newNumber: "",
+        frontNodes: [
+          { data: 6, Xmovment: [0], Ymovment: [] , color: null},   
+        ],
+      };
+    }
+  
+
+  handleInput = (e) => {
+    this.setState({ newNumber: e.target.value });
   }
 
   handleKeyPress(e) {
-    if (e.key === "Enter" && this.state.inputVal !== "") {
+    if (e.key === "Enter") {
       this.insertNode();
     }
   }
 
-  handleInputIndex(e) {
-    this.setState({ inputValIndex: e.target.value });
-  }
-
-  handleKeyPress(e) {
-    if (e.key === "Enter" && this.state.inputVal !== "") {
-      this.insertNode();
-    }
-  }
-
-  handleKeyPressIndex(e) {
-    if (e.key === "Enter" && this.state.inputValIndex !== "") {
-      this.insertNodeAfterIndex(this.state.inputValIndex);
-    }
-  }
-
+  //this function is used to insert a node into the linked list 
   insertNode() {
-    if (this.state.inputVal === "") {
-      alert("Please enter a value");
-      return;
-    }
-    if (isNaN(this.state.inputVal)) {
+    const { newNumber, frontNodes , backNodes } = this.state;
+    const linkedList = [...backNodes];
+    if(newNumber === "") {
       alert("Please enter a number");
-      return;
     }
-    if (this.state.inputVal > 9999 || this.state.inputVal < -999) {
-      alert("Please enter a number between -999 and 9999");
-      return;
+    if(isNaN(newNumber)) {
+      alert("Please enter a number");
     }
-    const newNode = new Node(this.state.inputVal);
-    if (!this.state.head) {
-      this.setState({ head: newNode});
-    } 
-    else {
-      let current = this.state.head;
-      while (current.next) {
-        current = current.next;
+    //i want that if the head is null i will ad a node to the head
+    if(this.state.head === null) {
+       //delete the head node
+       this.cleanArray(frontNodes);
+       this.cleanArray(backNodes);
+       if (newNumber) { 
+        const newData = parseInt(newNumber);
+        const newNode = {
+          data: newData,
+          Xmovment: [0],
+          Ymovment: [],
+          color: ['hsl(196, 100, 40)']
+        };
+        this.setState({
+          head: newNode,
+          frontNodes: [newNode],
+          backNodes: [newNode],
+        });
+       this.state.head = new Node(newNumber);
+       this.state.linkedlistleangth++;
       }
-      current.next = newNode;
     }
-    setTimeout(() => {
-      this.setState({ inputVal: ""})
-   }); 
+
+    else {
+      this.cleanArray(frontNodes);
+      this.cleanArray(backNodes);
+      if (newNumber) {
+        const newData = parseInt(newNumber);
+        const newNode = {
+          data: newData,
+          Xmovment: [-50,100,150,0],
+          Ymovment: [50,0],
+          color: ['hsl(196, 100, 40)']
+        };
+        
+        let addedArray = [...frontNodes];
+  
+        this.setState({
+          frontNodes: [...addedArray , newNode], // Update nodes with the new data
+          backNodes: [...addedArray, newNode],  // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
+          newNomber : "", // Clear the input field
+        });
+     }
+     this.state.linkedlistleangth++;
+    }    
+  }
+  
+  //this function is used to delete a node from the linked list
+  deleteNode() {
   }
 
-  deleteNode(value) {
-   let current = this.state.head;
-   let prev = null;
-   while (current !== null) {
-     if (current.data === value) {
-       if (prev === null) {
-         this.setState({ head: current.next });
-       } else {
-         prev.next = current.next;
-       }
-       this.setState({ inputVal: "" }); // Reset inputVal state to an empty string
-       return;
-     }
-     prev = current;
-     current = current.next;
-   }
-   alert("Node not found");
- }
-
+  //this function is used to delete the first node from the linked list
   deleteFirstNode() {
-    if (this.state.head === null) {
-      alert("List is empty");
-      return;
-    }
-    this.setState({ head: this.state.head.next });
   }
  
-
-
-  findNode(value) {
-    if (value === "") {
-      alert("Please enter a value");
-      return false;
-    }
-    let current = this.state.head;
-    while (current !== null) {
-      if (current.data === parseInt(value, 10)) {
-         this.setState({ foundKey: current.data }); // Update foundKey state with the key of the found node
-        return true;
-      }
-      current = current.next;
-    }
-    alert("Node not found");
-    return false;
+  //this function is used to find a node in the linked list
+  findNode() {
   }
 
-  RandomNode(value) {
-    if (value === "") {
-      alert("Please enter a value");
-      return;
-    }
-    if (isNaN(value)) {
-      alert("Please enter a number");
-      return;
-    }
-    if (value > 100 || value < 1) {
-      alert("Please enter a number between 1 and 100");
-      return;
-    }
-
-    if(this.state.head !== null) {
-      var head = this.state.head;
-      var current = this.state.head;
-    }
-  
-    for (let i = 0; i < value; i++) {
-      let rand = Math.floor(Math.random() * 100) + 1;
-      const newNode = new Node(rand);
-  
-      if (!head) {
-        head = newNode;
-        current = head;
-      } else {
-        current.next = newNode;
-        current = current.next;
-      }
-    }
-  
-    this.setState({ head: head, inputVal: "" });
+  //this function is used to generate a random node in the linked list
+  RandomNode() {
   }
 
-  handleInputIndex(e) {
-    this.setState({ inputValIndex: e.target.valueIndex });
+  cleanArray = (nodes) => {
+    for (let i = 0; i < nodes.length; i++) {
+      nodes[i].Xmovment = [0];
+      nodes[i].color = ['hsl(196, 100, 40)'];
+    }
   }
 
-  insertNodeAfterIndex(value, index) {
-    if (value === "") {
-      alert("Please enter a value");
-      return;
-    }
-  
-    const newNode = new Node(value);
-    let current = this.state.head;
-    let currentIndex = 0;
-  
-    // Handle the case where index is 0 separately
-    if (index === 0) {
-      newNode.next = current;
-      this.setState({ inputValIndex: "", head: newNode });
-      return;
-    }
-  
-    // Traverse the list to find the node at the specified index
-    while (currentIndex < index && current !== null) {
-      current = current.next;
-      currentIndex++;
-    }
-  
-    // If current is null, the index is out of range
-    if (current === null) {
-      alert("Index out of range");
-      return;
-    }
-  
-    // Insert the new node after the current node
-    newNode.next = current.next;
-    current.next = newNode;
-  
-    this.setState({ inputValIndex: "", head: this.state.head });
-    this.setState({ inputVal: "" });
-  }
-  
-  
 
   render() {
-    let nodes = [];
-    let arrows = [];
-    let current = this.state.head;
+    const {frontNodes , newNumber, node} = this.state;
 
-    while (current !== null) {
-      nodes.push(
-        <div
-          key={current.data}
-          className={`block ${this.state.foundKey === current.data ? "found" : ""}`}
-        >
-          {current.data}
-        </div>
-      );
-      if (current.next !== null) {
-        arrows.push(<div key={current.data + "->"} className="arrow"></div>);
-      }
-      current = current.next;
-    }
 
     return (
       <div className="LinkedList">
-        <h1>Linked List</h1>
-        <input className="insert-node"
-          type="text"
-          value={this.state.inputVal}
-          onChange={(e) => this.handleInput(e)}
-          onKeyPress={(e) => this.handleKeyPress(e)}
+      <h1>Linked List</h1>
+      <input className="insert-node"
+        type="text"
+        value={newNumber}
+        onChange={this.handleInput}
+        onKeyPress={(e) => this.handleKeyPress(e)}
+      />
+      <button onClick={() => this.deleteNode()}>Delete</button>
+      <button onClick={() => this.insertNode()}>Insert</button>
+      <button onClick={() => this.findNode()}>Find</button>
+      <button onClick={() => this.RandomNode()}>Random</button>
+      <button onClick={() => this.deleteFirstNode()}>Delete First</button>
+      <button onClick={() => this.setState()}>Clear</button>
+      <h1> </h1>
+      <div className="array-container"> 
+      { this.state.head === null ? null : (frontNodes.map((node, index) => ( 
+        <Node
+          data={node.data}
+          Xmovment={node.Xmovment}
+          Ymovment={node.Ymovment}
+          duration={5}
+          showPointer={false}
         />
-        <button onClick={() => this.deleteNode(this.state.inputVal)}>Delete</button>
-        <button onClick={() => this.insertNode()}>Insert</button>
-        <button onClick={() => this.findNode(this.state.inputVal)}>Find</button>
-        <button onClick={() => this.RandomNode(this.state.inputVal)}>Random</button>
-        <button onClick={() => this.deleteFirstNode()}>Delete First</button>
-        <button onClick={() => this.setState({ head: null })}>Clear</button>
-        <h1> </h1>
-        <input
-          className="insert-after-index"
-          type="text"
-          value={this.state.inputValIndex}
-          onChange={(e) => this.handleInputIndex(e)} // Use handleInputIndex for this input field
-          onKeyPress={(e) => this.handleKeyPressIndex(e)}
-        />
-        <button onClick={() => this.insertNodeAfterIndex(this.state.inputVal, parseInt(this.state.inputValIndex, 10))}>
-          Insert After Index
-        </button>
-        <div className="linked-list-container">
-          {nodes.map((node, index) => (
-            <React.Fragment key={index}>
-              {node}
-              {arrows[index]}
-            </React.Fragment>
-          ))}
-        </div>
+      )))}
+    </div>
         <TogglePopup />
       </div>
     );
   }
 }
-
-
 
 export default LinkedList;
