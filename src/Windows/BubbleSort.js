@@ -176,6 +176,34 @@ class BubbleSort extends Component {
     });
   };
 
+  random = () => {
+    const {newNumber ,frontNodes ,backNodes } = this.state;
+    this.cleanArray(frontNodes);
+    this.cleanArray(backNodes);
+    // create an empty array 
+    const randomNodes = [];
+    // create a random number between the possible numbers for a number in react
+    for (let i = 0; i < newNumber; i++) {
+      const newData =  Math.floor(Math.random() * (((100- (-100))) + 1) + (-100));
+      // insert the number to the array in the old structure { data: 6, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
+      const newNode = {
+        data: newData,
+        Xmovment: [],
+        Ymovment: [0],
+        color: ['hsl(196, 100, 40)']
+      };
+      randomNodes.push(newNode);
+    }
+    // return 'num' times 
+    // result: an array with 'num' random numbers
+    this.setState({
+      frontNodes: randomNodes,
+      backNodes: randomNodes,
+      newNumber: "", // Clear the input field
+      sorted: false,
+    });
+  }
+
   cleanArray = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
       nodes[i].Ymovment = [0];
@@ -197,16 +225,20 @@ class BubbleSort extends Component {
         placeholder="Enter a number"
       />
       <br />
-      <button className="button" onClick={this.addNumber}>
+      <button  onClick={this.addNumber}>
         Add Number
       </button>
       <br />
-      <button className="button" onClick={this.shuffleArray}>
+      <button  onClick={this.shuffleArray}>
             Shuffle
+      </button>
+      <br />
+      <button  onClick={this.random}>
+            Random
       </button>
     </div>
     <div className="sort-button">
-      <button className="button" onClick={this.animate}>Sort Array</button>
+      <button onClick={this.animate}>Sort Array</button>
     </div>
     <div className="array-container">
       {frontNodes.map((node, index) => (
