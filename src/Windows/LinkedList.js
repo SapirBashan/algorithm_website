@@ -15,11 +15,11 @@ class LinkedList extends React.Component {
         linkedListleangth: 1,
         head: null,
         backNodes: [
-          { data: 6, Xmovment: [0], Ymovment: [] , color: null},
+          { data: 6, Xmovment: [0], Ymovment: [] , color: null, showPointer: false},
         ],
         newNumber: "",
         frontNodes: [
-          { data: 6, Xmovment: [0], Ymovment: [] , color: null},   
+          { data: 6, Xmovment: [0], Ymovment: [] , color: null, showPointer: false},   
         ],
       };
     }
@@ -41,9 +41,13 @@ class LinkedList extends React.Component {
     const linkedList = [...backNodes];
     if(newNumber === "") {
       alert("Please enter a number");
+      this.state.newNumber = ""
+      return;
     }
     if(isNaN(newNumber)) {
       alert("Please enter a number");
+      this.state.newNumber = ""
+      return;
     }
     //i want that if the head is null i will ad a node to the head
     if(this.state.head === null) {
@@ -56,7 +60,8 @@ class LinkedList extends React.Component {
           data: newData,
           Xmovment: [0],
           Ymovment: [],
-          color: ['hsl(196, 100, 40)']
+          color: ['hsl(196, 100, 40)'],
+          showPointer: false
         };
         this.setState({
           head: newNode,
@@ -81,6 +86,8 @@ class LinkedList extends React.Component {
           Ymovment: [50,50,0],
           color: ['hsl(196, 100, 40)']
         };
+         //this code makes the node before show the pointer
+        frontNodes[frontNodes.length - 1].showPointer = true;
         
         let addedArray = [...frontNodes];
   
@@ -95,15 +102,96 @@ class LinkedList extends React.Component {
   }
   
   //this function is used to delete a node from the linked list
-  deleteNode() {
+  deleteNodeAfterIndex() {
+    const { newNumber, frontNodes , backNodes, head } = this.state;
+    const linkedList = [...backNodes];
+    
+    if(newNumber === "") {
+      alert("Please enter a number");
+      this.state.newNumber = ""
+      return;
+    }
+    if(isNaN(newNumber)) {
+      alert("Please enter a number");
+      this.state.newNumber = ""
+      return;
+    }
+    if(newNumber < 0)
+    {
+      alert("Please enter a positive number");
+      this.state.newNumber = ""
+      return;
+    }
+    if(newNumber > this.state.linkedlistleangth)
+    {
+      alert("Please enter a number smaller then the linked list length");
+      this.state.newNumber = ""
+      return;
+    }
+
+    //delete the node in the index with animation
+    let newFrontNodes = [...frontNodes];
+    let newBackNodes = [...backNodes];
+    let index = newNumber;
+
+    newFrontNodes[index].Xmovment = [0];
+    newFrontNodes[index].Ymovment = [90];
+    newFrontNodes[index].color = ['hsl(12, 100, 50)'];
+    newFrontNodes[index].duration = 5;
+
+    newFrontNodes.splice(index, 1);
+    newBackNodes.splice(index, 1);
+
+    this.setState({
+      frontNodes: newFrontNodes,
+      backNodes: newBackNodes,
+      linkedlistleangth: this.state.linkedlistleangth - 1,
+      newNumber: "",
+    });
   }
 
   //this function is used to delete the first node from the linked list
   deleteFirstNode() {
+     const { newNumber, frontNodes , backNodes, head } = this.state;
+    const linkedList = [...backNodes];
+
+    let newHead = linkedList[1]; 
+    let newFrontNodes = [...frontNodes];
+    let newBackNodes = [...backNodes];
+       
+    //delete the head node with animation
+    newFrontNodes[0].Xmovment = [0];
+    newFrontNodes[0].Ymovment = [90];
+    newFrontNodes[0].color = ['hsl(12, 100, 50)'];
+    newFrontNodes[0].duration = 5;
+
+    newFrontNodes.shift();
+    newBackNodes.shift();
+
+    this.setState({
+      frontNodes: newFrontNodes,
+      backNodes: newBackNodes,
+      head: newHead,
+      linkedlistleangth: this.state.linkedlistleangth - 1,
+    });
+
+    if(this.state.linkedlistleangth === 1) {
+      this.setState({
+        head: null,
+        frontNodes: [],
+        backNodes: [],
+        newNumber: "",
+        linkedlistleangth: 1,
+      });
+    }
+
+    
   }
+   
  
   //this function is used to find a node in the linked list
   findNode() {
+    
   }
 
   //this function is used to generate a random node in the linked list
@@ -126,16 +214,17 @@ class LinkedList extends React.Component {
         <h1>Linked List</h1>
         <input
           className="insert-node"
-          type="text"
+          type="number"
           value={newNumber}
+          placeholder="Enter a number"
           onChange={this.handleInput}
           onKeyPress={(e) => this.handleKeyPress(e)}
-        />
-        <button onClick={() => this.deleteNode()}>Delete</button>
-        <button onClick={() => this.insertNode()}>Insert</button>
+        />        
+        <button onClick={() => this.insertNode()}>Insert</button>        
+        <button onClick={() => this.deleteFirstNode()}>Delete First</button>
+        <button onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
         <button onClick={() => this.findNode()}>Find</button>
         <button onClick={() => this.RandomNode()}>Random</button>
-        <button onClick={() => this.deleteFirstNode()}>Delete First</button>
         <button onClick={() => this.setState({ head: null, frontNodes: [], backNodes: [], newNumber: "" })}>
           Clear
         </button>
@@ -148,7 +237,7 @@ class LinkedList extends React.Component {
                 Xmovment={node.Xmovment}
                 Ymovment={node.Ymovment}
                 duration={5 + this.state.linkedListleangth}
-                showPointer={false}
+                showPointer={node.showPointer}
               />
             ))
           )}
