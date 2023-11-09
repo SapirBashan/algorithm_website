@@ -12,7 +12,6 @@ class LinkedList extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        linkedListleangth: 1,
         head: null,
         backNodes: [
           { data: 6, Xmovment: [0], Ymovment: [] , color: null, showPointer: false},
@@ -31,22 +30,21 @@ class LinkedList extends React.Component {
 
   handleKeyPress(e) {
     if (e.key === "Enter") {
-      this.insertNode();
+      this.insertNode(this.state.newNumber);
     }
   }
 
   //this function is used to insert a node into the linked list 
-  insertNode() {
+  insertNode(value) {
     const { newNumber, frontNodes , backNodes } = this.state;
     const linkedList = [...backNodes];
-    console.log(this.state.linkedListleangth);
 
-    if(newNumber === "") {
+    if(value === "") {
       alert("Please enter a number");
       this.state.newNumber = ""
       return;
     }
-    if(isNaN(newNumber)) {
+    if(isNaN(value)) {
       alert("Please enter a number");
       this.state.newNumber = ""
       return;
@@ -56,8 +54,8 @@ class LinkedList extends React.Component {
        //delete the head node
        this.cleanArray(frontNodes);
        this.cleanArray(backNodes);
-       if (newNumber) { 
-        const newData = parseInt(newNumber);
+       if (value) { 
+        const newData = parseInt(value);
         const newNode = {
           data: newData,
           Xmovment: [0],
@@ -69,21 +67,19 @@ class LinkedList extends React.Component {
           frontNodes: [newNode],
           backNodes: [newNode],
           newNumber: "",
-          linkedlistleangth: this.state.linkedListleangth + 1,
-
         });
-       this.state.head = new Node(newNumber);
+       this.state.head = new Node(value);
       }
     }
 
     else {
       this.cleanArray(frontNodes);
       this.cleanArray(backNodes);
-      if (newNumber) {
-        const newData = parseInt(newNumber);
+      if (value) {
+        const newData = parseInt(value);
         const newNode = {
           data: newData,
-          Xmovment: [ (-75 + (-40*linkedList.length)),6,8,0],
+          Xmovment: [ (-75 + (-40*linkedList.length*2)),6,8,0],
           Ymovment: [50,50,0],
           color: ['hsl(196, 100, 40)']
         };
@@ -96,7 +92,6 @@ class LinkedList extends React.Component {
           frontNodes: [...addedArray , newNode], // Update nodes with the new data
           backNodes: [...addedArray, newNode],  // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
           newNumber: "",
-          linkedlistleangth: this.state.linkedListleangth + 1,
         });
      }
     }    
@@ -146,7 +141,6 @@ class LinkedList extends React.Component {
     this.setState({
       frontNodes: newFrontNodes,
       backNodes: newBackNodes,
-      linkedlistleangth: this.state.linkedlistleangth - 1,
       newNumber: "",
     });
   }
@@ -220,14 +214,12 @@ class LinkedList extends React.Component {
     }
 
     alert(listOfNodes)
-
-
-
-
   }
 
   //this function is used to generate a random node in the linked list
   RandomNode() {
+      let random = Math.floor(Math.random() * 100) + 1;
+      this.insertNode(random);
   }
 
   cleanArray = (nodes) => {
@@ -252,7 +244,7 @@ class LinkedList extends React.Component {
           onChange={this.handleInput}
           onKeyPress={(e) => this.handleKeyPress(e)}
         />        
-        <button onClick={() => this.insertNode()}>Insert</button>        
+        <button onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
         <button onClick={() => this.deleteFirstNode()}>Delete First</button>
         <button onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
         <button onClick={() => this.findNode()}>Find</button>
