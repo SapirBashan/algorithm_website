@@ -122,7 +122,7 @@ class LinkedList extends React.Component {
       this.state.newNumber = ""
       return;
     }
-    if(newNumber > this.state.linkedlistleangth)
+    if(newNumber - 1 > this.state.linkedlistleangth)
     {
       alert("Please enter a number smaller then the linked list length");
       this.state.newNumber = ""
@@ -191,7 +191,7 @@ class LinkedList extends React.Component {
  
   //this function is used to find a node in the linked list
   findNode() {
-    
+
   }
 
   //this function is used to generate a random node in the linked list
