@@ -12,7 +12,7 @@ class LinkedList extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        linkedListleangth: 0,
+        linkedListleangth: 1,
         head: null,
         backNodes: [
           { data: 6, Xmovment: [0], Ymovment: [] , color: null},
@@ -62,9 +62,11 @@ class LinkedList extends React.Component {
           head: newNode,
           frontNodes: [newNode],
           backNodes: [newNode],
+          newNumber: "",
+          linkedlistleangth: this.state.linkedlistleangth + 1,
+
         });
        this.state.head = new Node(newNumber);
-       this.state.linkedlistleangth++;
       }
     }
 
@@ -75,8 +77,8 @@ class LinkedList extends React.Component {
         const newData = parseInt(newNumber);
         const newNode = {
           data: newData,
-          Xmovment: [-50,100,150,0],
-          Ymovment: [50,0],
+          Xmovment: [ (-75 + (-25*this.state.linkedListleangth)),6,8,0],
+          Ymovment: [50,50,0],
           color: ['hsl(196, 100, 40)']
         };
         
@@ -85,10 +87,10 @@ class LinkedList extends React.Component {
         this.setState({
           frontNodes: [...addedArray , newNode], // Update nodes with the new data
           backNodes: [...addedArray, newNode],  // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
-          newNomber : "", // Clear the input field
+          newNumber: "",
+          linkedlistleangth: this.state.linkedlistleangth + 1,
         });
      }
-     this.state.linkedlistleangth++;
     }    
   }
   
@@ -117,36 +119,40 @@ class LinkedList extends React.Component {
 
 
   render() {
-    const {frontNodes , newNumber, node} = this.state;
-
-
+    const { frontNodes, newNumber, node } = this.state;
+  
     return (
       <div className="LinkedList">
-      <h1>Linked List</h1>
-      <input className="insert-node"
-        type="text"
-        value={newNumber}
-        onChange={this.handleInput}
-        onKeyPress={(e) => this.handleKeyPress(e)}
-      />
-      <button onClick={() => this.deleteNode()}>Delete</button>
-      <button onClick={() => this.insertNode()}>Insert</button>
-      <button onClick={() => this.findNode()}>Find</button>
-      <button onClick={() => this.RandomNode()}>Random</button>
-      <button onClick={() => this.deleteFirstNode()}>Delete First</button>
-      <button onClick={() => this.setState()}>Clear</button>
-      <h1> </h1>
-      <div className="array-container"> 
-      { this.state.head === null ? null : (frontNodes.map((node, index) => ( 
-        <Node
-          data={node.data}
-          Xmovment={node.Xmovment}
-          Ymovment={node.Ymovment}
-          duration={5}
-          showPointer={false}
+        <h1>Linked List</h1>
+        <input
+          className="insert-node"
+          type="text"
+          value={newNumber}
+          onChange={this.handleInput}
+          onKeyPress={(e) => this.handleKeyPress(e)}
         />
-      )))}
-    </div>
+        <button onClick={() => this.deleteNode()}>Delete</button>
+        <button onClick={() => this.insertNode()}>Insert</button>
+        <button onClick={() => this.findNode()}>Find</button>
+        <button onClick={() => this.RandomNode()}>Random</button>
+        <button onClick={() => this.deleteFirstNode()}>Delete First</button>
+        <button onClick={() => this.setState({ head: null, frontNodes: [], backNodes: [], newNumber: "" })}>
+          Clear
+        </button>
+        <h1> </h1>
+        <div className="array-container-list">
+          {this.state.head === null ? null : (
+            frontNodes.map((node, index) => (
+              <Node
+                data={node.data}
+                Xmovment={node.Xmovment}
+                Ymovment={node.Ymovment}
+                duration={5 + this.state.linkedListleangth}
+                showPointer={false}
+              />
+            ))
+          )}
+        </div>
         <TogglePopup />
       </div>
     );

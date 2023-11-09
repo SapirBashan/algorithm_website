@@ -39,12 +39,14 @@
     margin-top: 80px;
   }
 
-  .array-container{
+  .array-container-list {
     position: relative;
-    display: flex; /* Use flexbox layout for horizontal arrangement */
-    /*MOVE RIFGHT*/
-    margin-left: 50px;
+    /*make the list horizontal*/
+    display: flex;
+    margin-left: 40px;
+    margin-top: 40px;
   }
+  
 
   
   
