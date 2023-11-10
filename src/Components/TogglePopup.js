@@ -20,8 +20,8 @@ const tabVariants = {
   hidden: { opacity: 0, y: -20 },
   visible: { opacity: 1, y: 0 },
 };
+class TogglePopup extends React.Component{
 
-export default class TogglePopup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,10 +75,10 @@ export default class TogglePopup extends React.Component {
                   ))}
                   {/* Content for the lower part with tabs */}
                   <div className="tab-content">
-                    {activeTab === 1 && <div>Content for Tab 1</div>}
-                    {activeTab === 2 && <div>Content for Tab 2</div>}
-                    {activeTab === 3 && <div>Content for Tab 3</div>}
-                    {activeTab === 4 && <div>Content for Tab 4</div>}
+                    {activeTab === 1 && this.props.tab1}
+                    {activeTab === 2 && this.props.tab2}
+                    {activeTab === 3 && this.props.tab3}
+                    {activeTab === 4 && this.props.tab4}
                   </div>
                 </div>
               </div>
@@ -88,4 +88,7 @@ export default class TogglePopup extends React.Component {
       </div>
     );
   }
+  
 }
+
+export default TogglePopup;
