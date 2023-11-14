@@ -4,6 +4,7 @@ import "../styles.css";
 import TogglePopup from "../components/TogglePopup.js";
 import Node from "../components/Node";
 
+
 //this class is the linked list itself and it has all the functions for the linked list 
 class LinkedList extends React.Component {
 
@@ -147,40 +148,55 @@ class LinkedList extends React.Component {
   }
 
   //this function is used to delete the first node from the linked list
-  deleteFirstNode() {
-     const { newNumber, frontNodes , backNodes, head } = this.state;
+  deleteFirstNode = async () => {
+    return new Promise((resolve) => {
+      const { frontNodes, backNodes, head } = this.state;
+      const linkedList = [...backNodes];
+  
+      if (this.state.head === null) {
+        alert("The linked list is empty");
+        resolve();
+        return;
+      }
+      if (linkedList.length === 0) {
+        alert("The linked list is empty");
+        resolve();
+        return;
+      }
+  
+      let newFrontNodes = [...frontNodes];
+  
+      // delete the head node with animation
+      newFrontNodes[0].Xmovment = [0, 0];
+      newFrontNodes[0].Ymovment = [0, 90];
+      newFrontNodes[0].color = ['hsl(12, 100, 50)'];
+      newFrontNodes[0].duration = 5;
+  
+      setTimeout(() => {
+        // Delay the resolve to ensure animation completes
+        resolve();
+      }, 5000); // Adjust the delay time according to your animation duration
+    });
+  }
+  
+  animateDeleteFirstNode = () => {
+    const { frontNodes, backNodes, head } = this.state;
     const linkedList = [...backNodes];
-
-    if(this.state.head === null) {
-      alert("The linked list is empty");
-      return;
-    }
-    if(linkedList.length === 0) {
-      alert("The linked list is empty");
-      return;
-    }
-
-
-    let newHead = linkedList[1]; 
+  
+    let newHead = linkedList[1];
     let newFrontNodes = [...frontNodes];
     let newBackNodes = [...backNodes];
-       
-    //delete the head node with animation
-    newFrontNodes[0].Xmovment = [0];
-    newFrontNodes[0].Ymovment = [90];
-    newFrontNodes[0].color = ['hsl(12, 100, 50)'];
-    newFrontNodes[0].duration = 5;
-
+  
     newFrontNodes.shift();
     newBackNodes.shift();
-
+  
     this.setState({
       frontNodes: newFrontNodes,
       backNodes: newBackNodes,
       head: newHead,
     });
-
-    if(linkedList.length === 1) {
+  
+    if (linkedList.length === 1) {
       this.setState({
         head: null,
         frontNodes: [],
@@ -188,9 +204,7 @@ class LinkedList extends React.Component {
         newNumber: "",
       });
     }
-
-    
-  }
+  };
    
   //this function is used to find a node in the linked list
   findNode() {
@@ -232,6 +246,228 @@ class LinkedList extends React.Component {
 
   render() {
     const { frontNodes, newNumber, node } = this.state;
+
+    const pythonCode = `# Create a Node class to create a node
+    class Node:
+      def __init__(self, data):
+        self.data = data
+        self.next = None
+
+    # Create a LinkedList class
+    class LinkedList:
+      def __init__(self):
+        self.head = None
+
+      # Method to add a node at the end of LL
+      def insertAtEnd(self, data):
+        # Implementation for insertAtEnd method...
+
+      # Method to remove first node of linked list
+      def remove_first_node(self):
+        # Implementation for remove_first_node method...
+
+      # Method to remove at given index
+      def remove_at_index(self, index):
+        # Implementation for remove_at_index method...
+
+      # Method to clear the linked list
+      def clear(self):
+        self.head = None
+
+      # Method to find a node in the linked list
+      def find(self, data):
+        # Implementation for find method...
+  `;
+
+    const javaCode = `/* Create a Node class to create a node */
+    class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    /* Create a LinkedList class */
+    class LinkedList {
+        Node head;
+
+        public LinkedList() {
+            this.head = null;
+        }
+
+        /* Method to add a node at the end of LL */
+        public void insertAtEnd(int data) {
+            // Implementation for insertAtEnd method...
+        }
+
+        /* Method to remove first node of linked list */
+        public void removeFirstNode() {
+            // Implementation for removeFirstNode method...
+        }
+
+        /* Method to remove at given index */
+        public void removeAtIndex(int index) {
+            // Implementation for removeAtIndex method...
+        }
+
+        /* Method to clear the linked list */
+        public void clear() {
+            this.head = null;
+        }
+
+        /* Method to find a node in the linked list */
+        public Node find(int data) {
+            // Implementation for find method...
+            return null; // Change this to return the found node
+        }
+    }`;
+
+  const cppCode = ` /* Create a Node class to create a node */
+    class Node {
+    public:
+        int data;
+        Node* next;
+        
+        Node(int data) {
+            this->data = data;
+            this->next = nullptr;
+        }
+    };
+
+    /* Create a LinkedList class */
+    class LinkedList {
+    private:
+        Node* head;
+    public:
+        LinkedList() {
+            head = nullptr;
+        }
+        
+        /* Method to add a node at the end of LL */
+        void insertAtEnd(int data) {
+            // Implementation for insertAtEnd method...
+        }
+        
+        /* Method to remove first node of linked list */
+        void removeFirstNode() {
+            // Implementation for removeFirstNode method...
+        }
+        
+        /* Method to remove at given index */
+        void removeAtIndex(int index) {
+            // Implementation for removeAtIndex method...
+        }
+        
+        /* Method to clear the linked list */
+        void clear() {
+            head = nullptr;
+        }
+        
+        /* Method to find a node in the linked list */
+        Node* find(int data) {
+            // Implementation for find method...
+            return nullptr; // Change this to return the found node
+        }
+    };`;
+
+  const pseudoCode = ` /* Create a Node class to create a node */
+    Node
+        data
+        next
+
+    /* Create a LinkedList class */
+    LinkedList
+        head
+
+    /* Method to add a node at the end of LL */
+    insertAtEnd(data)
+        // Implementation for insertAtEnd method...
+
+    /* Method to remove first node of linked list */
+    removeFirstNode()
+        // Implementation for removeFirstNode method...
+
+    /* Method to remove at given index */
+    removeAtIndex(index)
+        // Implementation for removeAtIndex method...
+
+    /* Method to clear the linked list */
+    clear()
+        head = null
+
+    /* Method to find a node in the linked list */
+    find(data)
+        // Implementation for find method...
+        return null // Change this to return the found node
+  `;
+
+  const explination = `<div class="explanation">
+    <h2>Linked List Concept:</h2>
+    <p>
+      A linked list is a linear collection of elements where each element is a separate object called a node. 
+      Each node in a linked list contains two parts: the data itself, and a reference (link/pointer) to the next node in the sequence.
+    </p>
+    
+    <h2>How Linked List Works:</h2>
+    <p>
+      Imagine a chain of linked containers. Each container holds some information (the data) and a pointer to the next container. 
+      The first container is the starting point. It holds the first piece of information and points to the next container. 
+      The last container points to nowhere, indicating the end of the list.
+    </p>
+    
+    <h2>Benefits of Linked List over Other Data Structures:</h2>
+    <p>
+      <b>Dynamic Size:</b> Linked lists can grow or shrink in size during execution. 
+      They allocate memory when needed and are not constrained by a fixed size.
+    </p>
+    <p>
+      <b>Insertions and Deletions:</b> Adding or removing elements from a linked list is more efficient than some other data structures (like arrays) 
+      because it involves changing pointers rather than shifting elements.
+    </p>
+    <p>
+      <b>Ease of Modification:</b> Insertions and deletions can be done more easily at any position within the linked list without affecting the entire structure, 
+      unlike arrays which might require shifting elements.
+    </p>
+    
+    <h2>Visualizing Linked List:</h2>
+    <p>
+      Consider a train with each carriage representing a node. 
+      Each carriage holds cargo (the data) and is linked to the next carriage. 
+      To add a new carriage (node) or remove one, you simply need to adjust the connections between the carriages, not the whole train.
+    </p>
+    
+    <h2>Drawbacks:</h2>
+    <p>
+      <b>Random Access:</b> Unlike arrays, linked lists don't support direct access to elements by index. 
+      Traversing a linked list to reach a specific node might take more time.
+    </p>
+    <p>
+      <b>Memory Overhead:</b> Each node in a linked list requires extra memory for storing the reference to the next node, 
+      which might consume more memory compared to arrays for the same amount of data.
+    </p>
+    
+    <h2>Summary:</h2>
+    <p>
+      Linked lists offer flexibility in managing data dynamically, allowing for efficient insertions and deletions. 
+      They're useful when the size of data isn't known beforehand or when frequent insertions and deletions are expected.
+    </p>
+    
+    <h2>Real-world Analogies:</h2>
+    <p>
+      <b>Train Cars:</b> Each train car is linked to the next one and can be added or removed easily.
+    </p>
+    <p>
+      <b>Paper Chain Links:</b> Each link in a paper chain connects to the next link forming a sequence.
+    </p>
+    <p>
+      By relating the concept to familiar real-world scenarios, individuals new to algorithms can grasp the basic idea and advantages 
+      of using a linked list as a data structure.
+    </p>
+  </div>
+  `;
     
   
     return (
@@ -246,7 +482,13 @@ class LinkedList extends React.Component {
           onKeyPress={(e) => this.handleKeyPress(e)}
         />        
         <button onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
-        <button onClick={() => this.deleteFirstNode()}>Delete First</button>
+        <button onClick={() => {
+                this.deleteFirstNode().then(() => {
+                  setTimeout(() => {
+                    this.animateDeleteFirstNode();
+                  }, 5000); // Adjust the delay time according to your animation duration
+                });
+              }}>Delete First</button>
         <button onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
         <button onClick={() => this.findNode()}>Find</button>
         <button onClick={() => this.RandomNode()}>Random</button>
@@ -262,76 +504,22 @@ class LinkedList extends React.Component {
                 Xmovment={node.Xmovment}
                 Ymovment={node.Ymovment}
                 duration={5}
+                color={node.color}
                 showPointer={node.showPointer}
               />
             ))
           )}
         </div>
         <TogglePopup 
-        tab1 = 
-        {<div>
-          <h1>python code</h1>
-          <h2># Create a Node class to create a node</h2>
-          <h2>class Node:</h2>
-          <h2>def __init__(self, data):</h2>
-          <h2>self.data = data</h2>
-          <h2> self.next = None</h2>
-
-          <h2># Create a LinkedList class</h2>
-
-
-          <h2>class LinkedList:</h2>
-          <h2>def __init__(self):</h2>
-          <h2> self.head = None</h2>
-
-          <h2> # Method to add a node at the end of LL</h2>
-
-          <h2>  def insertAtEnd(self, data):</h2>
-          <h2>   new_node = Node(data)</h2>
-          <h2>   if self.head is None:</h2>
-          <h2>    self.head = new_node</h2>
-          <h2>     return</h2>
-
-          <h2>current_node = self.head</h2>
-          <h2>   while(current_node.next):</h2>
-          <h2>     current_node = current_node.next</h2>
-
-          <h2>   current_node.next = new_node</h2>
-
-            
-
-          <h2> # Method to remove first node of linked list</h2>
-
-          <h2> def remove_first_node(self):</h2>
-          <h2>   if(self.head == None):</h2>
-          <h2>     return</h2>
-
-          <h2>   self.head = self.head.next</h2>
-
-
-          <h2> # Method to remove at given index</h2>
-          <h2> def remove_at_index(self, index):</h2>
-          <h2>   if self.head == None:</h2>
-          <h2>     return</h2>
-
-          <h2>   current_node = self.head</h2>
-          <h2>  position = 0</h2>
-          <h2> if position == index:</h2>
-          <h2>    self.remove_first_node()</h2>
-          <h2>  else:</h2>
-          <h2>   while(current_node != None and position+1 != index):</h2>
-          <h2>      position = position+1</h2>
-          <h2>       current_node = current_node.next</h2>
-          <h2></h2>
-          <h2>    if current_node != None:</h2>
-          <h2>       current_node.next = current_node.next.next</h2>
-          <h2>    else:</h2>
-          <h2>       print("Index not present")</h2>
-
-        </div>}
-        tab2 = "java" tab3 = "C++" tab4 = "psudo"/>
+        text = {explination}
+        tab1 = {pythonCode}
+        tab2 = {javaCode} 
+        tab3 = {cppCode} 
+        tab4 = {pseudoCode}
+        />
       </div>
     );
+
   }
 }
 

@@ -2,6 +2,8 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./TogglePopup.css";
 import questionMark from '../icons/question.png';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const popupVariants = {
   hidden: { opacity: 0, y: -50 },
@@ -60,7 +62,9 @@ class TogglePopup extends React.Component{
                 <button onClick={this.togglePopup}>X</button>
               </div>
               <div className="popup-content">
-                <div className="popup-upper">{this.props.text}</div>
+                <div className="popup-upper" dangerouslySetInnerHTML={{ __html: this.props.text }}>
+                  {}
+                </div>
                 <div className="popup-lower">
                   {[1, 2, 3, 4].map((tabNumber) => (
                     <motion.div
@@ -69,16 +73,35 @@ class TogglePopup extends React.Component{
                       variants={tabVariants}
                     >
                       <button onClick={() => this.changeTab(tabNumber)}>
-                        Tab {tabNumber}
+                        {tabNumber === 1 && 'Python'}
+                        {tabNumber === 2 && 'Java'}
+                        {tabNumber === 3 && 'C++'}
+                        {tabNumber === 4 && 'Pseudo'}
                       </button>
                     </motion.div>
                   ))}
                   {/* Content for the lower part with tabs */}
                   <div className="tab-content">
-                    {activeTab === 1 && this.props.tab1}
-                    {activeTab === 2 && this.props.tab2}
-                    {activeTab === 3 && this.props.tab3}
-                    {activeTab === 4 && this.props.tab4}
+                    {activeTab === 1 && (
+                      <SyntaxHighlighter language="python" style={dark}>
+                        {this.props.tab1}
+                      </SyntaxHighlighter>
+                    )}
+                    {activeTab === 2 && (
+                      <SyntaxHighlighter language="java" style={dark}>
+                        {this.props.tab2}
+                      </SyntaxHighlighter>
+                    )}
+                    {activeTab === 3 && (
+                      <SyntaxHighlighter language="cpp" style={dark}>
+                        {this.props.tab3}
+                      </SyntaxHighlighter>
+                    )}
+                    {activeTab === 4 && (
+                      <SyntaxHighlighter language="plaintext" style={dark}>
+                        {this.props.tab4}
+                      </SyntaxHighlighter>
+                    )}
                   </div>
                 </div>
               </div>
