@@ -38,7 +38,7 @@ class BubbleSort extends Component {
       // Create a copy of the Ymovment array
       const updatedYmovment = [...updatedNode.Ymovment];
       // create a copy of the color array
-      const updatedColor = [...updatedNode.color];
+    //const updatedColor = [...updatedNode.color];
       // Add the movement value to the Ymovment array
       const value = updatedYmovment[updatedYmovment.length - 1];
       // Add the movement value to the Ymovment array
