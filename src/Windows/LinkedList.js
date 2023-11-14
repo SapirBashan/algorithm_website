@@ -164,47 +164,32 @@ class LinkedList extends React.Component {
         return;
       }
   
-      let newFrontNodes = [...frontNodes];
+      let newBackNodes = [...frontNodes];
   
+      this.cleanArray(frontNodes);
+      this.cleanArray(backNodes);
       // delete the head node with animation
-      newFrontNodes[0].Xmovment = [0, 0];
-      newFrontNodes[0].Ymovment = [0, 90];
-      newFrontNodes[0].color = ['hsl(12, 100, 50)'];
-      newFrontNodes[0].duration = 5;
-  
-      setTimeout(() => {
-        // Delay the resolve to ensure animation completes
-        resolve();
-      }, 5000); // Adjust the delay time according to your animation duration
-    });
-  }
-  
-  animateDeleteFirstNode = () => {
-    const { frontNodes, backNodes, head } = this.state;
-    const linkedList = [...backNodes];
-  
-    let newHead = linkedList[1];
-    let newFrontNodes = [...frontNodes];
-    let newBackNodes = [...backNodes];
-  
-    newFrontNodes.shift();
-    newBackNodes.shift();
-  
-    this.setState({
-      frontNodes: newFrontNodes,
-      backNodes: newBackNodes,
-      head: newHead,
-    });
-  
-    if (linkedList.length === 1) {
+      newBackNodes[0].Xmovment = [0, 0];
+      newBackNodes[0].Ymovment = [0, 90];
+      newBackNodes[0].color = ['hsl(12, 100, 50)'];
+      newBackNodes[0].duration = 5;
+
+      for(let i = 1; i < newBackNodes.length; i++) {
+        newBackNodes[i].Xmovment = [0,-60];
+        newBackNodes[i].Ymovment = [0,0];
+        newBackNodes[i].color = ['hsl(196, 100, 40)'];
+      }
+
       this.setState({
-        head: null,
-        frontNodes: [],
-        backNodes: [],
+        frontNodes: newBackNodes,
         newNumber: "",
       });
-    }
-  };
+
+      backNodes.shift();
+  
+      
+  });}
+
    
   //this function is used to find a node in the linked list
   findNode() {
@@ -483,11 +468,7 @@ class LinkedList extends React.Component {
         />        
         <button onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
         <button onClick={() => {
-                this.deleteFirstNode().then(() => {
-                  setTimeout(() => {
-                    this.animateDeleteFirstNode();
-                  }, 5000); // Adjust the delay time according to your animation duration
-                });
+                this.deleteFirstNode()
               }}>Delete First</button>
         <button onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
         <button onClick={() => this.findNode()}>Find</button>
