@@ -4,6 +4,7 @@ import "./InsertionSort.css";
 import Node from "../components/Node";
 import TogglePopup from "../components/TogglePopup.js";
 
+
 class InsertionSort extends Component {
   constructor(props) {
     super(props);

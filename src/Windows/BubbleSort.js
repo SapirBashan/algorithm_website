@@ -183,6 +183,7 @@ class BubbleSort extends Component {
       sorted: false,
     });
   }
+  
 
   random = () => {
     const {newNumber ,frontNodes ,backNodes } = this.state;

@@ -173,6 +173,7 @@ class LinkedList extends React.Component {
     newBackNodes[0].Ymovment = [0,90];
     newBackNodes[0].color = ['hsl(12, 100, 50)'];
     newBackNodes[0].duration = 5;
+    
 
     for(let i = 1; i < newBackNodes.length; i++) {
       newBackNodes[i].Xmovment = [0,-60];
