@@ -148,63 +148,59 @@ class LinkedList extends React.Component {
   }
 
   //this function is used to delete the first node from the linked list
-  deleteFirstNode = async () => {
-    return new Promise((resolve) => {
-      const { frontNodes, backNodes, head } = this.state;
-      const linkedList = [...backNodes];
-  
-      if (this.state.head === null) {
-        alert("The linked list is empty");
-        resolve();
-        return;
-      }
-      if (linkedList.length === 0) {
-        alert("The linked list is empty");
-        resolve();
-        return;
-      }
-  
-      let newFrontNodes = [...frontNodes];
-  
-      // delete the head node with animation
-      newFrontNodes[0].Xmovment = [0, 0];
-      newFrontNodes[0].Ymovment = [0, 90];
-      newFrontNodes[0].color = ['hsl(12, 100, 50)'];
-      newFrontNodes[0].duration = 5;
-  
-      setTimeout(() => {
-        // Delay the resolve to ensure animation completes
-        resolve();
-      }, 5000); // Adjust the delay time according to your animation duration
-    });
-  }
-  
-  animateDeleteFirstNode = () => {
-    const { frontNodes, backNodes, head } = this.state;
+  deleteFirstNode() {
+    const { newNumber, frontNodes , backNodes, head } = this.state;
     const linkedList = [...backNodes];
-  
-    let newHead = linkedList[1];
+
+    if(this.state.head === null) {
+      alert("The linked list is empty");
+      return;
+    }
+    if(linkedList.length === 0) {
+      alert("The linked list is empty");
+      return;
+    }
+
+
+    let newHead = linkedList[1]; 
     let newFrontNodes = [...frontNodes];
-    let newBackNodes = [...backNodes];
-  
-    newFrontNodes.shift();
-    newBackNodes.shift();
-  
+    const newBackNodes = [...backNodes];
+
+
+    this.cleanArray(frontNodes);
+    this.cleanArray(backNodes);
+    newBackNodes[0].Xmovment = [0,0];
+    newBackNodes[0].Ymovment = [0,90];
+    newBackNodes[0].color = ['hsl(12, 100, 50)'];
+    newBackNodes[0].duration = 5;
+
+    for(let i = 1; i < newBackNodes.length; i++) {
+      newBackNodes[i].Xmovment = [0,-60];
+      newBackNodes[i].Ymovment = [0,0];
+      newBackNodes[i].color = ['hsl(196, 100, 40)'];
+    }
+
+    this.setState({
+      frontNodes: newBackNodes,
+     })
+
+     backNodes.shift();
+  }
+
+  animateNode() {
+    const { newNumber, frontNodes , backNodes, head } = this.state;
+    const linkedList = [...backNodes];
+    let newFrontNodes = [...frontNodes];
+    
+    backNodes.shift();
+    frontNodes.shift();
+
     this.setState({
       frontNodes: newFrontNodes,
-      backNodes: newBackNodes,
-      head: newHead,
-    });
-  
-    if (linkedList.length === 1) {
-      this.setState({
-        head: null,
-        frontNodes: [],
-        backNodes: [],
-        newNumber: "",
-      });
-    }
-  };
+      backNodes: linkedList,
+    })
+  }
+
    
   //this function is used to find a node in the linked list
   findNode() {
@@ -482,13 +478,7 @@ class LinkedList extends React.Component {
           onKeyPress={(e) => this.handleKeyPress(e)}
         />        
         <button onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
-        <button onClick={() => {
-                this.deleteFirstNode().then(() => {
-                  setTimeout(() => {
-                    this.animateDeleteFirstNode();
-                  }, 5000); // Adjust the delay time according to your animation duration
-                });
-              }}>Delete First</button>
+        <button onClick={() => this.deleteFirstNode()}>Delete First</button>
         <button onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
         <button onClick={() => this.findNode()}>Find</button>
         <button onClick={() => this.RandomNode()}>Random</button>
