@@ -2,29 +2,18 @@
 import React, { Component } from "react";
 import "./BubbleSort.css";
 import Node from "../components/Node";
+import TogglePopup from "../components/TogglePopup";
 
 class BubbleSort extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      backNodes: [
-        { data: 6, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 2, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 9, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 1, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 5, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 3, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-      ],
+      backNodes: [],
       newNumber: "",
-      frontNodes: [
-        { data: 6, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 2, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 9, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 1, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 5, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-        { data: 3, Xmovment: [], Ymovment: [0] , color:['hsl(196, 100, 40)']},
-      ],
+      frontNodes: [],
       sorted: false,
+      volume:0, 
+      setVolume: (volume) => this.setState({volume})
     };
   }
 
@@ -48,7 +37,7 @@ class BubbleSort extends Component {
       // Add the color value to the color array
       updatedNodes[nodeIndex].color.push(color);
     }
-  };
+  }
 
   bubbleSort = () => {
     // if the array is sorted return
@@ -60,7 +49,8 @@ class BubbleSort extends Component {
     this.cleanArray(this.state.backNodes);
 
     let green = 'hsl(120, 100, 25)';
-    let blue = 'hsl(196, 100, 40)';
+    let blue = 'hsl(60, 100, 50)';
+    let red = 'hsl(0, 100, 50)';
 
     // set the nomber of nodes
     let n = nodes.length;
@@ -96,7 +86,7 @@ class BubbleSort extends Component {
                 //add the last element in the Ymovment array to the Ymovment array
               if(k === j || k === j + 1)
               {
-                this.addYMovementToNode(k, 0 , nodes, green);
+                this.addYMovementToNode(k, 0 , nodes, red);
               }
               else{
                 this.addYMovementToNode(k, 0 , nodes, blue);
@@ -116,7 +106,7 @@ class BubbleSort extends Component {
     this.setState({
       sorted: true,
     });
-  };
+  }
 
   animate = () => {
     const nodesCopy = [...this.state.backNodes]; // Create a copy of the nodes array
@@ -129,13 +119,27 @@ class BubbleSort extends Component {
 
   handleChange = (e) => {
     this.setState({ newNumber: e.target.value });
-  };
+  }
+  
+  handleKeyPress(e) {
+    if (e.key === "Enter") {
+      this.addNumber();
+    }
+  }
 
   addNumber = () => {
     const { newNumber, frontNodes , backNodes , sorted} = this.state;
     this.cleanArray(frontNodes);
     this.cleanArray(backNodes);
-    if (newNumber) {
+    if(isNaN(newNumber)) {
+      alert("Please enter a number");
+      this.state.newNumber = ""
+      return;
+    }
+    if(newNumber === "") {
+      alert("the input is empty");
+      return;
+    }
       const newData = parseInt(newNumber);
       const newNode = {
         data: newData,
@@ -156,13 +160,17 @@ class BubbleSort extends Component {
         newNumber: "", // Clear the input field
         sorted: false,
       });
-    }
-  };
+  }
 
   shuffleArray = () => {
     const { frontNodes , backNodes } = this.state;
     this.cleanArray(frontNodes);
     this.cleanArray(backNodes);
+    if(frontNodes.length === 0) {
+      alert("the array is empty");
+      return;
+    }
+
     const shuffledNodes = [...frontNodes];
     for (let i = shuffledNodes.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -174,12 +182,18 @@ class BubbleSort extends Component {
       backNodes: shuffledNodes,
       sorted: false,
     });
-  };
+  }
 
   random = () => {
     const {newNumber ,frontNodes ,backNodes } = this.state;
     this.cleanArray(frontNodes);
     this.cleanArray(backNodes);
+
+    if(newNumber === "") {
+      alert("the input is empty");
+      return;
+    }
+
     // create an empty array 
     const randomNodes = [];
     // create a random number between the possible numbers for a number in react
@@ -204,6 +218,15 @@ class BubbleSort extends Component {
     });
   }
 
+  erase = () => {
+    this.setState({
+      frontNodes: [],
+      backNodes: [],
+      newNumber: "",
+      sorted: false,
+    });
+  }
+
   cleanArray = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
       nodes[i].Ymovment = [0];
@@ -211,18 +234,24 @@ class BubbleSort extends Component {
     }
   }
 
-  render() {
-    const {frontNodes , newNumber} = this.state;
+  
 
+  render() {
+    const {frontNodes , newNumber ,volume, setVolume} = this.state;
     return (
+      <div>
+        
+          <h1>Bubble Sort</h1>
+        
       <div className="BubbleSort">
-    <h1>Bubble Sort</h1>
+       
     <div className="input-section">
       <input
         type="number"
         value={newNumber}
         onChange={this.handleChange}
         placeholder="Enter a number"
+        onKeyPress={(e) => this.handleKeyPress(e)}
       />
       <br />
       <button  onClick={this.addNumber}>
@@ -236,9 +265,26 @@ class BubbleSort extends Component {
       <button  onClick={this.random}>
             Random
       </button>
-    </div>
-    <div className="sort-button">
-      <button onClick={this.animate}>Sort Array</button>
+      <br />
+      <button  onClick={this.erase}>
+            Clear
+      </button>
+      <br />
+      <input
+          type="range"
+          //i want the min value to be the longest duration and the max value to be the shortest duration
+          min={frontNodes.length/4}
+          max={frontNodes.length*4}
+          step={0.02}
+          value={volume}
+          onChange={event => {
+            setVolume(event.target.valueAsNumber)
+          }}
+        />
+      <br />
+      <button  onClick={this.animate}>
+            Bubble Sort
+      </button>
     </div>
     <div className="array-container">
       {frontNodes.map((node, index) => (
@@ -247,11 +293,13 @@ class BubbleSort extends Component {
           Xmovment={node.Xmovment}
           Ymovment={node.Ymovment}
           color={node.color}
-          duration={node.Ymovment.length}
+          duration={frontNodes.length * 4 - volume}
           showPointer={false}
         />
       ))}
     </div>
+    <TogglePopup/>
+  </div>
   </div>
       
     );
