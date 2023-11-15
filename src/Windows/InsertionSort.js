@@ -25,16 +25,38 @@ class InsertionSort extends Component {
       const updatedNodes = [...nodes];
       // Create a copy of the node at the nodeIndex
       const updatedNode = { ...updatedNodes[nodeIndex] };
-      // Create a copy of the Ymovment array
-      const updatedXmovement = [...updatedNode.Xmovement];
+      // Create a copy of the Xmovement array
+      const updatedXmovement = [...updatedNode.Xmovment];
       // create a copy of the color array
     //const updatedColor = [...updatedNode.color];
-      // Add the movement value to the Ymovment array
+      // Add the movement value to the Xmovement array 
       const value = updatedXmovement[updatedXmovement.length - 1];
+      // Add the movement value to the Xmovment array
+      const movementValue = movement + value; 
+      // Add the movement value to the movment array
+      updatedNodes[nodeIndex].Xmovment.push(movementValue);
+      // Add the color value to the color array
+      updatedNodes[nodeIndex].color.push(color);
+    }
+  }
+
+  addYMovementToNode = (nodeIndex, movement , nodes ,color) => {
+  
+    if (nodeIndex >= 0 && nodeIndex < nodes.length) {
+      // Create a copy of the nodes array
+      const updatedNodes = [...nodes];
+      // Create a copy of the node at the nodeIndex
+      const updatedNode = { ...updatedNodes[nodeIndex] };
+      // Create a copy of the Ymovment array
+      const updatedYmovement = [...updatedNode.Xmovment];
+      // create a copy of the color array
+    //const updatedColor = [...updatedNode.color];
+      // Add the movement value to the Xmovement array 
+      const value = updatedYmovement[updatedYmovement.length - 1];
       // Add the movement value to the Ymovment array
       const movementValue = movement + value; 
       // Add the movement value to the Ymovment array
-      updatedNodes[nodeIndex].Xmovement.push(movementValue);
+      updatedNodes[nodeIndex].Ymovment.push(movementValue);
       // Add the color value to the color array
       updatedNodes[nodeIndex].color.push(color);
     }
@@ -53,39 +75,45 @@ class InsertionSort extends Component {
     let red = 'hsl(0, 100, 50)';
   
     let n = nodes.length;
-  
-    for (let i = 1; i < n; i++) {
+
+    for (let i = 1; i < n; i++) 
+    {
       let j = i - 1;
       let key = nodes[i].data;
       let move = false;
-  
-      while (j >= 0 && nodes[j].data > key) {
+      let keyLocation = i;
+      this.addYMovementToNode(i, 70, nodes, green);
+
+      while (j >= 0 && nodes[j].data > key) 
+      {
         move = true;
-        this.addXMovementToNode(j + 1, 50, nodes, red);
-        nodes[j + 1] = nodes[j];
+        this.addXMovementToNode(j, 60, nodes, green);
+        this.addXMovementToNode(keyLocation, -60, nodes, green);
+        this.addYMovementToNode(keyLocation, 0, nodes, green);
+        [nodes[j], nodes[keyLocation]] = [nodes[keyLocation], nodes[j]];
+        for(let k = 0; k < nodes.length; k++) 
+        {
+          if(k !== j && k !== keyLocation) 
+          {
+            this.addXMovementToNode(k, 0, nodes, blue);
+          }
+        }
         j--;
+        keyLocation--;
       }
-  
-      for (let k = j + 1; k < i; k++) {
-        this.addXMovementToNode(k, 0, nodes, blue);
-      }
-  
-      nodes[j + 1] = nodes[i];
-  
-      if (move) {
-        this.addXMovementToNode(j + 1, 50, nodes, green);
-      }
+      this.addYMovementToNode(i, -70, nodes, blue);
     }
   
     // Add blue color at the end of the sort
     for (let i = 0; i < n; i++) {
       this.addXMovementToNode(i, 0, nodes, blue);
     }
+
   
     this.setState({
       sorted: true,
     });
-  }
+}
 
   animate = () => {
     const nodesCopy = [...this.state.backNodes];
@@ -125,9 +153,9 @@ class InsertionSort extends Component {
     const newData = parseInt(newNumber);
     const newNode = {
       data: newData,
-      Xmovement: [0],
-      Ymovement: [],
-      color: ['hsl(196, 100, 40)'],
+      Xmovment: [0],
+      Ymovment: [0],
+      color: ['hsl(196, 100, 40)']
     };
 
     let addedArray = [...frontNodes];
@@ -182,9 +210,9 @@ class InsertionSort extends Component {
       const newData = Math.floor(Math.random() * (((100 - (-100))) + 1) + (-100));
       const newNode = {
         data: newData,
-        Xmovement: [0],
-        Ymovement: [],
-        color: ['hsl(196, 100, 40)'],
+        Xmovment: [0],
+        Ymovment: [0],
+        color: ['hsl(196, 100, 40)']
       };
       randomNodes.push(newNode);
     }
@@ -208,7 +236,8 @@ class InsertionSort extends Component {
 
   cleanArray = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
-      nodes[i].Ymovement = [0];
+      nodes[i].Xmovment = [0];
+      nodes[i].Ymovment = [0];
       nodes[i].color = ['hsl(196, 100, 40)'];
     }
   }
@@ -262,10 +291,9 @@ class InsertionSort extends Component {
         <div className="array-container-insertion">
           {frontNodes.map((node, index) => (
             <Node
-              key={index}
               data={node.data}
-              Xmovment={node.Xmovement}
-              Ymovment={node.Ymovement}
+              Xmovment={node.Xmovment}
+              Ymovment={node.Ymovment}
               color={node.color}
               duration={frontNodes.length * 4 - volume}
               showPointer={false}
