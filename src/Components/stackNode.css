@@ -1,0 +1,41 @@
+.Node-container {
+    display: flex; /* Use Flexbox to arrange the node and pointer horizontally */
+    align-items: center;
+  }
+  
+  .Node {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    padding: 0;
+    border-radius: 50%;
+    background-color: #0099cc;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: center;
+  }
+  
+  .pointer {
+    width: 40px;
+    height: 20px;
+    clip-path: polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%);
+    transform: rotate(0deg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-size: 40px;
+    margin-left: 10px;
+  }
+  
+  .pointer:hover {
+    color: gray;
+    cursor: pointer;
+    transition: 0.2s ease-in-out all;
+  }
+  

@@ -402,70 +402,74 @@ class LinkedList extends React.Component {
         return null // Change this to return the found node
   `;
 
-  const explination = `<div class="explanation">
+  const explanation = `<div class="explanation">
     <h2>Linked List Concept:</h2>
     <p>
       A linked list is a linear collection of elements where each element is a separate object called a node. 
-      Each node in a linked list contains two parts: the data itself, and a reference (link/pointer) to the next node in the sequence.
+      Each node contains data and a reference to the next node.
     </p>
     
     <h2>How Linked List Works:</h2>
     <p>
-      Imagine a chain of linked containers. Each container holds some information (the data) and a pointer to the next container. 
-      The first container is the starting point. It holds the first piece of information and points to the next container. 
-      The last container points to nowhere, indicating the end of the list.
+      Think of a chain of containers. Each container holds data and a link to the next container. 
+      The first container starts the chain and points to the next. The last one points to nowhere, indicating the end.
     </p>
     
-    <h2>Benefits of Linked List over Other Data Structures:</h2>
+    <h2>Benefits of Linked List:</h2>
     <p>
-      <b>Dynamic Size:</b> Linked lists can grow or shrink in size during execution. 
-      They allocate memory when needed and are not constrained by a fixed size.
+      <b>Dynamic Size:</b> Linked lists can change size during use, allocating memory as needed.
     </p>
     <p>
-      <b>Insertions and Deletions:</b> Adding or removing elements from a linked list is more efficient than some other data structures (like arrays) 
-      because it involves changing pointers rather than shifting elements.
+      <b>Insertions and Deletions:</b> Adding or removing elements is efficient as it involves changing links, not shifting elements.
     </p>
     <p>
-      <b>Ease of Modification:</b> Insertions and deletions can be done more easily at any position within the linked list without affecting the entire structure, 
-      unlike arrays which might require shifting elements.
+      <b>Ease of Modification:</b> Insertions and deletions can be done easily without affecting the entire structure.
     </p>
     
     <h2>Visualizing Linked List:</h2>
     <p>
-      Consider a train with each carriage representing a node. 
-      Each carriage holds cargo (the data) and is linked to the next carriage. 
-      To add a new carriage (node) or remove one, you simply need to adjust the connections between the carriages, not the whole train.
+      Imagine a train with carriages. Each holds data and links to the next. 
+      Adding or removing carriages involves adjusting connections, not the entire train.
     </p>
     
     <h2>Drawbacks:</h2>
     <p>
-      <b>Random Access:</b> Unlike arrays, linked lists don't support direct access to elements by index. 
-      Traversing a linked list to reach a specific node might take more time.
+      <b>Random Access:</b> Unlike arrays, accessing specific elements may take longer by traversing the list.
     </p>
     <p>
-      <b>Memory Overhead:</b> Each node in a linked list requires extra memory for storing the reference to the next node, 
-      which might consume more memory compared to arrays for the same amount of data.
+      <b>Memory Overhead:</b> Each node needs extra memory for the reference, potentially consuming more memory compared to arrays.
     </p>
     
-    <h2>Summary:</h2>
+    <h2>Runtime Complexity:</h2>
     <p>
-      Linked lists offer flexibility in managing data dynamically, allowing for efficient insertions and deletions. 
-      They're useful when the size of data isn't known beforehand or when frequent insertions and deletions are expected.
+      <b>Insertion at End:</b> O(1) - Constant time complexity by updating the tail pointer.
+    </p>
+    <p>
+      <b>Removal of First Node:</b> O(1) - Constant time complexity by updating the head pointer.
+    </p>
+    <p>
+      <b>Removal at Given Index, Finding a Node:</b> O(n) - Linear time complexity involving traversing the list.
+    </p>
+    <p>
+      <b>Find a Node, Finding a Node:</b> O(n) - Linear time complexity involving traversing the list.
+    </p>
+    <p>
+      <b>Clearing the Linked List:</b> O(1) - Constant time complexity by updating the head pointer to null.
     </p>
     
     <h2>Real-world Analogies:</h2>
     <p>
-      <b>Train Cars:</b> Each train car is linked to the next one and can be added or removed easily.
+      <b>Train Cars:</b> Each train car links to the next and can be added or removed easily.
     </p>
     <p>
-      <b>Paper Chain Links:</b> Each link in a paper chain connects to the next link forming a sequence.
+      <b>Paper Chain Links:</b> Each link forms a sequence and connects to the next link.
     </p>
     <p>
-      By relating the concept to familiar real-world scenarios, individuals new to algorithms can grasp the basic idea and advantages 
-      of using a linked list as a data structure.
+      Relating concepts to familiar scenarios helps understand the advantages of using a linked list.
     </p>
   </div>
   `;
+
     
   
     return (
@@ -503,7 +507,7 @@ class LinkedList extends React.Component {
           )}
         </div>
         <TogglePopup 
-        text = {explination}
+        text = {explanation}
         tab1 = {pythonCode}
         tab2 = {javaCode} 
         tab3 = {cppCode} 
