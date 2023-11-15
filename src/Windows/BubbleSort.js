@@ -244,6 +244,132 @@ class BubbleSort extends Component {
   
 
   render() {
+    const pythonCode = `def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]  # Swap elements
+
+    # Example usage:
+    arr = [64, 34, 25, 12, 22, 11, 90]
+    bubble_sort(arr)
+    print("Sorted array:", arr)
+    `;
+
+    const javaCode = `public class BubbleSort {
+      public static void bubbleSort(int[] arr) {
+          int n = arr.length;
+          for (int i = 0; i < n-1; i++) {
+              for (int j = 0; j < n-i-1; j++) {
+                  if (arr[j] > arr[j+1]) {
+                      // Swap arr[j] and arr[j+1]
+                      int temp = arr[j];
+                      arr[j] = arr[j+1];
+                      arr[j+1] = temp;
+                  }
+              }
+          }
+      }
+  
+      public static void main(String[] args) {
+          int[] arr = {64, 34, 25, 12, 22, 11, 90};
+          bubbleSort(arr);
+          System.out.println("Sorted array: " + Arrays.toString(arr));
+      }
+  }
+  `;
+
+const cppCode = `#include <iostream>
+using namespace std;
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap arr[j] and arr[j+1]
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    bubbleSort(arr, n);
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+`;
+
+
+  const pseudoCode = `procedure bubbleSort(arr)
+      n = length(arr)
+      for i = 0 to n-1
+          for j = 0 to n-i-1
+              if arr[j] > arr[j+1]
+                  swap(arr[j], arr[j+1])
+
+  # Example usage:
+  arr = [64, 34, 25, 12, 22, 11, 90]
+  bubbleSort(arr)
+  display("Sorted array:", arr)
+  `;
+
+  const explanation = `<div class="explanation">
+  <h2>Bubble Sort Concept:</h2>
+  <p>
+    Bubble sort is a simple sorting algorithm that compares adjacent items and swaps them if they're in the wrong order.
+  </p>
+  
+  <h2>How Bubble Sort Works:</h2>
+  <p>
+    Imagine arranging elements in a row. Bubble sort compares adjacent elements, moving larger ones towards the end.
+  </p>
+  
+  <h2>Benefits of Bubble Sort:</h2>
+  <p>
+    <b>Simplicity:</b> Easy to understand and implement, suitable for educational purposes and small datasets.
+  </p>
+  <p>
+    <b>Easy Implementation:</b> Involves comparing and swapping adjacent elements.
+  </p>
+  
+  <h2>Drawbacks:</h2>
+  <p>
+    <b>Inefficiency:</b> Poor time complexity (O(n^2)) makes it slow for large datasets.
+  </p>
+  <p>
+    <b>Performance:</b> Not suitable for large-scale applications compared to more efficient algorithms.
+  </p>
+  
+  <h2>Runtime Complexity:</h2>
+  <p>
+    <b>Worst and Average Case:</b> O(n^2) - Quadratic time complexity for comparisons in larger datasets.
+  </p>
+  
+  <h2>Real-world Analogies:</h2>
+  <p>
+    <b>Organizing Cards:</b> Comparing and swapping cards until they're in order.
+  </p>
+  <p>
+    <b>Arranging Books:</b> Sorting books by comparing adjacent ones and swapping positions if needed.
+  </p>
+  <p>
+    Relating concepts to everyday scenarios helps understand the basics of Bubble Sort.
+  </p>
+</div>
+`;
+
+
+
+
     const {frontNodes , newNumber ,volume, setVolume} = this.state;
     return (
       <div>
@@ -304,7 +430,13 @@ class BubbleSort extends Component {
         />
       ))}
     </div>
-    <TogglePopup/>
+    <TogglePopup 
+        text = {explanation}
+        tab1 = {pythonCode}
+        tab2 = {javaCode} 
+        tab3 = {cppCode} 
+        tab4 = {pseudoCode}
+        />
   </div>
   </div>
       
