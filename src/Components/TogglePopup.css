@@ -1,8 +1,9 @@
 /* Container for the popup */
+@media screen and (max-width: 768px) {
 .popup-container {
   position: relative;
   display: inline-block;
-}
+}}
 
 /* Toggle button for the popup */
 .toggle-popup {
@@ -149,3 +150,5 @@
 .tab-content > div.active {
   display: block;
 }
+
+

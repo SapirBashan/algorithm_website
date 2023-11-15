@@ -12,6 +12,48 @@ code {
     monospace;
 }
 
+/* Base styles (no media query changes) */
+/* ... (existing CSS) ... */
+
+/* Container for the popup */
+@media screen and (max-width: 768px) {
+  .popup-container {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* Toggle button for the popup */
+  .toggle-button {
+    width: 40px;
+    height: 40px;
+    top: 20px;
+    right: 20px;
+  }
+
+  /* Popup styling */
+  .popup {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    width: 80%;
+    height: calc(100% - 50px);
+  }
+
+  /* Popup upper section */
+  .popup-upper {
+    height: 40%;
+    max-height: none;
+  }
+
+  /* Popup lower section */
+  .popup-lower {
+    height: 60%;
+  }
+  
+  /* Other adjustments for better responsiveness */
+}
 
 
 
