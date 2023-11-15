@@ -1,11 +1,12 @@
 import React from "react";
 import "./AStar.css";
+import UpperMenu from "../components/UpperMenu.js";
 
 class AStar extends React.Component{
   render () {
      return (
       <div className="AStar">
-         <h1>AStar</h1>
+         <UpperMenu nameOfPage = {"A Star"} search = {false}/> 
       </div>
      );
      }

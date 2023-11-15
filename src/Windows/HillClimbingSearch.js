@@ -1,11 +1,12 @@
 import React from "react";
 import "./HillClimbingSearch.css";
+import UpperMenu from "../components/UpperMenu";
 
 class HillClimbingSearch extends React.Component{
   render () {
      return (
       <div className="HillClimbingSearch">
-         <h1>HillClimbingSearch</h1>
+         <UpperMenu nameOfPage = {"HillClimbingSearch"} search = {false}/>
       </div>
      );
      }

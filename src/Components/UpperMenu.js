@@ -122,15 +122,24 @@ class UpperMenu extends Component {
         <Link to="http://localhost:3000/" >
             <img src={logo} alt="Logo" className='logo'/>
         </Link>
-            <input
-              type="text"
-              className="upper-menu__search"
-              value={this.state.searchQuery}
-              onChange={this.handleInputChange}
-              placeholder="Search" /><button onClick={this.search} className='search'>
-                <img src={magnifier} alt="Search" />
-              </button>
+        <>
+          {this.props.search === false ? null : (
+            <div>
+              <input
+                type="text"
+                className="upper-menu__search"
+                value={this.state.searchQuery}
+                onChange={this.handleInputChange}
+                placeholder="Search"
+              />
+            </div>
+          )}
+        </>
           </div>
+        <div className="upper-menu__center">
+          <h1 className="upper-menu__center__title">{this.props.nameOfPage}</h1>
+        </div>
+    
         <div className="upper-menu__right">
         </div>
       </div>

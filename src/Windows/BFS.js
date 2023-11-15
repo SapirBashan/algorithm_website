@@ -1,11 +1,12 @@
 import React from "react";
 import './BFS.css';
+import UpperMenu from "../components/UpperMenu";
 
 class BFS extends React.Component{
  render () {
     return (
      <div className="BFS">
-        <h1>BFS</h1>
+      <UpperMenu nameOfPage = {"Breadth First Search"} search = {false}/>
      </div>
     );
      }

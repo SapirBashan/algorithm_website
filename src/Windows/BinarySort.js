@@ -1,11 +1,12 @@
 import React from "react";
 import "./BinarySort.css";
+import UpperMenu from "../components/UpperMenu";
 
 class BinarySort extends React.Component{
   render () {
      return (
       <div className="BinarySort">
-         <h1>BinarySort</h1>
+         <UpperMenu nameOfPage = {"Binary Sort"} search = {false}/>
       </div>
      );
      }

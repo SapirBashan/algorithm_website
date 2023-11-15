@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./BubbleSort.css";
 import Node from "../components/Node";
 import TogglePopup from "../components/TogglePopup";
+import UpperMenu from "../components/UpperMenu";
 
 class BubbleSort extends Component {
   constructor(props) {
@@ -242,8 +243,7 @@ class BubbleSort extends Component {
     return (
       <div>
         
-          <h1>Bubble Sort</h1>
-        
+      <UpperMenu nameOfPage = {"Bubble Sort"} search = {false}/>        
       <div className="BubbleSort">
        
     <div className="input-section">

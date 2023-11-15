@@ -1,11 +1,12 @@
 import React from "react";
 import "./MergeSort.css";
+import UpperMenu from "../components/UpperMenu";
 
 class MergeSort extends React.Component{
   render () {
      return (
       <div className="MergeSort">
-         <h1>MergeSort</h1>
+         <UpperMenu nameOfPage = {"MergeSort"} search = {false}/>
       </div>
      );
      }

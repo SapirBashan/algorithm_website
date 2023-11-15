@@ -1,11 +1,12 @@
 import React from "react";
 import "./Minimax.css";
+import UpperMenu from "../components/UpperMenu";
 
 class Minimax extends React.Component{
   render () {
      return (
       <div className="Minimax">
-         <h1>Minimax</h1>
+         <UpperMenu nameOfPage = {"Minimax"} search = {false}/>
       </div>
      );
      }

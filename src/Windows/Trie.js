@@ -1,11 +1,12 @@
 import React from "react";
 import "./Trie.css";
+import UpperMenu from "../components/UpperMenu";
 
 class Trie extends React.Component{
   render () {
      return (
       <div className="Trie">
-         <h1>Trie</h1>
+         <UpperMenu nameOfPage = {"Trie"} search = {false}/>
       </div>
      );
      }

@@ -1,11 +1,12 @@
 import React from "react";
 import "./CountingSort.css";
+import UpperMenu from "../components/UpperMenu";
 
 class CountingSort extends React.Component{
    render () {
        return (
          <div className="CountingSort">
-          <h1>CountingSort</h1>
+          <UpperMenu nameOfPage = {"Counting Sort"} search = {false}/>
          </div>
        );
        }

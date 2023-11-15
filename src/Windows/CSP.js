@@ -1,11 +1,12 @@
 import React from "react";
 import "./CSP.css";
+import UpperMenu from "../components/UpperMenu";
 
 class CSP extends React.Component{
   render () {
      return (
       <div className="CSP">
-         <h1>CSP</h1>
+         <UpperMenu nameOfPage = {"CSP"} search = {false}/>
       </div>
      );
      }

@@ -1,11 +1,12 @@
 import React from "react";
 import "./Heap.css";
+import UpperMenu from "../components/UpperMenu";
 
 class Heap extends React.Component{
   render () {
       return (
       <div className="Heap">
-          <h1>Heap</h1>
+        <UpperMenu nameOfPage = {"Heap"} search = {false}/>
       </div>
       );
       }

@@ -1,11 +1,12 @@
 import React from "react";
 import "./AVL.css";
+import UpperMenu from "../components/UpperMenu";
 
 class AVL extends React.Component{
   render () {
       return (
       <div className="AVL">
-          <h1>AVL</h1>
+        <UpperMenu nameOfPage = {"AVL"} search = {false}/>
       </div>
       );
       }
