@@ -82,27 +82,24 @@ class InsertionSort extends Component {
       let key = nodes[i].data;
       let move = false;
       let keyLocation = i;
-      this.addYMovementToNode(i, 70, nodes, green);
 
       while (j >= 0 && nodes[j].data > key) 
       {
         move = true;
         this.addXMovementToNode(j, 60, nodes, green);
         this.addXMovementToNode(keyLocation, -60, nodes, green);
-        this.addYMovementToNode(keyLocation, 0, nodes, green);
         [nodes[j], nodes[keyLocation]] = [nodes[keyLocation], nodes[j]];
-        for(let k = 0; k < nodes.length; k++) 
-        {
-          if(k !== j && k !== keyLocation) 
-          {
+        for(let k = 0; k < nodes.length; k++) {
+          if(k !== j && k !== keyLocation) {
             this.addXMovementToNode(k, 0, nodes, blue);
           }
         }
         j--;
         keyLocation--;
       }
-      this.addYMovementToNode(i, -70, nodes, blue);
     }
+
+
   
     // Add blue color at the end of the sort
     for (let i = 0; i < n; i++) {
