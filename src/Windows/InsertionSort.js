@@ -18,14 +18,24 @@ class InsertionSort extends Component {
     };
   }
 
-  addYMovementToNode = (nodeIndex, movement, nodes, color) => {
+  addXMovementToNode = (nodeIndex, movement , nodes ,color) => {
+  
     if (nodeIndex >= 0 && nodeIndex < nodes.length) {
+      // Create a copy of the nodes array
       const updatedNodes = [...nodes];
+      // Create a copy of the node at the nodeIndex
       const updatedNode = { ...updatedNodes[nodeIndex] };
+      // Create a copy of the Ymovment array
       const updatedXmovement = [...updatedNode.Xmovement];
+      // create a copy of the color array
+    //const updatedColor = [...updatedNode.color];
+      // Add the movement value to the Ymovment array
       const value = updatedXmovement[updatedXmovement.length - 1];
-      const movementValue = movement + value;
+      // Add the movement value to the Ymovment array
+      const movementValue = movement + value; 
+      // Add the movement value to the Ymovment array
       updatedNodes[nodeIndex].Xmovement.push(movementValue);
+      // Add the color value to the color array
       updatedNodes[nodeIndex].color.push(color);
     }
   }
@@ -35,7 +45,6 @@ class InsertionSort extends Component {
       return;
     }
   
-    // Create a copy of the nodes array
     const nodes = [...this.state.backNodes];
     this.cleanArray(this.state.backNodes);
   
@@ -43,24 +52,39 @@ class InsertionSort extends Component {
     let blue = 'hsl(196, 100, 40)';
     let red = 'hsl(0, 100, 50)';
   
-    // Set the number of nodes
     let n = nodes.length;
   
     for (let i = 1; i < n; i++) {
       let j = i - 1;
       let key = nodes[i].data;
+      let move = false;
   
       while (j >= 0 && nodes[j].data > key) {
-        // Shift elements greater than key to the right
-        nodes[j + 1].data = nodes[j].data;
-        this.addYMovementToNode(j + 1, 50, nodes, red);
+        move = true;
+        this.addXMovementToNode(j + 1, 50, nodes, red);
+        nodes[j + 1] = nodes[j];
         j--;
       }
   
-      // Insert the key at its correct position
-      nodes[j + 1].data = key;
-      this.addYMovementToNode(j + 1, 50, nodes, green);
+      for (let k = j + 1; k < i; k++) {
+        this.addXMovementToNode(k, 0, nodes, blue);
+      }
+  
+      nodes[j + 1] = nodes[i];
+  
+      if (move) {
+        this.addXMovementToNode(j + 1, 50, nodes, green);
+      }
     }
+  
+    // Add blue color at the end of the sort
+    for (let i = 0; i < n; i++) {
+      this.addXMovementToNode(i, 0, nodes, blue);
+    }
+  
+    this.setState({
+      sorted: true,
+    });
   }
 
   animate = () => {
@@ -158,7 +182,7 @@ class InsertionSort extends Component {
       const newData = Math.floor(Math.random() * (((100 - (-100))) + 1) + (-100));
       const newNode = {
         data: newData,
-        Xmovment: [0],
+        Xmovement: [0],
         Ymovement: [],
         color: ['hsl(196, 100, 40)'],
       };
@@ -240,7 +264,7 @@ class InsertionSort extends Component {
             <Node
               key={index}
               data={node.data}
-              Xmovment={node.Xmovment}
+              Xmovment={node.Xmovement}
               Ymovment={node.Ymovement}
               color={node.color}
               duration={frontNodes.length * 4 - volume}
