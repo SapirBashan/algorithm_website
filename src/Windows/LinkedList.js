@@ -3,6 +3,7 @@ import "./LinkedList.css";
 import "../styles.css";
 import TogglePopup from "../components/TogglePopup.js";
 import Node from "../components/Node";
+import UpperMenu from "../components/UpperMenu.js";
 
 
 //this class is the linked list itself and it has all the functions for the linked list 
@@ -469,7 +470,7 @@ class LinkedList extends React.Component {
   
     return (
       <div className="LinkedList">
-        <h1>Linked List</h1>
+        <UpperMenu nameOfPage = {"Linked List"} search = {false}/>
         <input
           className="insert-node"
           type="number"

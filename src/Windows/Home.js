@@ -26,7 +26,7 @@ function Home() {
   return (
     <div className="App">
       <BrowserRouter>
-        <UpperMenu onRouteChange={handleRouteChange} onSearch={handleOnSearch}/>
+      <UpperMenu onRouteChange={handleRouteChange} onSearch={handleOnSearch} nameOfPage = {""}/>
         <Routes>
           {/* Route to render the home page */}
           <Route

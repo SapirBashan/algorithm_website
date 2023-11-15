@@ -1,11 +1,12 @@
 import React from "react";
 import "./Stack.css";
+import UpperMenu from "../components/UpperMenu";
 
 class Stack extends React.Component{
    render () {
          return (
          <div className="Stack">
-            <h1>Stack</h1>
+            <UpperMenu nameOfPage = {"Stack"} search = {false}/>
          </div>
          );
          }

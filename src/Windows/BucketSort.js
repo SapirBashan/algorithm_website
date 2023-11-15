@@ -1,11 +1,12 @@
 import React from "react";
 import "./BucketSort.css";
+import UpperMenu from "../components/UpperMenu";
 
 class BucketSort extends React.Component{
   render () {
      return (
       <div className="BucketSort">
-         <h1>BucketSort</h1>
+         <UpperMenu nameOfPage = {"Bucket Sort"} search = {false}/>
       </div>
      );
      }

@@ -1,11 +1,12 @@
 import React from "react";
 import "./HashTable.css";
+import UpperMenu from "../components/UpperMenu";
 
 class HashTable extends React.Component{
   render () {
      return (
       <div className="HashTable">
-         <h1>HashTable</h1>
+         <UpperMenu nameOfPage = {"Hash Table"} search = {false}/>
       </div>
      );
      }

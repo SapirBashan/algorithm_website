@@ -1,11 +1,12 @@
 import react from "react";
 import "./FindTheIValue.css";
+import UpperMenu from "../components/UpperMenu";
 
 class FindTheIValue extends react.Component{
    render () {
        return (
          <div className="FindTheIValue">
-          <h1>FindTheIValue</h1>
+          <UpperMenu nameOfPage = {"Find The I Value"} search = {false}/>
          </div>
        );
        }

@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./TogglePopup.css";
 import questionMark from '../icons/question.png';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { twilight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import UpperMenu from "./UpperMenu";
 
 const popupVariants = {
   hidden: { opacity: 0, y: -50 },
@@ -83,22 +84,22 @@ class TogglePopup extends React.Component{
                   {/* Content for the lower part with tabs */}
                   <div className="tab-content">
                     {activeTab === 1 && (
-                      <SyntaxHighlighter language="python" style={dark}>
+                      <SyntaxHighlighter language="python" style={twilight}>
                         {this.props.tab1}
                       </SyntaxHighlighter>
                     )}
                     {activeTab === 2 && (
-                      <SyntaxHighlighter language="java" style={dark}>
+                      <SyntaxHighlighter language="java" style={twilight}>
                         {this.props.tab2}
                       </SyntaxHighlighter>
                     )}
                     {activeTab === 3 && (
-                      <SyntaxHighlighter language="cpp" style={dark}>
+                      <SyntaxHighlighter language="cpp" style={twilight}>
                         {this.props.tab3}
                       </SyntaxHighlighter>
                     )}
                     {activeTab === 4 && (
-                      <SyntaxHighlighter language="plaintext" style={dark}>
+                      <SyntaxHighlighter language="plaintext" style={twilight}>
                         {this.props.tab4}
                       </SyntaxHighlighter>
                     )}

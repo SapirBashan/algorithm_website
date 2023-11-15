@@ -1,11 +1,12 @@
 import React from "react";
 import "./QuickSort.css";
+import UpperMenu from "../components/UpperMenu";
 
 class QuickSort extends React.Component{
    render () {
          return (
          <div className="QuickSort">
-            <h1>QuickSort</h1>
+            <UpperMenu nameOfPage = {"Quick Sort"} search = {false}/>
          </div>
          );
          }

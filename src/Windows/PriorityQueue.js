@@ -1,11 +1,12 @@
 import React from "react";
 import "./PriorityQueue.css";
+import UpperMenu from "../components/UpperMenu";
 
 class PriorityQueue extends React.Component{
    render () {
          return (
          <div className="PriorityQueue">
-            <h1>PriorityQueue</h1>
+            <UpperMenu nameOfPage = {"PriorityQueue"} search = {false}/>
          </div>
          );
          }

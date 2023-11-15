@@ -1,11 +1,12 @@
 import React from "react";
 import "./RadixSort.css";
+import UpperMenu from "../components/UpperMenu";
 
 class RadixSort extends React.Component{
    render () {
        return (
          <div className="RadixSort">
-          <h1>RadixSort</h1>
+            <UpperMenu nameOfPage = {"RadixSort"} search = {false}/>
          </div>
        );
        }
