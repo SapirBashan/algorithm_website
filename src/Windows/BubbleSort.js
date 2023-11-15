@@ -66,10 +66,12 @@ class BubbleSort extends Component {
     for (let i = 0; i < n - 1; i++) {
       swapped = false;
       // Loop through the array from 0 to n - i - 1
-      for (let j = 0; j < n - i - 1; j++) {
+      for (let j = 0; j < n - i - 1; j++) 
+      {
         move = false;
         // If the node at the current index is greater than the node at the next index
-        if (nodes[j].data > nodes[j + 1].data) {
+        if (nodes[j].data > nodes[j + 1].data) 
+        {
           move = true;
           //add movment to the nodes that are moving
           //take the last element in the Ymovment array and decrease its value by 70 to move it down
@@ -81,15 +83,18 @@ class BubbleSort extends Component {
           swapped = true;
         }
         //add movment in place of the nodes that are not moving
-        for(let k = 0; k < n; k++) {
+        for(let k = 0; k < n; k++) 
+        {
             // if the node is not moving or if there was no swap
-            if((k !== j && k !== j + 1) || move === false) {
+            if((k !== j && k !== j + 1) || move === false) 
+            {
                 //add the last element in the Ymovment array to the Ymovment array
               if(k === j || k === j + 1)
               {
                 this.addYMovementToNode(k, 0 , nodes, red);
               }
-              else{
+              else
+              {
                 this.addYMovementToNode(k, 0 , nodes, blue);
               }
             }
@@ -98,7 +103,7 @@ class BubbleSort extends Component {
         // by inner loop, then break
       }
         if (swapped === false)
-            break;
+           { break;}
       }
       // add a blue color in the end of color array to all the nodes
       for(let i = 0; i < n; i++) {
