@@ -1,0 +1,109 @@
+/* GenericPage.css */
+
+/* Styles for each part */
+.part {
+  padding: 20px;
+  /* border: 0.5px solid white; */
+  margin: 10px;
+  overflow: auto;
+  box-sizing: border-box; /* Adjust the box-sizing property */
+}
+
+.part1 {
+  width: 100%;
+  height: 100%;
+  /* Center part 1 between part 2 and 3 */
+  position: absolute;
+  right: 0;
+  top: 20px;
+  /* Center the elements in part 1 height-wise */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.part2,
+.part3 {
+  height: 100%;
+  position: absolute;
+  top: 60px;
+  overflow: visible;
+  visibility: hidden;
+}
+
+.part2 {
+  width: 30%;
+  right: 0;
+}
+
+.part3 {
+  width: 162.5px;
+  left: -10px;;
+  background-color: #4270b5;
+}
+
+/* Additional styles when Part 2 is open */
+.part2-open .part1 {
+  width: 59%;
+  left: 0;
+}
+
+.part2-open .part2 {
+  visibility: visible;
+}
+
+/* Additional styles when Part 3 is open */
+.part3-open .part1 {
+  width: 80%;
+  left: 125px;
+}
+
+.part3-open .part3 {
+  visibility: visible;
+}
+
+
+/* Additional styles when both Part 2 and Part 3 are open */
+.both-open .part1 {
+  width: 59%;
+  left: 0;
+}
+
+.both-open .part2,
+.both-open .part3 {
+  visibility: visible;
+}
+
+/* Button to toggle the popup */
+.toggle-button {
+  float: right;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: 2px solid #ffcc00;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  position: fixed;
+  top: 90px;
+  right: 10px;
+  z-index: 9999;
+}
+
+/* Button hover effect */
+.toggle-button:hover {
+  background: linear-gradient(to bottom, #f8b133, #ffcc00);
+}
+
+/* Icon inside toggle button */
+.toggle-button img {
+  width: 1100%;
+  height: 108%;
+  display: block;
+  margin: 0.4px auto 0 auto;
+  transition: transform 0.2s ease;
+}
