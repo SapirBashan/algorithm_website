@@ -12,7 +12,8 @@ class Node extends React.Component {
         >
         <motion.div
           animate={{ backgroundColor: this.props.color }} // Set the background color from props
-          transition={{ duration: this.props.duration }}
+          transition={{ duration: this.props.colorDuration || this.props.duration }}
+
           //the class name should be this props.className but the default is node
           className= {this.props.className || "Node"}
         >
@@ -31,6 +32,7 @@ class Node extends React.Component {
     color: this.props.color,
     duration: this.props.duration,
     showPointer: this.props.showPointer,
+    colorDuration: this.props.colorDuration,
   }
 }
 

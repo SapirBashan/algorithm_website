@@ -17,6 +17,7 @@
   font-weight: bold;
   margin-right: 10px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .pointer {
@@ -56,5 +57,27 @@
   border: 2px solid #000000;
   /*make a bigger difference between the hight of the numbers*/
   line-height: 45px;
+
 }
 
+
+.QueueNode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  padding: 0;
+  border-radius: 0%;
+  background-color: #0099cc;
+  width: 40px;
+  height: 60px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-right: 10px;
+  text-align: center;
+  border: 2px solid #000000;
+  /* Adjust line height for bigger difference between the heights of the numbers */
+  line-height: 45px; /* You can adjust this value as needed */
+  /*make the width between the numbers zero*/
+  margin-right: 0px;
+}

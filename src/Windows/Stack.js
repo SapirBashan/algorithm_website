@@ -1,9 +1,11 @@
 import React from "react";
+import "../styles.css";
 import "./Stack.css";
 import UpperMenu from "../components/UpperMenu";
 import TogglePopup from "../components/TogglePopup";
 import { motion } from "framer-motion";
 import Node from "../components/Node";
+import GenericPage from "../components/GenericPage";
 
 
 class Stack extends React.Component {
@@ -84,6 +86,7 @@ class Stack extends React.Component {
 
     /*make the top node move up*/
     addedArray[addedArray.length-1].Ymovment = [0, -600];
+    addedArray[addedArray.length-1].color.push('hsl(0, 100, 40)');
 
 
     this.setState({
@@ -436,17 +439,26 @@ class Stack extends React.Component {
       
       <div className="Stack">
         <UpperMenu nameOfPage={"Stack"} search={false} />
+        <GenericPage
+          explanation={explanation}
+          pythonCode={pythonCode}
+          javaCode={javaCode}
+          cppCode={cppCode}
+          pseudoCode={pseudoCode}
+        
+        buttons={
         <div className="button-container">
           <input
-            className="insert-node"
+            className="insert"
             type="number"
             value={this.state.newNumber}
             placeholder="Enter a number"
             onChange={this.handleInput}
             onKeyPress={this.handleKeyPress}
           />
-          <button onClick={() => this.push(this.state.newNumber)}>Push</button>
-          <button onClick={() => this.pop()}>Pop</button>
+          <button className="side-button" onClick={() => this.push(this.state.newNumber)}>Push</button>
+          <button className="side-button" onClick={() => this.pop()}>Pop</button>
+          <button className="side-button" onClick={() => this.clear()}>Clear</button>
           <button
           disabled={!this.isEmpty()}
           className={this.isEmpty() ? "greenButton" : ""}
@@ -459,9 +471,9 @@ class Stack extends React.Component {
           >
             Is Full
           </button>
-          <button onClick={() => this.clear()}>Clear</button>
-        </div>
-
+        </div>}
+        
+        presentational={
         <div className="stack-container">
           <ul className="numbers">
             <li>9. </li>
@@ -482,22 +494,17 @@ class Stack extends React.Component {
                 data={node.data}
                 Xmovment={node.Xmovment}
                 Ymovment={node.Ymovment}
-                duration={3}
+                duration={4}
                 color={node.color}
+                colorDuration={0.5}
               />
             ))
           )}
           </div>
-        </div>
-       
-        <TogglePopup
-             text = {explanation}
-             tab1 = {pythonCode}
-             tab2 = {javaCode} 
-             tab3 = {cppCode} 
-             tab4 = {pseudoCode} 
-        />
-      </div>
+          </div>
+          }
+  
+      /></div>
     );
   }  
  }
