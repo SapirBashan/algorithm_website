@@ -4,6 +4,7 @@ import "../styles.css";
 import TogglePopup from "../components/TogglePopup.js";
 import Node from "../components/Node";
 import UpperMenu from "../components/UpperMenu.js";
+import GenericPage from "../components/GenericPage.js";
 
 
 //this class is the linked list itself and it has all the functions for the linked list 
@@ -473,26 +474,16 @@ class LinkedList extends React.Component {
     
   
     return (
-      <div className="LinkedList">
-        <UpperMenu nameOfPage = {"Linked List"} search = {false}/>
-        <input
-          className="insert-node"
-          type="number"
-          value={newNumber}
-          placeholder="Enter a number"
-          onChange={this.handleInput}
-          onKeyPress={(e) => this.handleKeyPress(e)}
-        />        
-        <button onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
-        <button onClick={() => this.deleteFirstNode()}>Delete First</button>
-        <button onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
-        <button onClick={() => this.findNode()}>Find</button>
-        <button onClick={() => this.RandomNode()}>Random</button>
-        <button onClick={() => this.setState({ head: null, frontNodes: [], backNodes: [], newNumber: "" })}>
-          Clear
-        </button>
-        <h1> </h1>
-        <div className="array-container-list">
+      <div>
+      <UpperMenu nameOfPage = {"Linked List"} search = {false}/>
+      <GenericPage
+        explanation={explanation}
+        pythonCode={pythonCode}
+        javaCode={javaCode}
+        cppCode={cppCode}
+        pseudoCode={pseudoCode}
+        presentational={
+          <div className="array-container-list">
           {this.state.head === null ? null : (
             frontNodes.map((node, index) => (
               <Node
@@ -505,15 +496,71 @@ class LinkedList extends React.Component {
               />
             ))
           )}
+        </div>}
+        buttons={
+        <div>
+          <input
+            className="insert"
+            type="number"
+            value={newNumber}
+            placeholder="Enter a number"
+            onChange={this.handleInput}
+            onKeyPress={(e) => this.handleKeyPress(e)}
+          />        
+          <button className="side-button" onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
+          <button className="side-button" onClick={() => this.deleteFirstNode()}>Delete First</button>
+          <button className="side-button" onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
+          <button className="side-button" onClick={() => this.findNode()}>Find</button>
+          <button className="side-button" onClick={() => this.RandomNode()}>Random</button>
+          <button className="side-button" onClick={() => this.setState({ head: null, frontNodes: [], backNodes: [], newNumber: "" })}>
+            Clear
+          </button>
         </div>
-        <TogglePopup 
-        text = {explanation}
-        tab1 = {pythonCode}
-        tab2 = {javaCode} 
-        tab3 = {cppCode} 
-        tab4 = {pseudoCode}
-        />
-      </div>
+        }
+        
+      /></div>
+
+      // <div className="LinkedList">
+      //   <UpperMenu nameOfPage = {"Linked List"} search = {false}/>
+      //   <input
+      //     className="insert-node"
+      //     type="number"
+      //     value={newNumber}
+      //     placeholder="Enter a number"
+      //     onChange={this.handleInput}
+      //     onKeyPress={(e) => this.handleKeyPress(e)}
+      //   />        
+      //   <button onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
+      //   <button onClick={() => this.deleteFirstNode()}>Delete First</button>
+      //   <button onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
+      //   <button onClick={() => this.findNode()}>Find</button>
+      //   <button onClick={() => this.RandomNode()}>Random</button>
+      //   <button onClick={() => this.setState({ head: null, frontNodes: [], backNodes: [], newNumber: "" })}>
+      //     Clear
+      //   </button>
+      //   <h1> </h1>
+      //   <div className="array-container-list">
+      //     {this.state.head === null ? null : (
+      //       frontNodes.map((node, index) => (
+      //         <Node
+      //           data={node.data}
+      //           Xmovment={node.Xmovment}
+      //           Ymovment={node.Ymovment}
+      //           duration={5}
+      //           color={node.color}
+      //           showPointer={node.showPointer}
+      //         />
+      //       ))
+      //     )}
+      //   </div>
+      //   <TogglePopup 
+      //   text = {explanation}
+      //   tab1 = {pythonCode}
+      //   tab2 = {javaCode} 
+      //   tab3 = {cppCode} 
+      //   tab4 = {pseudoCode}
+      //   />
+      // </div>
     );
 
   }

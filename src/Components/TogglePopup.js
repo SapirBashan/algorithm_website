@@ -4,7 +4,6 @@ import "./TogglePopup.css";
 import questionMark from '../icons/question.png';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { twilight } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import UpperMenu from "./UpperMenu";
 
 const popupVariants = {
   hidden: { opacity: 0, y: -50 },
@@ -28,14 +27,10 @@ class TogglePopup extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      isPopupOpen: false,
       activeTab: 1,
     };
   }
 
-  togglePopup = () => {
-    this.setState({ isPopupOpen: !this.state.isPopupOpen });
-  };
 
   changeTab = (tabNumber) => {
     this.setState({ activeTab: tabNumber });
@@ -46,12 +41,8 @@ class TogglePopup extends React.Component{
 
     return (
       <div className="popup-container">
-        <button className="toggle-button" onClick={this.togglePopup}>
-          <img className="toggle-button-img" src={questionMark} alt="no image" />
-        </button>
 
         <AnimatePresence>
-          {isPopupOpen && (
             <motion.div
               className="popup"
               variants={popupVariants}
@@ -59,9 +50,6 @@ class TogglePopup extends React.Component{
               animate="visible"
               exit="hidden"
             >
-              <div className="popup-header">
-                <button onClick={this.togglePopup}>X</button>
-              </div>
               <div className="popup-content">
                 <div className="popup-upper" dangerouslySetInnerHTML={{ __html: this.props.text }}>
                   {}
@@ -107,7 +95,6 @@ class TogglePopup extends React.Component{
                 </div>
               </div>
             </motion.div>
-          )}
         </AnimatePresence>
       </div>
     );
