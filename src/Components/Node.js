@@ -13,12 +13,12 @@ class Node extends React.Component {
         <motion.div
           animate={{ backgroundColor: this.props.color }} // Set the background color from props
           transition={{ duration: this.props.duration }}
-          className='Node'
+          //the class name should be this props.className but the default is node
+          className= {this.props.className || "Node"}
         >
           {this.props.data}
          </motion.div>
         {this.props.showPointer && <div className='pointer'>&rarr;</div>}
-        {!this.props.showPointer && <div className='pointer'>&nbsp;</div>}
       </motion.div>
     );
   }
