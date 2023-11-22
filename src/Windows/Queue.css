@@ -26,13 +26,12 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-start;
-    width: 465px; /* Adjust the width of the queue display */
+    width: 615px; /* Adjust the width of the queue display */
     border-bottom: 4px solid #0094FA;
     border-top: 4px solid #0094FA;
     border-radius: 5px;
     padding: 15px;
     box-sizing: border-box;
-    height: auto; /* Set a fixed height or use 'auto' */
   }
   
   .front {
@@ -49,15 +48,11 @@
     margin-bottom: 5px;
   }
   
-  /* Add any other desired styles for the queue elements */
-  
-
-  
+ 
   
   .greenButton {
     background-color: rgb(151, 215, 151); /* Modify this as per your styling preferences */
     /* Add any other desired styles for the green button */
   }
   
-  /* Other styles as needed */
   

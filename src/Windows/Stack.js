@@ -46,19 +46,21 @@ class Stack extends React.Component {
     this.cleanArray(this.state.backNodes);
 
     const newBackNodes = [...this.state.backNodes];
-    const newFrontNodes = [...this.state.frontNodes];
 
       this.state.top = newNumber;
-
-     
 
       const newData = parseInt(newNumber);
         const newNode = {
           data: newData,
           Xmovment: [0,0],
           Ymovment: [-350+((this.state.backNodes.length+1)*20),0],
-          color: ['hsl(150, 100, 40)'],
+          color: ['hsl(102, 100, 30)', 'hsl(102, 100, 30)'],
         };
+
+      /*make all the colors but the top blue (196, 100, 40)*/
+      for(let i = 0; i < newBackNodes.length; i++){
+        newBackNodes[i].color.push('hsl(196, 100, 40)');
+      }
 
         let addedArray = [...frontNodes];
     
@@ -87,6 +89,7 @@ class Stack extends React.Component {
     /*make the top node move up*/
     addedArray[addedArray.length-1].Ymovment = [0, -600];
     addedArray[addedArray.length-1].color.push('hsl(0, 100, 40)');
+    addedArray[addedArray.length-2].color.push('hsl(102, 100, 30)');
 
 
     this.setState({
@@ -475,7 +478,7 @@ class Stack extends React.Component {
         
         presentational={
         <div className="stack-container">
-          <ul className="numbers">
+          {/* <ul className="numbers">
             <li>9. </li>
             <li>8. </li>
             <li>7. </li>
@@ -486,7 +489,7 @@ class Stack extends React.Component {
             <li>2. </li>
             <li>1. </li>
             <li>0. </li>
-          </ul>
+          </ul> */}
           <div className="stack">
           {this.state.top === null ? null : (
             frontNodes.map((node, index) => (

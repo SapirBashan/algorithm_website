@@ -37,11 +37,14 @@ class Queue extends React.Component {
       alert("Please enter a number");
       return;
     }
+    if(newNumber < -99 || newNumber > 999){
+      alert("Please enter a number between -99 and 999");
+      return;
+    }
 
     this.cleanArray(this.state.frontNodes);
     this.cleanArray(this.state.backNodes);
 
-  
    this.state.front = newNumber; 
 
    const newData = parseInt(newNumber);
@@ -49,7 +52,6 @@ class Queue extends React.Component {
      data: newData,
      Xmovment: [-350+((this.state.backNodes.length+1)*20),0],
      Ymovment: [0,0],
-     color: ['hsl(150, 100, 40)'],
    };
 
    let addedArray = [...backNodes];
@@ -60,7 +62,7 @@ class Queue extends React.Component {
      backNodes: [...addedArray, newNode],  // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
      newNumber: "",
    });
-  };
+  }
 
   dequeue = () => {
     if (this.isEmpty()) {
@@ -81,7 +83,7 @@ class Queue extends React.Component {
     addedArray[0].color.push('hsl(0, 100, 40)');
 
     for(let i = 1; i < addedArray.length; i++){
-      addedArray[i].Xmovment = [0, 40];
+      addedArray[i].Xmovment = [0, 60];
     }
 
 
