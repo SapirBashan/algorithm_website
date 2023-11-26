@@ -7,21 +7,35 @@ import exit from '../icons/delete.png'
 const GenericPage = (props) => {
   const [isPart2Open, setPart2Open] = useState(false);
   const [isPart3Open, setPart3Open] = useState(true);
+  const [isBothOpen, setBothOpen] = useState(false);
 
 
   const handlePart2Toggle = () => {
     setPart2Open(!isPart2Open);
-    setPart3Open(false); // Close Part 3 when opening Part 2
+    if (isPart3Open && !isPart2Open ) {
+      setBothOpen(true);
+    }
+    else
+    {
+      setBothOpen(false);
+    }
   };
 
   const handlePart3Toggle = () => {
     setPart3Open(!isPart3Open);
-    setPart2Open(false); // Close Part 2 when opening Part 3
+    if (isPart2Open && !isPart3Open) {
+      setBothOpen(true);
+    }
+    else
+    {
+      setBothOpen(false);
+    }
   };
 
 
   return (
-    <div className={`generic-page ${isPart2Open ? 'part2-open' : ''} ${isPart3Open ? 'part3-open' : ''}`}>
+    <div className={`generic-page ${isBothOpen ?'both-open'  :`${isPart2Open ? 'part2-open' : ''} ${isPart3Open ? 'part3-open' : ''}` }`}>
+
       
       {/* part 1 is the presentational part */}
       <div className="part part1">

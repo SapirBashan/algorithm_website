@@ -171,25 +171,12 @@ class LinkedList extends React.Component {
       linkedList[0].Ymovment = [0,-90,-90];
       linkedList[0].color.push('hsl(0, 100, 50)','hsl(0, 100, 50)','hsl(196, 100, 40)');
       linkedList[0].duration = 5;
-
-      
-      for(let i = 1; i < linkedList.length; i++) {
-        linkedList[i].Xmovment = [0,-60];
-        linkedList[i].Ymovment = [0,0];
-        linkedList[i].color.push('hsl(196, 100, 40)');
-      }
     }
     else{
       linkedList[0].Xmovment = [0,0,-191];
       linkedList[0].Ymovment = [0,-91,-91];
       linkedList[0].color.push('hsl(0, 100, 51)','hsl(0, 100, 51)','hsl(196, 100, 41)');
       linkedList[0].duration = 6;
-      
-      for(let i = 1; i < linkedList.length; i++) {
-        linkedList[i].Xmovment = [0,-61];
-        linkedList[i].Ymovment = [0,0];
-        linkedList[i].color.push('hsl(196, 100, 40)');
-      }
     }
     
 

@@ -65,8 +65,8 @@
 
 /* Additional styles when both Part 2 and Part 3 are open */
 .both-open .part1 {
-  width: 59%;
-  left: 0;
+  width: 44%;
+  left: 110px;
 }
 
 .both-open .part2,
