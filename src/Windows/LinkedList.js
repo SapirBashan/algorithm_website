@@ -1,10 +1,10 @@
 import React from "react";
 import "./LinkedList.css";
 import "../styles.css";
-import TogglePopup from "../components/TogglePopup.js";
 import Node from "../components/Node";
 import UpperMenu from "../components/UpperMenu.js";
 import GenericPage from "../components/GenericPage.js";
+import { useState } from "react";
 
 
 //this class is the linked list itself and it has all the functions for the linked list 
@@ -16,16 +16,12 @@ class LinkedList extends React.Component {
       super(props);
       this.state = {
         head: null,
-        backNodes: [
-          { data: 6, Xmovment: [0], Ymovment: [] , color: null, showPointer: false},
-        ],
+        backNodes: [],
         newNumber: "",
-        frontNodes: [
-          { data: 6, Xmovment: [0], Ymovment: [] , color: null, showPointer: false},   
-        ],
+        frontNodes: [],
+        deleted: false,
       };
     }
-  
 
   handleInput = (e) => {
     this.setState({ newNumber: e.target.value });
@@ -89,7 +85,7 @@ class LinkedList extends React.Component {
          //this code makes the node before show the pointer
         frontNodes[frontNodes.length - 1].showPointer = true;
         
-        let addedArray = [...frontNodes];
+        let addedArray = [...linkedList];
   
         this.setState({
           frontNodes: [...addedArray , newNode], // Update nodes with the new data
@@ -103,6 +99,8 @@ class LinkedList extends React.Component {
   //this function is used to delete a node from the linked list
   deleteNodeAfterIndex() {
     const { newNumber, frontNodes , backNodes, head } = this.state;
+    this.cleanArray(frontNodes);
+    this.cleanArray(backNodes);
     const linkedList = [...backNodes];
     console.log(this.state.linkedListleangth);
     
@@ -151,10 +149,15 @@ class LinkedList extends React.Component {
 
   //this function is used to delete the first node from the linked list
   deleteFirstNode() {
-    const { newNumber, frontNodes , backNodes, head } = this.state;
+    // update the frontNodes to be the backNodes
+    const {frontNodes,deleted , backNodes, head } = this.state;
+  
+    this.cleanArray(frontNodes);
+    this.cleanArray(backNodes);
+
     const linkedList = [...backNodes];
 
-    if(this.state.head === null) {
+    if(head === null) {
       alert("The linked list is empty");
       return;
     }
@@ -163,47 +166,46 @@ class LinkedList extends React.Component {
       return;
     }
 
+    if(deleted){
+      linkedList[0].Xmovment = [0,0,-190];
+      linkedList[0].Ymovment = [0,-90,-90];
+      linkedList[0].color.push('hsl(0, 100, 50)','hsl(0, 100, 50)','hsl(196, 100, 40)');
+      linkedList[0].duration = 5;
 
-    let newHead = linkedList[1]; 
-    let newFrontNodes = [...frontNodes];
-    const newBackNodes = [...backNodes];
-
-
-    this.cleanArray(frontNodes);
-    this.cleanArray(backNodes);
-    newBackNodes[0].Xmovment = [0,0];
-    newBackNodes[0].Ymovment = [0,90];
-    newBackNodes[0].color = ['hsl(12, 100, 50)'];
-    newBackNodes[0].duration = 5;
+      
+      for(let i = 1; i < linkedList.length; i++) {
+        linkedList[i].Xmovment = [0,-60];
+        linkedList[i].Ymovment = [0,0];
+        linkedList[i].color.push('hsl(196, 100, 40)');
+      }
+    }
+    else{
+      linkedList[0].Xmovment = [0,0,-191];
+      linkedList[0].Ymovment = [0,-91,-91];
+      linkedList[0].color.push('hsl(0, 100, 51)','hsl(0, 100, 51)','hsl(196, 100, 41)');
+      linkedList[0].duration = 6;
+      
+      for(let i = 1; i < linkedList.length; i++) {
+        linkedList[i].Xmovment = [0,-61];
+        linkedList[i].Ymovment = [0,0];
+        linkedList[i].color.push('hsl(196, 100, 40)');
+      }
+    }
     
 
-    for(let i = 1; i < newBackNodes.length; i++) {
-      newBackNodes[i].Xmovment = [0,-60];
-      newBackNodes[i].Ymovment = [0,0];
-      newBackNodes[i].color = ['hsl(196, 100, 40)'];
+    for(let i = 1; i < linkedList.length; i++) {
+      linkedList[i].Xmovment = [0,-60];
+      linkedList[i].Ymovment = [0,0];
+      linkedList[i].color.push('hsl(196, 100, 40)');
     }
 
+    //  the frontNodes will be the linkedlist and the backNodes will be the backNodes from index 1 to the end
     this.setState({
-      frontNodes: newBackNodes,
-     })
-
-     backNodes.shift();
+      frontNodes: linkedList,
+      backNodes: backNodes.slice(1),
+      deleted: !deleted,
+    });
   }
-
-  animateNode() {
-    const { newNumber, frontNodes , backNodes, head } = this.state;
-    const linkedList = [...backNodes];
-    let newFrontNodes = [...frontNodes];
-    
-    backNodes.shift();
-    frontNodes.shift();
-
-    this.setState({
-      frontNodes: newFrontNodes,
-      backNodes: linkedList,
-    })
-  }
-
    
   //this function is used to find a node in the linked list
   findNode() {
@@ -222,7 +224,7 @@ class LinkedList extends React.Component {
     }
     else{
       for(let i = 0; i < listOfNodes.length; i++) {
-        frontNodes[listOfNodes[i]].color = ['hsl(0, 100, 50)'];
+        frontNodes[listOfNodes[i]].color.push(['hsl(0, 100, 50)']);
       }
     }
 
@@ -237,14 +239,15 @@ class LinkedList extends React.Component {
 
   cleanArray = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
-      nodes[i].Xmovment = [0];
-      nodes[i].color = ['hsl(196, 100, 40)'];
+      nodes[i].Xmovment=[0];
+      nodes[i].Ymovment =[0];
+      nodes[i].color=[];
     }
   }
 
 
   render() {
-    const { frontNodes, newNumber, node } = this.state;
+    const { frontNodes,firstNode, newNumber, node } = this.state;
 
     const pythonCode = `# Create a Node class to create a node
     class Node:
@@ -508,7 +511,7 @@ class LinkedList extends React.Component {
             onKeyPress={(e) => this.handleKeyPress(e)}
           />        
           <button className="side-button" onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
-          <button className="side-button" onClick={() => this.deleteFirstNode()}>Delete First</button>
+          <button className="side-button" onClick={() => {this.deleteFirstNode()}}>Delete First</button>
           <button className="side-button" onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
           <button className="side-button" onClick={() => this.findNode()}>Find</button>
           <button className="side-button" onClick={() => this.RandomNode()}>Random</button>
@@ -564,6 +567,7 @@ class LinkedList extends React.Component {
     );
 
   }
+
 }
 
 export default LinkedList;

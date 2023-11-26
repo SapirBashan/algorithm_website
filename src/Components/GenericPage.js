@@ -6,8 +6,7 @@ import exit from '../icons/delete.png'
 
 const GenericPage = (props) => {
   const [isPart2Open, setPart2Open] = useState(false);
-  const [isPart3Open, setPart3Open] = useState(false);
-  const [isbothOpen, setbothOpen] = useState(false);
+  const [isPart3Open, setPart3Open] = useState(true);
 
 
   const handlePart2Toggle = () => {
