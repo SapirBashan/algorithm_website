@@ -40,11 +40,14 @@
   }
 
   .array-container-list {
+    /*start a bit to the left*/
+    margin-left: 60px;
     position: relative;
     /*make the list horizontal*/
     display: flex;
-    margin-left: 40px;
     margin-top: 40px;
+    flex-direction: row;
+    align-items: flex-start;
   }
   
 

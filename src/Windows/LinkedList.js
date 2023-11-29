@@ -6,26 +6,23 @@ import UpperMenu from "../components/UpperMenu.js";
 import GenericPage from "../components/GenericPage.js";
 import { useState } from "react";
 
-
-//this class is the linked list itself and it has all the functions for the linked list 
+//this class is the linked list itself and it has all the functions for the linked list
 class LinkedList extends React.Component {
-
-
-  //this constructer is incharge of the state of the linked list 
-    constructor(props) {
-      super(props);
-      this.state = {
-        head: null,
-        backNodes: [],
-        newNumber: "",
-        frontNodes: [],
-        deleted: false,
-      };
-    }
+  //this constructer is incharge of the state of the linked list
+  constructor(props) {
+    super(props);
+    this.state = {
+      head: null,
+      backNodes: [],
+      newNumber: "",
+      frontNodes: [],
+      deleted: false,
+    };
+  }
 
   handleInput = (e) => {
     this.setState({ newNumber: e.target.value });
-  }
+  };
 
   handleKeyPress(e) {
     if (e.key === "Enter") {
@@ -33,33 +30,33 @@ class LinkedList extends React.Component {
     }
   }
 
-  //this function is used to insert a node into the linked list 
+  //this function is used to insert a node into the linked list
   insertNode(value) {
-    const { newNumber, frontNodes , backNodes } = this.state;
+    const { newNumber, frontNodes, backNodes } = this.state;
     const linkedList = [...backNodes];
 
-    if(value === "") {
+    if (value === "") {
       alert("Please enter a number");
-      this.state.newNumber = ""
+      this.state.newNumber = "";
       return;
     }
-    if(isNaN(value)) {
+    if (isNaN(value)) {
       alert("Please enter a number");
-      this.state.newNumber = ""
+      this.state.newNumber = "";
       return;
     }
     //i want that if the head is null i will ad a node to the head
-    if(this.state.head === null) {
-       //delete the head node
-       this.cleanArray(frontNodes);
-       this.cleanArray(backNodes);
-       if (value) { 
+    if (this.state.head === null) {
+      //delete the head node
+      this.cleanArray(frontNodes);
+      this.cleanArray(backNodes);
+      if (value) {
         const newData = parseInt(value);
         const newNode = {
           data: newData,
           Xmovment: [0],
           Ymovment: [],
-          color: ['hsl(196, 100, 40)'],
+          color: ["hsl(196, 100, 40)"],
         };
         this.setState({
           head: newNode,
@@ -67,127 +64,127 @@ class LinkedList extends React.Component {
           backNodes: [newNode],
           newNumber: "",
         });
-       this.state.head = new Node(value);
+        this.state.head = new Node(value);
       }
-    }
-
-    else {
+    } else {
       this.cleanArray(frontNodes);
       this.cleanArray(backNodes);
       if (value) {
         const newData = parseInt(value);
         const newNode = {
           data: newData,
-          Xmovment: [ (-75 + (-40*linkedList.length*2)),6,8,0],
-          Ymovment: [50,50,0],
-          color: ['hsl(196, 100, 40)']
+          Xmovment: [-75 + -40 * linkedList.length * 2, 6, 8, 0],
+          Ymovment: [50, 50, 0],
+          color: ["hsl(196, 100, 40)"],
         };
-         //this code makes the node before show the pointer
+        //this code makes the node before show the pointer
         frontNodes[frontNodes.length - 1].showPointer = true;
-        
+
         let addedArray = [...linkedList];
-  
+
         this.setState({
-          frontNodes: [...addedArray , newNode], // Update nodes with the new data
-          backNodes: [...addedArray, newNode],  // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
+          frontNodes: [...addedArray, newNode], // Update nodes with the new data
+          backNodes: [...addedArray, newNode], // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
           newNumber: "",
         });
-     }
-    }    
+      }
+    }
   }
-  
+
   //this function is used to delete a node from the linked list
   deleteNodeAfterIndex() {
-    const { newNumber, frontNodes , backNodes, head } = this.state;
+    const { newNumber, frontNodes, backNodes, head } = this.state;
     this.cleanArray(frontNodes);
     this.cleanArray(backNodes);
     const linkedList = [...backNodes];
     console.log(this.state.linkedListleangth);
-    
-    if(newNumber === "") {
+
+    if (newNumber === "") {
       alert("Please enter a number");
-      this.state.newNumber = ""
+      this.state.newNumber = "";
       return;
-    }
-    else if(isNaN(newNumber)) {
+    } else if (isNaN(newNumber)) {
       alert("Please enter a number");
-      this.state.newNumber = ""
+      this.state.newNumber = "";
       return;
-    }
-    else if(newNumber < 0)
-    {
+    } else if (newNumber < 0) {
       alert("Please enter a positive number");
-      this.state.newNumber = ""
+      this.state.newNumber = "";
       return;
-    }
-    else if(newNumber > linkedList.length) {
+    } else if (newNumber > linkedList.length) {
       alert("Please enter a number smaller then the linked list length");
-      this.state.newNumber = ""
+      this.state.newNumber = "";
       return;
+    } else {
+      //delete the node in the index with animation
+      let newFrontNodes = [...frontNodes];
+      let newBackNodes = [...backNodes];
+      let index = newNumber;
+
+      newFrontNodes[index].Xmovment = [0];
+      newFrontNodes[index].Ymovment = [90];
+      newFrontNodes[index].color = ["hsl(12, 100, 50)"];
+      newFrontNodes[index].duration = 5;
+
+      newFrontNodes.splice(index, 1);
+      newBackNodes.splice(index, 1);
+
+      this.setState({
+        frontNodes: newFrontNodes,
+        backNodes: newBackNodes,
+        newNumber: "",
+      });
     }
-    else{
-    //delete the node in the index with animation
-    let newFrontNodes = [...frontNodes];
-    let newBackNodes = [...backNodes];
-    let index = newNumber;
-
-    newFrontNodes[index].Xmovment = [0];
-    newFrontNodes[index].Ymovment = [90];
-    newFrontNodes[index].color = ['hsl(12, 100, 50)'];
-    newFrontNodes[index].duration = 5;
-
-    newFrontNodes.splice(index, 1);
-    newBackNodes.splice(index, 1);
-
-    this.setState({
-      frontNodes: newFrontNodes,
-      backNodes: newBackNodes,
-      newNumber: "",
-    });
-  }
   }
 
   //this function is used to delete the first node from the linked list
   deleteFirstNode() {
     // update the frontNodes to be the backNodes
-    const {frontNodes,deleted , backNodes, head } = this.state;
-  
+    const { frontNodes, deleted, backNodes, head } = this.state;
+
     this.cleanArray(frontNodes);
     this.cleanArray(backNodes);
 
     const linkedList = [...backNodes];
 
-    if(head === null) {
+    if (head === null) {
       alert("The linked list is empty");
       return;
     }
-    if(linkedList.length === 0) {
+    if (linkedList.length === 0) {
       alert("The linked list is empty");
       return;
     }
 
-    if(deleted){
-      linkedList[0].Xmovment = [0,0,-190];
-      linkedList[0].Ymovment = [0,-90,-90];
-      linkedList[0].color.push('hsl(0, 100, 50)','hsl(0, 100, 50)','hsl(196, 100, 40)');
+    if (deleted) {
+      linkedList[0].Xmovment = [0, 0, -190];
+      linkedList[0].Ymovment = [0, -90, -90];
+      linkedList[0].color.push(
+        "hsl(0, 100, 50)",
+        "hsl(0, 100, 50)",
+        "hsl(196, 100, 40)"
+      );
       linkedList[0].duration = 5;
 
-      for(let i = 1; i < linkedList.length; i++) {
-        linkedList[i].Xmovment = [0,-91];
-        linkedList[i].Ymovment = [0,0];
-        linkedList[i].color.push('hsl(196, 100, 40)');
+      for (let i = 1; i < linkedList.length; i++) {
+        linkedList[i].Xmovment = [0, -91];
+        linkedList[i].Ymovment = [0, 0];
+        linkedList[i].color.push("hsl(196, 100, 40)");
       }
-    }
-    else{
-      linkedList[0].Xmovment = [0,0,-191];
-      linkedList[0].Ymovment = [0,-91,-91];
-      linkedList[0].color.push('hsl(0, 100, 51)','hsl(0, 100, 51)','hsl(196, 100, 41)');
+    } else {
+      linkedList[0].Xmovment = [0, 0, -191];
+      linkedList[0].Ymovment = [0, -91, -91];
+      linkedList[0].color.push(
+        "hsl(0, 100, 51)",
+        "hsl(0, 100, 51)",
+        "hsl(196, 100, 41)"
+      );
       linkedList[0].duration = 6;
 
-      for(let i = 1; i < linkedList.length; i++) {
-        linkedList[i].Xmovment = [0,-90];
-        linkedList[i].Ymovment = [0,0];
-        linkedList[i].color.push('hsl(196, 100, 40)');
+      for (let i = 1; i < linkedList.length; i++) {
+        linkedList[i].Xmovment = [0, -90];
+        linkedList[i].Ymovment = [0, 0];
+        linkedList[i].color.push("hsl(196, 100, 40)");
       }
     }
 
@@ -198,48 +195,46 @@ class LinkedList extends React.Component {
       deleted: !deleted,
     });
   }
-   
+
   //this function is used to find a node in the linked list
   findNode() {
-    const { newNumber, frontNodes , backNodes, head } = this.state;
+    const { newNumber, frontNodes, backNodes, head } = this.state;
     const linkedList = [...backNodes];
     let listOfNodes = [];
 
-    for(let i = 0; i < linkedList.length; i++) {
-      if(linkedList[i].data === parseInt(newNumber)) {
+    for (let i = 0; i < linkedList.length; i++) {
+      if (linkedList[i].data === parseInt(newNumber)) {
         listOfNodes.push(i);
       }
     }
-    if(listOfNodes.length === 0) {
+    if (listOfNodes.length === 0) {
       alert("The number is not in the linked list");
       return;
-    }
-    else{
-      for(let i = 0; i < listOfNodes.length; i++) {
-        frontNodes[listOfNodes[i]].color.push(['hsl(0, 100, 50)']);
+    } else {
+      for (let i = 0; i < listOfNodes.length; i++) {
+        frontNodes[listOfNodes[i]].color.push(["hsl(0, 100, 50)"]);
       }
     }
 
-    alert(listOfNodes)
+    alert(listOfNodes);
   }
 
   //this function is used to generate a random node in the linked list
   RandomNode() {
-      let random = Math.floor(Math.random() * 100) + 1;
-      this.insertNode(random);
+    let random = Math.floor(Math.random() * 100) + 1;
+    this.insertNode(random);
   }
 
   cleanArray = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
-      nodes[i].Xmovment=[0];
-      nodes[i].Ymovment =[0];
-      nodes[i].color=[];
+      nodes[i].Xmovment = [0];
+      nodes[i].Ymovment = [0];
+      nodes[i].color = [];
     }
-  }
-
+  };
 
   render() {
-    const { frontNodes,firstNode, newNumber, node } = this.state;
+    const { frontNodes, firstNode, newNumber, node } = this.state;
 
     const pythonCode = `# Create a Node class to create a node
     class Node:
@@ -319,7 +314,7 @@ class LinkedList extends React.Component {
         }
     }`;
 
-  const cppCode = ` /* Create a Node class to create a node */
+    const cppCode = ` /* Create a Node class to create a node */
     class Node {
     public:
         int data;
@@ -367,7 +362,7 @@ class LinkedList extends React.Component {
         }
     };`;
 
-  const pseudoCode = ` /* Create a Node class to create a node */
+    const pseudoCode = ` /* Create a Node class to create a node */
     Node
         data
         next
@@ -398,7 +393,7 @@ class LinkedList extends React.Component {
         return null // Change this to return the found node
   `;
 
-  const explanation = `<div class="explanation">
+    const explanation = `<div class="explanation">
     <h2>Linked List Concept:</h2>
     <p>
       A linked list is a linear collection of elements where each element is a separate object called a node. 
@@ -466,54 +461,84 @@ class LinkedList extends React.Component {
   </div>
   `;
 
-    
-  
     return (
       <div>
-      <UpperMenu nameOfPage = {"Linked List"} search = {false}/>
-      <GenericPage
-        explanation={explanation}
-        pythonCode={pythonCode}
-        javaCode={javaCode}
-        cppCode={cppCode}
-        pseudoCode={pseudoCode}
-        presentational={
-          <div className="array-container-list">
-          {this.state.head === null ? null : (
-            frontNodes.map((node, index) => (
-              <Node
-                data={node.data}
-                Xmovment={node.Xmovment}
-                Ymovment={node.Ymovment}
-                duration={5}
-                color={node.color}
-                showPointer={node.showPointer}
+        <UpperMenu nameOfPage={"Linked List"} search={false} />
+        <GenericPage
+          explanation={explanation}
+          pythonCode={pythonCode}
+          javaCode={javaCode}
+          cppCode={cppCode}
+          pseudoCode={pseudoCode}
+          presentational={
+            <div className="array-container-list">
+              {this.state.head === null
+                ? null
+                : frontNodes.map((node, index) => (
+                    <Node
+                      data={node.data}
+                      Xmovment={node.Xmovment}
+                      Ymovment={node.Ymovment}
+                      duration={5}
+                      color={node.color}
+                      showPointer={node.showPointer}
+                    />
+                  ))}
+            </div>
+          }
+          buttons={
+            <div>
+              <input
+                className="insert"
+                type="number"
+                value={newNumber}
+                placeholder="Enter a number"
+                onChange={this.handleInput}
+                onKeyPress={(e) => this.handleKeyPress(e)}
               />
-            ))
-          )}
-        </div>}
-        buttons={
-        <div>
-          <input
-            className="insert"
-            type="number"
-            value={newNumber}
-            placeholder="Enter a number"
-            onChange={this.handleInput}
-            onKeyPress={(e) => this.handleKeyPress(e)}
-          />        
-          <button className="side-button" onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
-          <button className="side-button" onClick={() => {this.deleteFirstNode()}}>Delete First</button>
-          <button className="side-button" onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
-          <button className="side-button" onClick={() => this.findNode()}>Find</button>
-          <button className="side-button" onClick={() => this.RandomNode()}>Random</button>
-          <button className="side-button" onClick={() => this.setState({ head: null, frontNodes: [], backNodes: [], newNumber: "" })}>
-            Clear
-          </button>
-        </div>
-        }
-        
-      /></div>
+              <button
+                className="side-button"
+                onClick={() => this.insertNode(this.state.newNumber)}
+              >
+                Insert
+              </button>
+              <button
+                className="side-button"
+                onClick={() => {
+                  this.deleteFirstNode();
+                }}
+              >
+                Delete First
+              </button>
+              <button
+                className="side-button"
+                onClick={() => this.deleteNodeAfterIndex()}
+              >
+                Delete index
+              </button>
+              <button className="side-button" onClick={() => this.findNode()}>
+                Find
+              </button>
+              <button className="side-button" onClick={() => this.RandomNode()}>
+                Random
+              </button>
+              <button
+                className="side-button"
+                onClick={() =>
+                  this.setState({
+                    head: null,
+                    frontNodes: [],
+                    backNodes: [],
+                    newNumber: "",
+                  })
+                }
+              >
+                Clear
+              </button>
+            </div>
+          }
+        />
+      </div>
 
       // <div className="LinkedList">
       //   <UpperMenu nameOfPage = {"Linked List"} search = {false}/>
@@ -524,8 +549,8 @@ class LinkedList extends React.Component {
       //     placeholder="Enter a number"
       //     onChange={this.handleInput}
       //     onKeyPress={(e) => this.handleKeyPress(e)}
-      //   />        
-      //   <button onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>        
+      //   />
+      //   <button onClick={() => this.insertNode(this.state.newNumber)}>Insert</button>
       //   <button onClick={() => this.deleteFirstNode()}>Delete First</button>
       //   <button onClick={() => this.deleteNodeAfterIndex()}>Delete index</button>
       //   <button onClick={() => this.findNode()}>Find</button>
@@ -548,18 +573,16 @@ class LinkedList extends React.Component {
       //       ))
       //     )}
       //   </div>
-      //   <TogglePopup 
+      //   <TogglePopup
       //   text = {explanation}
       //   tab1 = {pythonCode}
-      //   tab2 = {javaCode} 
-      //   tab3 = {cppCode} 
+      //   tab2 = {javaCode}
+      //   tab3 = {cppCode}
       //   tab4 = {pseudoCode}
       //   />
       // </div>
     );
-
   }
-
 }
 
 export default LinkedList;
