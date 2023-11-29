@@ -81,7 +81,7 @@ import DFSIMG from '../icons/DFS.png';
 
 export const buttonsData = [
   { text: 'Linked List', link: '/src/windows/LinkedList', image: LinkedListImage },
-  { text: 'Insertion Sort', link: '/src/windows/InsertionSort', image: InsertionSortImage },
+  { text: 'Insertion Sort', link: '/InsertionSort', image: InsertionSortImage },// src/windows can be deleted
   { text: 'Bubble Sort', link: '/src/windows/BubbleSort', image: BubbleSortImage },
   { text: 'BFS', link: '/src/windows/BFS', image: BFSIMG },
   { text: 'DFS', link: '/src/windows/DFS', image: DFSIMG },
@@ -121,7 +121,7 @@ export const buttonsData = [
 
 
 export const routeData = [
-  { path: '/src/windows/InsertionSort', element: <InsertionSort /> },
+  { path: '/InsertionSort', element: <InsertionSort /> },
   { path: '/src/windows/BubbleSort', element: <BubbleSort /> },
   { path: '/src/windows/BFS', element: <BFS />},
   { path : '/src/windows/DFS', element: <DFS/>},

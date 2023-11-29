@@ -1,9 +1,11 @@
 
 import React, { Component } from "react";
+import "../styles.css";
 import "./BubbleSort.css";
 import Node from "../components/Node";
 import TogglePopup from "../components/TogglePopup";
 import UpperMenu from "../components/UpperMenu";
+import GenericPage from "../components/GenericPage";
 
 class BubbleSort extends Component {
   constructor(props) {
@@ -373,52 +375,15 @@ int main() {
     const {frontNodes , newNumber ,volume, setVolume} = this.state;
     return (
       <div>
-        
-      <UpperMenu nameOfPage = {"Bubble Sort"} search = {false}/>        
-      <div className="BubbleSort">
-       
-    <div className="input-section">
-      <input
-        type="number"
-        value={newNumber}
-        onChange={this.handleChange}
-        placeholder="Enter a number"
-        onKeyPress={(e) => this.handleKeyPress(e)}
-      />
-      <br />
-      <button  onClick={this.addNumber}>
-        Add Number
-      </button>
-      <br />
-      <button  onClick={this.shuffleArray}>
-            Shuffle
-      </button>
-      <br />
-      <button  onClick={this.random}>
-            Random
-      </button>
-      <br />
-      <button  onClick={this.erase}>
-            Clear
-      </button>
-      <br />
-      <input
-          type="range"
-          //i want the min value to be the longest duration and the max value to be the shortest duration
-          min={frontNodes.length/4}
-          max={frontNodes.length*4}
-          step={0.02}
-          value={volume}
-          onChange={event => {
-            setVolume(event.target.valueAsNumber)
-          }}
-        />
-      <br />
-      <button  onClick={this.animate}>
-            Bubble Sort
-      </button>
-    </div>
-    <div className="array-container">
+      <UpperMenu nameOfPage = {"Bubble Sort"} search = {false}/>
+      <GenericPage
+        explanation={explanation}
+        pythonCode={pythonCode}
+        javaCode={javaCode}
+        cppCode={cppCode}
+        pseudoCode={pseudoCode}
+        presentational={
+          <div className="array-container">
       {frontNodes.map((node, index) => (
         <Node
           data={node.data}
@@ -429,17 +394,53 @@ int main() {
           showPointer={false}
         />
       ))}
-    </div>
-    <TogglePopup 
-        text = {explanation}
-        tab1 = {pythonCode}
-        tab2 = {javaCode} 
-        tab3 = {cppCode} 
-        tab4 = {pseudoCode}
-        />
-  </div>
-  </div>
-      
+    </div>}
+        buttons={
+          <div >
+          <input
+            className="insert"
+            type="number"
+            value={newNumber}
+            onChange={this.handleChange}
+            placeholder="Enter a number"
+            onKeyPress={(e) => this.handleKeyPress(e)}
+          />
+          
+          <button className="side-button" onClick={this.addNumber}>
+            Add Number
+          </button>
+          
+          <button className="side-button" onClick={this.shuffleArray}>
+                Shuffle
+          </button>
+          
+          <button className="side-button" onClick={this.random}>
+                Random
+          </button>
+          
+          <button className="side-button" onClick={this.erase}>
+                Clear
+          </button>
+          
+          <input
+              className="slider"
+              type="range"
+              min={frontNodes.length/4}
+              max={frontNodes.length*4}
+              step={0.02}
+              value={volume}
+              onChange={event => {
+                setVolume(event.target.valueAsNumber)
+              }}
+            />
+          
+          <button className="side-button" onClick={this.animate}>
+                Bubble Sort
+          </button>
+        </div>
+        }
+        
+      /></div>   
     );
   }
 }
