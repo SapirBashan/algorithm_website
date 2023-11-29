@@ -19,6 +19,8 @@ h1 {
 }
 
 .array-container-insertion {
+  /* start a bit to the left*/
+  margin-left: 60px;
   position: relative;
   display: flex;
   flex-direction: row;

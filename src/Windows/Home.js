@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './Home.css';
-import ButtonsToPages from '../components/ButtonsToPages.js';
-import { routeData, buttonsData } from '../components/data.js';
-import UpperMenu from '../components/UpperMenu';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./Home.css";
+import ButtonsToPages from "../components/ButtonsToPages.js";
+import { routeData, buttonsData } from "../components/data.js";
+import UpperMenu from "../components/UpperMenu";
 
 function Home() {
-  const [currentRoute, setCurrentRoute] = useState('/');
   const [filteredButtons, setFilteredButtons] = useState(buttonsData);
 
   // Reset search bar state when the component is re-rendered
@@ -14,19 +13,14 @@ function Home() {
     setFilteredButtons(buttonsData);
   }, []); // Empty dependency array ensures the effect runs only once after initial render
 
-  const handleRouteChange = (newRoute) => {
-    setCurrentRoute(newRoute);
-  };
-
   const handleOnSearch = (filteredButtons) => {
     setFilteredButtons(filteredButtons);
   };
 
-
   return (
     <div className="App">
       <BrowserRouter>
-      <UpperMenu onRouteChange={handleRouteChange} onSearch={handleOnSearch} nameOfPage = {""}/>
+        <UpperMenu onSearch={handleOnSearch} nameOfPage={""} />
         <Routes>
           {/* Route to render the home page */}
           <Route
@@ -49,7 +43,12 @@ function Home() {
           />
           {/* Shorter way to write the routes */}
           {routeData.map((route, index) => (
-            <Route key={index} exact path={route.path} element={route.element} />
+            <Route
+              key={index}
+              exact
+              path={route.path}
+              element={route.element}
+            />
           ))}
         </Routes>
       </BrowserRouter>
