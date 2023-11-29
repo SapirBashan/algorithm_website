@@ -27,17 +27,17 @@ class Queue extends React.Component {
     }
   };
 
-  enqueue = () => {
+  enqueue = (myNumber) => {
     const { newNumber, backNodes, maxQueueSize, frontNodes } = this.state;
     if (this.isFull()) {
       alert("Queue is full");
       return;
     }
-    if (newNumber === "" || newNumber === null) {
+    if (myNumber === "" || myNumber === null) {
       alert("Please enter a number");
       return;
     }
-    if(newNumber < -99 || newNumber > 999){
+    if(myNumber < -99 || myNumber > 999){
       alert("Please enter a number between -99 and 999");
       return;
     }
@@ -45,9 +45,9 @@ class Queue extends React.Component {
     this.cleanArray(this.state.frontNodes);
     this.cleanArray(this.state.backNodes);
 
-   this.state.front = newNumber; 
+   this.state.front = myNumber; 
 
-   const newData = parseInt(newNumber);
+   const newData = parseInt(myNumber);
    const newNode = {
      data: newData,
      Xmovment: [-350+((this.state.backNodes.length+1)*20),0],
@@ -80,7 +80,7 @@ class Queue extends React.Component {
 
     /*make the top node move up*/
     addedArray[0].Xmovment = [(addedArray.length+1)*8, 600];
-    addedArray[0].color.push('hsl(0, 100, 40)');
+    addedArray[0].color.push('hsl(0, 100, 40)', 'hsl(196, 100, 40)');
 
     for(let i = 1; i < addedArray.length; i++){
       addedArray[i].Xmovment = [0, 60];
@@ -104,6 +104,10 @@ class Queue extends React.Component {
 
   isFull = () => {
     return this.state.backNodes.length >= this.state.maxQueueSize;
+  };
+
+  random = () => {
+    this.enqueue(Math.floor(Math.random() * 99));
   };
 
   clear = () => {
@@ -466,6 +470,7 @@ class Queue extends React.Component {
           />
           <button className="side-button" onClick={() => this.enqueue(this.state.newNumber)}>enqueue</button>
           <button className="side-button" onClick={() => this.dequeue()}>dequeue</button>
+          <button className="side-button" onClick={() => this.random()}>Random enqueue</button>
           <button className="side-button" onClick={() => this.clear()}>Clear</button>
           <button
           disabled={!this.isEmpty()}

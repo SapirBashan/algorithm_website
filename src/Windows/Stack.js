@@ -31,13 +31,13 @@ class Stack extends React.Component {
     }
   };
 
-  push = () => {
+  push = (myNumber) => {
     const { newNumber,frontNodes, backNodes } = this.state;
     if (this.isFull()) {
       alert("Stack is full");
       return;
     }
-    if(newNumber === "" || newNumber === null){
+    if(myNumber === "" || myNumber === null){
       alert("Please enter a number");
       return;
     }
@@ -47,27 +47,26 @@ class Stack extends React.Component {
 
     const newBackNodes = [...this.state.backNodes];
 
-      this.state.top = newNumber;
+    this.state.top = myNumber;
 
-      const newData = parseInt(newNumber);
-        const newNode = {
-          data: newData,
-          Xmovment: [0,0],
-          Ymovment: [-350+((this.state.backNodes.length+1)*20),0],
-          color: ['hsl(102, 100, 30)', 'hsl(102, 100, 30)'],
-        };
+   
+    const newData = parseInt(myNumber);
+      const newNode = {
+        data: newData,
+        Xmovment: [0,0],
+        Ymovment: [-350+((this.state.backNodes.length+1)*20),0],
+        color: ['hsl(102, 100, 30)', 'hsl(102, 100, 30)'],
+      };
 
       /*make all the colors but the top blue (196, 100, 40)*/
       for(let i = 0; i < newBackNodes.length; i++){
         newBackNodes[i].color.push('hsl(196, 100, 40)');
       }
-
-        let addedArray = [...frontNodes];
     
     
       this.setState({
-        frontNodes: [...addedArray , newNode], // Update nodes with the new data
-        backNodes: [...addedArray, newNode],  // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
+        frontNodes: [...newBackNodes , newNode], // Update nodes with the new data
+        backNodes: [...newBackNodes, newNode],  
         newNumber: "",
       });
 
@@ -81,24 +80,26 @@ class Stack extends React.Component {
     this.cleanArray(this.state.frontNodes);
     this.cleanArray(this.state.backNodes);
 
-    const newBackNodes = [...this.state.backNodes];
-
-
-    let addedArray = [...newBackNodes];
+    const addedArray = [...this.state.backNodes];
 
     /*make the top node move up*/
-    addedArray[addedArray.length-1].Ymovment = [0, -600];
+    addedArray[addedArray.length-1].Xmovment = [0, 0];
+    addedArray[addedArray.length-1].Ymovment = [0, -225*(addedArray.length+2)];
+    if(addedArray.length !== 1){
     addedArray[addedArray.length-1].color.push('hsl(0, 100, 40)');
     addedArray[addedArray.length-2].color.push('hsl(102, 100, 30)');
+    }
+    else{
+      addedArray[0].color.push('hsl(0, 100, 40)');
+    }
 
 
     this.setState({
       frontNodes: [...addedArray ], // Update nodes with the new data 
+      backNodes: [...addedArray.slice(0,-1)],  
       newNumber: "",
-    });
+    }); 
 
-    this.state.backNodes.pop();
-    
   };
 
   isEmpty = () => {
@@ -114,6 +115,10 @@ class Stack extends React.Component {
     this.setState({ frontNodes: [] });
     this.setState({ top: null });
   };
+
+  random = () => {
+    this.push(Math.floor(Math.random() * 99));
+  }
 
   cleanArray = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
@@ -436,7 +441,7 @@ class Stack extends React.Component {
       </p>
     </div>
     `;
-    
+
 
     return (
       
@@ -461,6 +466,7 @@ class Stack extends React.Component {
           />
           <button className="side-button" onClick={() => this.push(this.state.newNumber)}>Push</button>
           <button className="side-button" onClick={() => this.pop()}>Pop</button>
+          <button className="side-button" onClick={() => this.random()}>Random Push</button>
           <button className="side-button" onClick={() => this.clear()}>Clear</button>
           <button
           disabled={!this.isEmpty()}

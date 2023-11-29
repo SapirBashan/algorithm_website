@@ -17,7 +17,12 @@ class Node extends React.Component {
           //the class name should be this props.className but the default is node
           className= {this.props.className || "Node"}
         >
-          {this.props.data}
+          {this.props.data2 === null ? 
+          (<span>{this.props.data}</span>):
+          (<span className="vertical-span">
+          <span>{this.props.data}</span>
+          <span>{this.props.data2}</span>
+        </span>)}
          </motion.div>
         {this.props.showPointer && <div className='pointer'>&rarr;</div>}
       </motion.div>
@@ -26,6 +31,7 @@ class Node extends React.Component {
 
   setState = {
     data: this.props.data,
+    data2: this.props.data2,
     pointers: this.props.pointers,
     Xmovment: this.props.Xmovment,
     Ymovment: this.props.Ymovment,
