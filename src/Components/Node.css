@@ -69,7 +69,7 @@
   color: #000000;
   padding: 0;
   border-radius: 0%;
-  background-color: #0099cc;
+  background-color: #ffcc00;
   width: 55px;
   height: 55px;
   font-size: 30px;
@@ -82,3 +82,65 @@
   /*make the width between the numbers zero*/
   margin-right: 0px;
 }
+
+.priorityQueueNode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  padding: 0;
+  border-radius: 0%;
+  background-color: transparent; /* Set background color to transparent */
+  width: 55px;
+  height: 110px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-right: 10px;
+  text-align: center;
+  border: 2px solid #000000;
+  line-height: 1; /* Adjust line height */
+  position: relative; /* Ensure position is set for pseudo-element positioning */
+  overflow: hidden; /* Hide overflow content */
+}
+
+.priorityQueueNode::before,
+.priorityQueueNode::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 50%; /* Set the height to 50% for each half */
+}
+
+.priorityQueueNode::before {
+  top: 0;
+  background-color: #ffcc00; /* Color for the top half */
+}
+
+.priorityQueueNode::after {
+  bottom: 0;
+  background-color: #ff9900; /* Color for the bottom half */
+  border-top: 2px solid #000; /* Divider line */
+}
+
+/* Adjust the span (or content element) to remain visible */
+.priorityQueueNode span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Node.css */
+.vertical-span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.vertical-span span {
+  margin: 5px 0; /* Adjust the margin as needed */
+}
+
+
+
+
