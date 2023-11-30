@@ -7,11 +7,95 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: 	#0d3674;
+  background-color: #0d3674;
   color: white;
-  height: 60px; /* Set the desired height for the slim menu */
-  padding: 10px 20px; /* Adjust the padding to your liking */
-  z-index: 1000; /* Set a z-index to ensure it's above other content */
+  height: 60px;
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+.upper-menu__left {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.upper-menu__logo {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.upper-menu__search {
+  border-radius: 5px;
+  margin-left: 20px;
+  font-size: 15px;
+}
+
+.upper-menu__right {
+  display: flex;
+  align-items: center;
+}
+
+.upper-menu__user,
+.upper-menu__cart {
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+.search {
+  max-width: 34px;
+  max-height: 34px;
+  display: flex;
+  border-radius: 5px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.search img {
+  width: 100%;
+  height: auto;
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.search-results-container {
+  position: absolute;
+  top: 64%;
+  left: 0;
+  width: 192px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  text-align: left;
+  color: #21252b;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: slide-down 0.3s ease;
+  z-index: 1;
+  margin-left: 80px;
+}
+
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.search-results li {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.search-results li:last-child {
+  border-bottom: none;
 }
 
 .logo{
@@ -110,13 +194,19 @@
   border-bottom: none;
 }
 
+
 .upper-menu__center__title {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
-  font-family: 'Roboto', sans-serif;
-  margin-left: -460px; /* Reset margin to avoid unexpected spacing */
-  color: beige;
+  font-family: 'Rational TW', sans-serif;
+  margin-left: -460px;
+  color: rgb(255, 255, 255);
+  margin-right: 20px;
+  letter-spacing: -0.2px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  -webkit-text-stroke: 0.1px rgb(12, 24, 92); /* Add a black outline */
 }
+
 
 .upper-menu__center {
   flex-grow: 2; /* Allow the center section to take more space */

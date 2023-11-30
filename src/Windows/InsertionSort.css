@@ -5,11 +5,6 @@
   padding: 20px;
 }
 
-h1 {
-  font-size: 24px;
-  margin-right: 20px; /* Add margin to separate the heading from the input section */
-}
-
 .input-section {
   position: absolute;
   display: flex;
