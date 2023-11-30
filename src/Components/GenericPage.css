@@ -125,6 +125,10 @@ body::-webkit-scrollbar {
   visibility: visible;
 }
 
+.both-open .part3-button-open-close {
+  left: 145px;
+}
+
 /* Button to toggle the popup */
 .toggle-button {
   float: right;
