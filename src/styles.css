@@ -15,9 +15,9 @@ body {
        the text will be whith
        when hovering the text will have a underline*/
         width: 117px;
-        text-align: left;
+        text-align: center;
         overflow: visible;
-        white-space: nowrap;
+        white-space: wrap;
         text-overflow: ellipsis;
         border: none;
         background-color: transparent;
@@ -26,7 +26,8 @@ body {
         display: inline-block;
         font-size: 16px;
         font-weight: bold;
-        padding-bottom: 10px;
+        padding-bottom: 7px;
+        padding-top: 7px;
         cursor: pointer;
         /* no more then one button per line*/
         display: block;
@@ -34,8 +35,9 @@ body {
     }
     
 .side-button:hover {
-        text-decoration: underline;
-    }
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7); /* Subtle box shadow on hover */
+    border-radius: 10px;
+  }
 
   input.insert {
     width: 110px;
