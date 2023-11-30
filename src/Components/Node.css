@@ -108,6 +108,7 @@
   position: absolute;
   width: 100%;
   height: 50%; /* Set the height to 50% for each half */
+  z-index: -1; /* Move the pseudo-elements behind the content */
 }
 
 .priorityQueueNode::before {
@@ -124,7 +125,6 @@
 /* Adjust the span (or content element) to remain visible */
 .priorityQueueNode span {
   position: relative;
-  z-index: 1;
 }
 
 /* Node.css */
