@@ -207,28 +207,31 @@ class LinkedList extends React.Component {
   findNode() {
     const { newNumber, frontNodes, backNodes, head } = this.state;
     const linkedList = [...backNodes];
+    const movment = [];
+    const color = [];
+    //for to collect all the movment the search node will need to do (he'll need to go on each node and move to the next one)
+    for (let i = 0; i < linkedList.length; i++) {
+      movment.push(-90 * linkedList.length + 30 + 90 * i);
+      movment.push(-90 * linkedList.length + 30 + 90 * i);
+      if (linkedList[i].data === parseInt(newNumber)) {
+        //todo
+        //if the node is found
+        //the node will be highlighted in green when the search node is on it
+        //meaning that that first there will be i blue steps and then green steps
+        for (let j = 0; j < i; j++) {
+          color.push("hsl(196, 100, 40)");
+        }
+        color.push("hsl(120, 100, 50)");
+      }
+    }
+
     const highlightedNodes = {
       className: "Search-Node",
-      Xmovment: [-1 * linkedList.length * 2 + -10, 0],
+      Xmovment: movment,
       Ymovment: [],
-      color: ["hsl(0, 100, 50)"],
+      duration: linkedList.length,
     };
     linkedList.push(highlightedNodes);
-    let listOfNodes = [];
-
-    for (let i = 0; i < linkedList.length; i++) {
-      if (linkedList[i].data === parseInt(newNumber)) {
-        listOfNodes.push(i);
-      }
-    }
-    if (listOfNodes.length === 0) {
-      alert("The number is not in the linked list");
-      return;
-    } else {
-      for (let i = 0; i < listOfNodes.length; i++) {
-        frontNodes[listOfNodes[i]].color.push(["hsl(0, 100, 50)"]);
-      }
-    }
 
     this.setState({
       frontNodes: linkedList,
@@ -272,7 +275,7 @@ class LinkedList extends React.Component {
                       data={node.data}
                       Xmovment={node.Xmovment}
                       Ymovment={node.Ymovment}
-                      duration={5}
+                      duration={node.duration || 5}
                       color={node.color}
                       className={node.className || false}
                       showPointer={node.showPointer}
