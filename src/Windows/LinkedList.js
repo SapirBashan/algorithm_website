@@ -12,8 +12,8 @@ import {
   cppCodeLinkedList,
   pseudoCodeLinkedList,
 } from "../components/data.js";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //this class is the linked list itself and it has all the functions for the linked list
 class LinkedList extends React.Component {
@@ -54,7 +54,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     }
@@ -68,7 +68,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     }
@@ -126,7 +126,7 @@ class LinkedList extends React.Component {
     const linkedList = [...backNodes];
     console.log(this.state.linkedListleangth);
 
-    if (newNumber === "" ) {
+    if (newNumber === "") {
       toast.error("Please enter a number", {
         position: "top-center",
         autoClose: 3000,
@@ -136,7 +136,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     } else if (newNumber < 0) {
@@ -149,7 +149,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     } else if (newNumber > linkedList.length) {
@@ -162,7 +162,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     } else {
@@ -207,10 +207,9 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       return;
     }
-
 
     if (deleted) {
       linkedList[0].Xmovment = [0, 0, -190];
@@ -281,35 +280,7 @@ class LinkedList extends React.Component {
       duration: linkedList.length,
     };
     linkedList.push(highlightedNodes);
-<<<<<<< HEAD
-=======
-    let listOfNodes = [];
 
-    for (let i = 0; i < linkedList.length; i++) {
-      if (linkedList[i].data === parseInt(newNumber)) {
-        listOfNodes.push(i);
-      }
-    }
-    if (listOfNodes.length === 0) {
-      toast.error("The number is not in the linked list", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
-      return;
-    } else {
-      for (let i = 0; i < listOfNodes.length; i++) {
-        frontNodes[listOfNodes[i]].color.push(["hsl(0, 100, 50)"]);
-      }
-    }
->>>>>>> a6be99acb4a273b7a6fef8c91be39b9523a49ee0
-
-<<<<<<< HEAD
     toast.error(listOfNodes, {
       position: "top-center",
       autoClose: 3000,
@@ -319,14 +290,7 @@ class LinkedList extends React.Component {
       draggable: true,
       progress: undefined,
       theme: "dark",
-      });
-=======
-    this.setState({
-      frontNodes: linkedList,
-      backNodes: backNodes,
-      newNumber: "",
     });
->>>>>>> 99d09937b09c5172618fd2bcf60fc7bb33a62f65
   }
 
   //this function is used to generate a random node in the linked list
@@ -350,17 +314,17 @@ class LinkedList extends React.Component {
       <div>
         <UpperMenu nameOfPage={"Linked List"} search={false} />
         <ToastContainer
-            position="top-center"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-         />
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <GenericPage
           explanation={explanationLinkedList}
           pythonCode={pythonCodeLinkedList}
