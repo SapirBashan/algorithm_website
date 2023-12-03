@@ -256,6 +256,13 @@ class LinkedList extends React.Component {
   findNode() {
     const { newNumber, frontNodes, backNodes, head } = this.state;
     const linkedList = [...backNodes];
+    const highlightedNodes = {
+      className: "Search-Node",
+      Xmovment: [-1 * linkedList.length * 2 + -10, 0],
+      Ymovment: [],
+      color: ["hsl(0, 100, 50)"],
+    };
+    linkedList.push(highlightedNodes);
     let listOfNodes = [];
 
     for (let i = 0; i < linkedList.length; i++) {
@@ -281,6 +288,7 @@ class LinkedList extends React.Component {
       }
     }
 
+<<<<<<< HEAD
     toast.error(listOfNodes, {
       position: "top-center",
       autoClose: 3000,
@@ -291,6 +299,13 @@ class LinkedList extends React.Component {
       progress: undefined,
       theme: "dark",
       });
+=======
+    this.setState({
+      frontNodes: linkedList,
+      backNodes: backNodes,
+      newNumber: "",
+    });
+>>>>>>> 99d09937b09c5172618fd2bcf60fc7bb33a62f65
   }
 
   //this function is used to generate a random node in the linked list
@@ -342,6 +357,7 @@ class LinkedList extends React.Component {
                       Ymovment={node.Ymovment}
                       duration={5}
                       color={node.color}
+                      className={node.className || false}
                       showPointer={node.showPointer}
                     />
                   ))}
