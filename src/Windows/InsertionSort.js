@@ -12,6 +12,8 @@ import {
   pseudoCodeInsertion,
   explanationInsertion,
 } from "../components/data";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class InsertionSort extends Component {
   constructor(props) {
@@ -148,13 +150,31 @@ class InsertionSort extends Component {
     this.cleanArray(backNodes);
 
     if (isNaN(newNumber)) {
-      alert("Please enter a number");
-      this.state.newNumber = "";
+      toast.error("Please enter a number", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+       this.state.newNumber = "";
       return;
     }
 
     if (newNumber === "") {
-      alert("the input is empty");
+      toast.error("the input is empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
 
@@ -186,7 +206,16 @@ class InsertionSort extends Component {
     this.cleanArray(backNodes);
 
     if (frontNodes.length === 0) {
-      alert("the array is empty");
+      toast.error("the array is empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
 
@@ -212,7 +241,16 @@ class InsertionSort extends Component {
     this.cleanArray(backNodes);
 
     if (newNumber === "") {
-      alert("the input is empty");
+      toast.error("the input is empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
 
@@ -259,6 +297,18 @@ class InsertionSort extends Component {
     return (
       <div>
         <UpperMenu nameOfPage={"Insertion Sort"} search={false} />
+        <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+         />
         <GenericPage
           explanation={explanationInsertion}
           pythonCode={pythonCodeInsertion}

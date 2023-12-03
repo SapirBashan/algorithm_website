@@ -59,14 +59,16 @@ body::-webkit-scrollbar {
 .part3 {
   width: 155px;
   left: -20px;
-  background-color: #4270b5;
+  background-color: #294672;
   position: fixed;
+  /* add shadow */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .part3-button-open-close {
   width: 25px;
   height: 90px;
-  background-color: #4270b5;
+  background-color: #294672;
   border: none;
   color: white;
   text-align: center;

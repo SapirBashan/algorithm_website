@@ -6,6 +6,8 @@ import TogglePopup from "../components/TogglePopup";
 import { motion } from "framer-motion";
 import Node from "../components/Node";
 import GenericPage from "../components/GenericPage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 class Stack extends React.Component {
@@ -34,11 +36,29 @@ class Stack extends React.Component {
   push = (myNumber) => {
     const { newNumber,frontNodes, backNodes } = this.state;
     if (this.isFull()) {
-      alert("Stack is full");
+      toast.error("Stack is full", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
     if(myNumber === "" || myNumber === null){
-      alert("Please enter a number");
+      toast.error("Please enter a number", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
 
@@ -74,7 +94,16 @@ class Stack extends React.Component {
 
   pop = () => {
     if (this.isEmpty()) {
-      alert("Stack is empty");
+      toast.error("Stack is empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
     this.cleanArray(this.state.frontNodes);
@@ -447,6 +476,18 @@ class Stack extends React.Component {
       
       <div className="Stack">
         <UpperMenu nameOfPage={"Stack"} search={false} />
+        <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+         />
         <GenericPage
           explanation={explanation}
           pythonCode={pythonCode}
