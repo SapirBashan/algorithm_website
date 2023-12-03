@@ -12,6 +12,8 @@ import {
   cppCodeLinkedList,
   pseudoCodeLinkedList,
 } from "../components/data.js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //this class is the linked list itself and it has all the functions for the linked list
 class LinkedList extends React.Component {
@@ -43,12 +45,30 @@ class LinkedList extends React.Component {
     const linkedList = [...backNodes];
 
     if (value === "") {
-      alert("Please enter a number");
+      toast.error("Please enter a number", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       this.state.newNumber = "";
       return;
     }
     if (isNaN(value)) {
-      alert("Please enter a number");
+      toast.error("Please enter a number", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       this.state.newNumber = "";
       return;
     }
@@ -106,20 +126,43 @@ class LinkedList extends React.Component {
     const linkedList = [...backNodes];
     console.log(this.state.linkedListleangth);
 
-    if (newNumber === "") {
-      alert("Please enter a number");
-      this.state.newNumber = "";
-      return;
-    } else if (isNaN(newNumber)) {
-      alert("Please enter a number");
+    if (newNumber === "" ) {
+      toast.error("Please enter a number", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       this.state.newNumber = "";
       return;
     } else if (newNumber < 0) {
-      alert("Please enter a positive number");
+      toast.error("Please enter a positive number", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       this.state.newNumber = "";
       return;
     } else if (newNumber > linkedList.length) {
-      alert("Please enter a number smaller then the linked list length");
+      toast.error("Please enter a number smaller then the linked list length", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       this.state.newNumber = "";
       return;
     } else {
@@ -154,14 +197,20 @@ class LinkedList extends React.Component {
 
     const linkedList = [...backNodes];
 
-    if (head === null) {
-      alert("The linked list is empty");
+    if (head === null || linkedList.length === 0) {
+      toast.error("The linked list is empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
-    if (linkedList.length === 0) {
-      alert("The linked list is empty");
-      return;
-    }
+
 
     if (deleted) {
       linkedList[0].Xmovment = [0, 0, -190];
@@ -215,7 +264,16 @@ class LinkedList extends React.Component {
       }
     }
     if (listOfNodes.length === 0) {
-      alert("The number is not in the linked list");
+      toast.error("The number is not in the linked list", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     } else {
       for (let i = 0; i < listOfNodes.length; i++) {
@@ -223,7 +281,16 @@ class LinkedList extends React.Component {
       }
     }
 
-    alert(listOfNodes);
+    toast.error(listOfNodes, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
   }
 
   //this function is used to generate a random node in the linked list
@@ -246,6 +313,18 @@ class LinkedList extends React.Component {
     return (
       <div>
         <UpperMenu nameOfPage={"Linked List"} search={false} />
+        <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+         />
         <GenericPage
           explanation={explanationLinkedList}
           pythonCode={pythonCodeLinkedList}

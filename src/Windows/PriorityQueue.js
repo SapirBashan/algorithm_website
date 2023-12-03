@@ -3,6 +3,8 @@ import "./PriorityQueue.css";
 import UpperMenu from "../components/UpperMenu";
 import Node from "../components/Node";
 import GenericPage from "../components/GenericPage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class PriorityQueue extends React.Component{
    constructor(props) {
@@ -39,19 +41,55 @@ class PriorityQueue extends React.Component{
     enqueue = (myNumber,myChar) => {
       const { newNumber,newChar, backNodes, maxQueueSize, frontNodes } = this.state;
       if (this.isFull()) {
-        alert("Queue is full");
+        toast.error("Queue is full", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
         return;
       }
       if (myNumber === "" || myNumber === null) {
-        alert("Please enter a number");
+        toast.error("Please enter a number", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
         return;
       }
-      if(myNumber < -99 || myNumber > 999){
-        alert("Please enter a number between -99 and 999");
+      if(myNumber < -9 || myNumber > 99){
+        toast.error("Please enter a number between -9 and 99", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
         return;
       }
-      if (myChar === "" || myChar === null) {
-         alert("Please enter a lowercase letter");
+    if (myChar === "" || myChar === null) {
+         toast.error("Please enter a lowercase letter", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
          return;
       }
       
@@ -84,7 +122,17 @@ class PriorityQueue extends React.Component{
   
     dequeue = () => {
       if (this.isEmpty()) {
-        alert("Queue is empty");
+        toast.error("Queue is empty", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+
         return;
       }
   
@@ -174,6 +222,18 @@ class PriorityQueue extends React.Component{
         
         <div className="PriorityQueue">
           <UpperMenu nameOfPage={"Priority Queue"} search={false} />
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+         />
           <GenericPage
             // explanation={explanation}
             // pythonCode={pythonCode}

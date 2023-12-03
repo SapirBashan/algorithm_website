@@ -4,6 +4,8 @@ import "./Queue.css";
 import UpperMenu from "../components/UpperMenu";
 import Node from "../components/Node";
 import GenericPage from "../components/GenericPage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Queue extends React.Component {
   constructor(props) {
@@ -30,15 +32,42 @@ class Queue extends React.Component {
   enqueue = (myNumber) => {
     const { newNumber, backNodes, maxQueueSize, frontNodes } = this.state;
     if (this.isFull()) {
-      alert("Queue is full");
+      toast.error("Queue is full", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
     if (myNumber === "" || myNumber === null) {
-      alert("Please enter a number");
+      toast.error("Please enter a number", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
-    if(myNumber < -99 || myNumber > 999){
-      alert("Please enter a number between -99 and 999");
+    if(myNumber < -9 || myNumber > 99){
+      toast.error("Please enter a number between -9 and 99", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
 
@@ -66,7 +95,16 @@ class Queue extends React.Component {
 
   dequeue = () => {
     if (this.isEmpty()) {
-      alert("Queue is empty");
+      toast.error("Queue is empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
 
@@ -451,6 +489,18 @@ class Queue extends React.Component {
       
       <div className="Queue">
         <UpperMenu nameOfPage={"Queue"} search={false} />
+        <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+         />
         <GenericPage
           explanation={explanation}
           pythonCode={pythonCode}

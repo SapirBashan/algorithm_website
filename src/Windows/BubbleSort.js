@@ -12,6 +12,8 @@ import {
   pseudoCodeBubble,
   explanationBubble,
 } from "../components/data";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class BubbleSort extends Component {
   constructor(props) {
@@ -139,12 +141,30 @@ class BubbleSort extends Component {
     this.cleanArray(frontNodes);
     this.cleanArray(backNodes);
     if (isNaN(newNumber)) {
-      alert("Please enter a number");
+      toast.error("Please enter a number", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       this.state.newNumber = "";
       return;
     }
     if (newNumber === "") {
-      alert("the input is empty");
+      toast.error("the input is empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
     const newData = parseInt(newNumber);
@@ -174,7 +194,16 @@ class BubbleSort extends Component {
     this.cleanArray(frontNodes);
     this.cleanArray(backNodes);
     if (frontNodes.length === 0) {
-      alert("the array is empty");
+      toast.error("the array is empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
 
@@ -200,7 +229,16 @@ class BubbleSort extends Component {
     this.cleanArray(backNodes);
 
     if (newNumber === "") {
-      alert("the input is empty");
+      toast.error("the input is empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       return;
     }
 
