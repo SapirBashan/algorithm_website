@@ -4,7 +4,7 @@ import "../styles.css";
 import Node from "../components/Node";
 import UpperMenu from "../components/UpperMenu.js";
 import GenericPage from "../components/GenericPage.js";
-import { useState } from "react";
+
 import {
   explanationLinkedList,
   pythonCodeLinkedList,

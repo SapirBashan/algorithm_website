@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../styles.css";
 import "./BubbleSort.css";
 import Node from "../components/Node";
-import TogglePopup from "../components/TogglePopup";
 import UpperMenu from "../components/UpperMenu";
 import GenericPage from "../components/GenericPage";
 import {
