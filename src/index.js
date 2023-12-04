@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-
-import Home from './windows/Home.js';
+import Home from '../src/windows/Home.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
