@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./Home.css";
 import ButtonsToPages from "../components/ButtonsToPages.js";
 import { routeData, buttonsData } from "../components/data.js";
@@ -19,7 +19,7 @@ function Home() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         <UpperMenu onSearch={handleOnSearch} nameOfPage={""} />
         <Routes>
           {/* Route to render the home page */}
@@ -51,7 +51,7 @@ function Home() {
             />
           ))}
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
