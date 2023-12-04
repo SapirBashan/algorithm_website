@@ -287,8 +287,6 @@ class LinkedList extends React.Component {
         frontNodes[listOfNodes[i]].color.push(["hsl(0, 100, 50)"]);
       }
     }
-
-<<<<<<< HEAD
     toast.error(listOfNodes, {
       position: "top-center",
       autoClose: 3000,
@@ -299,13 +297,11 @@ class LinkedList extends React.Component {
       progress: undefined,
       theme: "dark",
       });
-=======
     this.setState({
       frontNodes: linkedList,
       backNodes: backNodes,
       newNumber: "",
     });
->>>>>>> 99d09937b09c5172618fd2bcf60fc7bb33a62f65
   }
 
   //this function is used to generate a random node in the linked list

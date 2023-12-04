@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import './UpperMenu.css';
-import magnifier from"../icons/magnifier.png"
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { routeData ,buttonsData } from '../components/data.js';
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import logo from "../icons/logo.png"
 
 
