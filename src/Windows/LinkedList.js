@@ -12,8 +12,8 @@ import {
   cppCodeLinkedList,
   pseudoCodeLinkedList,
 } from "../components/data.js";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //this class is the linked list itself and it has all the functions for the linked list
 class LinkedList extends React.Component {
@@ -54,7 +54,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     }
@@ -68,7 +68,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     }
@@ -126,7 +126,7 @@ class LinkedList extends React.Component {
     const linkedList = [...backNodes];
     console.log(this.state.linkedListleangth);
 
-    if (newNumber === "" ) {
+    if (newNumber === "") {
       toast.error("Please enter a number", {
         position: "top-center",
         autoClose: 3000,
@@ -136,7 +136,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     } else if (newNumber < 0) {
@@ -149,7 +149,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     } else if (newNumber > linkedList.length) {
@@ -162,7 +162,7 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     } else {
@@ -207,10 +207,9 @@ class LinkedList extends React.Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       return;
     }
-
 
     if (deleted) {
       linkedList[0].Xmovment = [0, 0, -190];
@@ -256,11 +255,29 @@ class LinkedList extends React.Component {
   findNode() {
     const { newNumber, frontNodes, backNodes, head } = this.state;
     const linkedList = [...backNodes];
+    const movment = [];
+    const color = [];
+    //for to collect all the movment the search node will need to do (he'll need to go on each node and move to the next one)
+    for (let i = 0; i < linkedList.length; i++) {
+      movment.push(-90 * linkedList.length + 30 + 90 * i);
+      movment.push(-90 * linkedList.length + 30 + 90 * i);
+      if (linkedList[i].data === parseInt(newNumber)) {
+        //todo
+        //if the node is found
+        //the node will be highlighted in green when the search node is on it
+        //meaning that that first there will be i blue steps and then green steps
+        for (let j = 0; j < i; j++) {
+          color.push("hsl(196, 100, 40)");
+        }
+        color.push("hsl(120, 100, 50)");
+      }
+    }
+
     const highlightedNodes = {
       className: "Search-Node",
-      Xmovment: [-1 * linkedList.length * 2 + -10, 0],
+      Xmovment: movment,
       Ymovment: [],
-      color: ["hsl(0, 100, 50)"],
+      duration: linkedList.length,
     };
     linkedList.push(highlightedNodes);
     let listOfNodes = [];
@@ -287,16 +304,7 @@ class LinkedList extends React.Component {
         frontNodes[listOfNodes[i]].color.push(["hsl(0, 100, 50)"]);
       }
     }
-    toast.error(listOfNodes, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      });
+
     this.setState({
       frontNodes: linkedList,
       backNodes: backNodes,
@@ -325,17 +333,17 @@ class LinkedList extends React.Component {
       <div>
         <UpperMenu nameOfPage={"Linked List"} search={false} />
         <ToastContainer
-            position="top-center"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-         />
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <GenericPage
           explanation={explanationLinkedList}
           pythonCode={pythonCodeLinkedList}
@@ -351,7 +359,7 @@ class LinkedList extends React.Component {
                       data={node.data}
                       Xmovment={node.Xmovment}
                       Ymovment={node.Ymovment}
-                      duration={5}
+                      duration={node.duration || 5}
                       color={node.color}
                       className={node.className || false}
                       showPointer={node.showPointer}
