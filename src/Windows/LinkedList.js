@@ -4,7 +4,7 @@ import "../styles.css";
 import Node from "../components/Node";
 import UpperMenu from "../components/UpperMenu.js";
 import GenericPage from "../components/GenericPage.js";
-import { useState } from "react";
+
 import {
   explanationLinkedList,
   pythonCodeLinkedList,
@@ -341,11 +341,43 @@ class LinkedList extends React.Component {
       color: color,
       duration: linkedList.length,
     };
+<<<<<<< HEAD
 
     this.setState({
       frontNodes: [...linkedList, highlightedNodes],
       backNodes: backNodes,
       found: !found,
+=======
+    linkedList.push(highlightedNodes);
+    let listOfNodes = [];
+
+    for (let i = 0; i < linkedList.length; i++) {
+      if (linkedList[i].data === parseInt(newNumber)) {
+        listOfNodes.push(i);
+      }
+    }
+    if (listOfNodes.length === 0) {
+      toast.error("The number is not in the linked list", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+      return;
+    } else {
+      for (let i = 0; i < listOfNodes.length; i++) {
+        frontNodes[listOfNodes[i]].color.push(["hsl(0, 100, 50)"]);
+      }
+    }
+
+    this.setState({
+      frontNodes: linkedList,
+      backNodes: backNodes,
+>>>>>>> 51939eea210f67db070ec6f69ac3bab12f704669
       newNumber: "",
     });
 
