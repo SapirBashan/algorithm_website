@@ -1,4 +1,3 @@
-// InsertionSort.js
 import React, { Component } from "react";
 import "./InsertionSort.css";
 import Node from "../components/Node";
@@ -12,8 +11,8 @@ import {
   pseudoCodeInsertion,
   explanationInsertion,
 } from "../components/data";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class InsertionSort extends Component {
   constructor(props) {
@@ -159,8 +158,8 @@ class InsertionSort extends Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
-       this.state.newNumber = "";
+      });
+      this.state.newNumber = "";
       return;
     }
 
@@ -174,7 +173,7 @@ class InsertionSort extends Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       return;
     }
 
@@ -215,7 +214,7 @@ class InsertionSort extends Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       return;
     }
 
@@ -250,7 +249,7 @@ class InsertionSort extends Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       return;
     }
 
@@ -298,17 +297,17 @@ class InsertionSort extends Component {
       <div>
         <UpperMenu nameOfPage={"Insertion Sort"} search={false} />
         <ToastContainer
-            position="top-center"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-         />
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <GenericPage
           explanation={explanationInsertion}
           pythonCode={pythonCodeInsertion}
@@ -362,69 +361,12 @@ class InsertionSort extends Component {
                 }}
               />
               <button className="side-button" onClick={this.animate}>
-                Insertion Sort
+                Sort
               </button>
             </div>
           }
         />
       </div>
-
-      // <div className="InsertionSort">
-
-      //   <h1>Insertion Sort</h1>
-      //   <div className="input-section">
-      //     <input
-      //       type="number"
-      //       value={newNumber}
-      //       onChange={this.handleChange}
-      //       placeholder="Enter a number"
-      //       onKeyPress={(e) => this.handleKeyPress(e)}
-      //     />
-      //     <br />
-      //     <button onClick={this.addNumber}>
-      //       Add Number
-      //     </button>
-      //     <br />
-      //     <button onClick={this.shuffleArray}>
-      //       Shuffle
-      //     </button>
-      //     <br />
-      //     <button onClick={this.random}>
-      //       Random
-      //     </button>
-      //     <br />
-      //     <button onClick={this.erase}>
-      //       Clear
-      //     </button>
-      //     <br />
-      //     <input
-      //       type="range"
-      //       min={frontNodes.length / 4}
-      //       max={frontNodes.length * 4}
-      //       step={0.02}
-      //       value={volume}
-      //       onChange={event => {
-      //         setVolume(event.target.valueAsNumber);
-      //       }}
-      //     />
-      //     <br />
-      //     <button onClick={this.animate}>
-      //       Insertion Sort
-      //     </button>
-      //   </div>
-      //   <div className="array-container-insertion">
-      //     {frontNodes.map((node, index) => (
-      //       <Node
-      //         data={node.data}
-      //         Xmovment={node.Xmovment}
-      //         Ymovment={node.Ymovment}
-      //         color={node.color}
-      //         duration={frontNodes.length * 4 - volume}
-      //         showPointer={false}
-      //       />
-      //     ))}
-      //   </div>
-      // </div>
     );
   }
 }
