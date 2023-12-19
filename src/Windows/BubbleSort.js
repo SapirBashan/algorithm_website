@@ -11,8 +11,8 @@ import {
   pseudoCodeBubble,
   explanationBubble,
 } from "../components/data";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class BubbleSort extends Component {
   constructor(props) {
@@ -149,7 +149,7 @@ class BubbleSort extends Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       this.state.newNumber = "";
       return;
     }
@@ -163,7 +163,7 @@ class BubbleSort extends Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       return;
     }
     const newData = parseInt(newNumber);
@@ -202,7 +202,7 @@ class BubbleSort extends Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       return;
     }
 
@@ -237,7 +237,7 @@ class BubbleSort extends Component {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       return;
     }
 
@@ -296,6 +296,7 @@ class BubbleSort extends Component {
             <div className="array-container">
               {frontNodes.map((node, index) => (
                 <Node
+                  key={index} // Add a unique key prop
                   data={node.data}
                   Xmovment={node.Xmovment}
                   Ymovment={node.Ymovment}
@@ -346,7 +347,7 @@ class BubbleSort extends Component {
               />
 
               <button className="side-button" onClick={this.animate}>
-                Bubble Sort
+                Sort
               </button>
             </div>
           }

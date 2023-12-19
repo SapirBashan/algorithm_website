@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./LinkedList.css";
 import "../styles.css";
 import Node from "../components/Node";
@@ -26,6 +26,8 @@ class LinkedList extends React.Component {
       newNumber: "",
       frontNodes: [],
       deleted: false,
+      found: false,
+      inProcess: false,
     };
   }
 
@@ -45,30 +47,12 @@ class LinkedList extends React.Component {
     const linkedList = [...backNodes];
 
     if (value === "") {
-      toast.error("Please enter a number", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error("Please enter a number");
       this.state.newNumber = "";
       return;
     }
     if (isNaN(value)) {
-      toast.error("Please enter a number", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error("Please enter a number");
       this.state.newNumber = "";
       return;
     }
@@ -104,8 +88,9 @@ class LinkedList extends React.Component {
           Ymovment: [50, 50, 0],
           color: ["hsl(196, 100, 40)"],
         };
+
         //this code makes the node before show the pointer
-        frontNodes[frontNodes.length - 1].showPointer = true;
+        linkedList[linkedList.length - 1].showPointer = true;
 
         let addedArray = [...linkedList];
 
@@ -118,79 +103,43 @@ class LinkedList extends React.Component {
     }
   }
 
-  //this function is used to delete a node from the linked list
-  deleteNodeAfterIndex() {
-    const { newNumber, frontNodes, backNodes, head } = this.state;
-    this.cleanArray(frontNodes);
-    this.cleanArray(backNodes);
-    const linkedList = [...backNodes];
-    console.log(this.state.linkedListleangth);
+  // This function is used to delete the node after the specified index from the linked list
+  deleteNodeAfterIndex(index) {
+    // update the frontNodes to be the backNodes
+    const { frontNodes, deleted, backNodes, head, inProcess } = this.state;
 
-    if (newNumber === "") {
-      toast.error("Please enter a number", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      this.state.newNumber = "";
+    index = parseInt(index);
+    // Check if deletion is already in progress
+    if (inProcess) {
+      toast.info("Deletion in progress. Please wait.");
       return;
-    } else if (newNumber < 0) {
-      toast.error("Please enter a positive number", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      this.state.newNumber = "";
+    }
+
+    if (backNodes.length === 0) {
+      toast.error("The linked list is empty");
       return;
-    } else if (newNumber > linkedList.length) {
-      toast.error("Please enter a number smaller then the linked list length", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      this.state.newNumber = "";
+    }
+
+    if (index === undefined) {
+      toast.error("Please enter an index");
       return;
-    } else {
-      //delete the node in the index with animation
-      let newFrontNodes = [...frontNodes];
-      let newBackNodes = [...backNodes];
-      let index = newNumber;
+    }
 
-      newFrontNodes[index].Xmovment = [0];
-      newFrontNodes[index].Ymovment = [90];
-      newFrontNodes[index].color = ["hsl(12, 100, 50)"];
-      newFrontNodes[index].duration = 5;
-
-      newFrontNodes.splice(index, 1);
-      newBackNodes.splice(index, 1);
-
+    if (backNodes.length === 1) {
       this.setState({
-        frontNodes: newFrontNodes,
-        backNodes: newBackNodes,
+        head: null,
+        frontNodes: [],
+        backNodes: [],
         newNumber: "",
       });
+      return;
     }
-  }
 
-  //this function is used to delete the first node from the linked list
-  deleteFirstNode() {
-    // update the frontNodes to be the backNodes
-    const { frontNodes, deleted, backNodes, head } = this.state;
+    // Ensure that the index is valid
+    if (index < 0 || index >= backNodes.length - 1) {
+      toast.error("Invalid index for deletion.");
+      return;
+    }
 
     this.cleanArray(frontNodes);
     this.cleanArray(backNodes);
@@ -198,16 +147,90 @@ class LinkedList extends React.Component {
     const linkedList = [...backNodes];
 
     if (head === null || linkedList.length === 0) {
-      toast.error("The linked list is empty", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
+      toast.error("The linked list is empty");
+      return;
+    }
+
+    if (deleted) {
+      linkedList[index].Xmovment = [0, 0, -190 * linkedList.length];
+      linkedList[index].Ymovment = [0, -90, -90];
+      linkedList[index].color.push(
+        "hsl(0, 100, 50)", //red
+        "hsl(0, 100, 50)", //red
+        "hsl(196, 100, 40)" //blue
+      );
+      linkedList[index].duration = 5;
+
+      for (let i = index + 1; i < linkedList.length; i++) {
+        linkedList[i].Xmovment = [0, -92];
+        linkedList[i].Ymovment = [0, 0];
+        linkedList[i].color.push("hsl(196, 100, 40)");
+      }
+    } else {
+      linkedList[index].Xmovment = [0, 0, -191 * linkedList.length];
+      linkedList[index].Ymovment = [0, -91, -91];
+      linkedList[index].color.push(
+        "hsl(0, 100, 51)", //red
+        "hsl(0, 100, 51)", //red
+        "hsl(196, 100, 41)" //blue
+      );
+
+      linkedList[index].duration = 6;
+
+      for (let i = index + 1; i < linkedList.length; i++) {
+        linkedList[i].Xmovment = [0, -90];
+        linkedList[i].Ymovment = [0, 0];
+        linkedList[i].color.push("hsl(196, 100, 40)");
+      }
+    }
+
+    // Update the state for deletion after the specified index
+    this.setState({
+      frontNodes: linkedList,
+      backNodes: backNodes.filter((_, i) => i !== index),
+      deleted: !deleted,
+      inProcess: true,
+    });
+
+    // Reset the inProcess flag after 6 seconds
+    setTimeout(() => {
+      this.cleanArray(backNodes);
+      this.setState({
+        frontNodes: backNodes.filter((_, i) => i !== index),
+        inProcess: false,
       });
+    }, 6000);
+  }
+
+  //this function is used to delete the first node from the linked list
+  deleteFirstNode() {
+    // update the frontNodes to be the backNodes
+    const { frontNodes, deleted, backNodes, head, inProcess } = this.state;
+
+    // Check if deletion is already in progress
+    if (inProcess) {
+      toast.info("Deletion in progress. Please wait.");
+      return;
+    }
+
+    //if the linked list is only one node then delete it by clearing the array
+    if (backNodes.length === 1) {
+      this.setState({
+        head: null,
+        frontNodes: [],
+        backNodes: [],
+        newNumber: "",
+      });
+      return;
+    }
+
+    this.cleanArray(frontNodes);
+    this.cleanArray(backNodes);
+
+    const linkedList = [...backNodes];
+
+    if (head === null || linkedList.length === 0) {
+      toast.error("The linked list is empty");
       return;
     }
 
@@ -215,9 +238,9 @@ class LinkedList extends React.Component {
       linkedList[0].Xmovment = [0, 0, -190];
       linkedList[0].Ymovment = [0, -90, -90];
       linkedList[0].color.push(
-        "hsl(0, 100, 50)",
-        "hsl(0, 100, 50)",
-        "hsl(196, 100, 40)"
+        "hsl(0, 100, 50)", //red
+        "hsl(0, 100, 50)", //red
+        "hsl(196, 100, 40)" //blue
       );
       linkedList[0].duration = 5;
 
@@ -230,9 +253,9 @@ class LinkedList extends React.Component {
       linkedList[0].Xmovment = [0, 0, -191];
       linkedList[0].Ymovment = [0, -91, -91];
       linkedList[0].color.push(
-        "hsl(0, 100, 51)",
-        "hsl(0, 100, 51)",
-        "hsl(196, 100, 41)"
+        "hsl(0, 100, 51)", //red
+        "hsl(0, 100, 51)", //red
+        "hsl(196, 100, 41)" //blue
       );
       linkedList[0].duration = 6;
 
@@ -248,68 +271,87 @@ class LinkedList extends React.Component {
       frontNodes: linkedList,
       backNodes: backNodes.slice(1),
       deleted: !deleted,
+      inProcess: true,
     });
+
+    setTimeout(() => {
+      this.cleanArray(backNodes);
+      this.setState({
+        frontNodes: backNodes.slice(1),
+        inProcess: false,
+      });
+    }, 6000);
   }
 
   //this function is used to find a node in the linked list
   findNode() {
-    const { newNumber, frontNodes, backNodes, head } = this.state;
+    const { newNumber, frontNodes, backNodes, head, found } = this.state;
+    this.cleanArray(frontNodes);
+    this.cleanArray(backNodes);
     const linkedList = [...backNodes];
     const movment = [];
     const color = [];
+    if (head === null || linkedList.length === 0) {
+      toast.error("The linked list is empty");
+      this.state.newNumber = "";
+      return;
+    }
+    if (newNumber === "") {
+      toast.error("Please enter a number");
+      this.state.newNumber = "";
+      return;
+    }
+
     //for to collect all the movment the search node will need to do (he'll need to go on each node and move to the next one)
     for (let i = 0; i < linkedList.length; i++) {
-      movment.push(-90 * linkedList.length + 30 + 90 * i);
-      movment.push(-90 * linkedList.length + 30 + 90 * i);
+      if (found) {
+        movment.push(-90 * linkedList.length + 30 + 90 * i);
+        movment.push(-90 * linkedList.length + 30 + 90 * i);
+      } else {
+        movment.push(-90 * linkedList.length + 31 + 90 * i);
+        movment.push(-90 * linkedList.length + 31 + 90 * i);
+      }
+      color.push("hsla(120, 100, 50, 0.2)"); //orange
+
       if (linkedList[i].data === parseInt(newNumber)) {
-        //todo
-        //if the node is found
+        color.push("hsla(120, 100, 50, 0.7)"); //green
+        //green//if the node is found
         //the node will be highlighted in green when the search node is on it
         //meaning that that first there will be i blue steps and then green steps
         for (let j = 0; j < i; j++) {
-          color.push("hsl(196, 100, 40)");
+          linkedList[i].color.push("hsl(196, 100, 40)"); //blue
         }
-        color.push("hsl(120, 100, 50)");
+        linkedList[i].color = linkedList[i].color.concat("hsl(120, 80, 33)"); //green
+        linkedList[i].colorDuration = color.length - 1;
+        setTimeout(() => {
+          linkedList[i].color = linkedList[i].color.concat("hsl(196, 100, 40)"); //blue
+          this.setState({ frontNodes: frontNodes });
+        }, linkedList.length * 1000 + 5000);
       }
     }
+    //the search node will becoam transparent complitly when he is on the last node
+    color.push(color[color.length - 1]);
+    color.push(color[color.length - 1]);
 
     const highlightedNodes = {
       className: "Search-Node",
       Xmovment: movment,
       Ymovment: [],
+      colorDuration: color.length - 2,
+      color: color,
       duration: linkedList.length,
     };
-    linkedList.push(highlightedNodes);
-    let listOfNodes = [];
-
-    for (let i = 0; i < linkedList.length; i++) {
-      if (linkedList[i].data === parseInt(newNumber)) {
-        listOfNodes.push(i);
-      }
-    }
-    if (listOfNodes.length === 0) {
-      toast.error("The number is not in the linked list", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
-      return;
-    } else {
-      for (let i = 0; i < listOfNodes.length; i++) {
-        frontNodes[listOfNodes[i]].color.push(["hsl(0, 100, 50)"]);
-      }
-    }
 
     this.setState({
-      frontNodes: linkedList,
+      frontNodes: [...linkedList, highlightedNodes],
       backNodes: backNodes,
+      found: !found,
       newNumber: "",
     });
+
+    setTimeout(() => {
+      this.setState({ frontNodes: frontNodes });
+    }, linkedList.length * 1000 + 3000);
   }
 
   //this function is used to generate a random node in the linked list
@@ -322,8 +364,23 @@ class LinkedList extends React.Component {
     for (let i = 0; i < nodes.length; i++) {
       nodes[i].Xmovment = [0];
       nodes[i].Ymovment = [0];
-      nodes[i].color = [];
+      nodes[i].color = ["hsl(196, 100, 40)"];
     }
+    this.setState({ nodes: nodes });
+    return nodes;
+  };
+
+  showToast = (message, options = {}) => {
+    toast.error(message, {
+      position: options.position || "top-center",
+      autoClose: options.autoClose || 3000,
+      hideProgressBar: options.hideProgressBar || false,
+      closeOnClick: options.closeOnClick || true,
+      pauseOnHover: options.pauseOnHover || true,
+      draggable: options.draggable || true,
+      progress: options.progress || undefined,
+      theme: options.theme || "dark",
+    });
   };
 
   render() {
@@ -361,6 +418,7 @@ class LinkedList extends React.Component {
                       Ymovment={node.Ymovment}
                       duration={node.duration || 5}
                       color={node.color}
+                      colorDuration={node.colorDuration || false}
                       className={node.className || false}
                       showPointer={node.showPointer}
                     />
@@ -393,7 +451,7 @@ class LinkedList extends React.Component {
               </button>
               <button
                 className="side-button"
-                onClick={() => this.deleteNodeAfterIndex()}
+                onClick={() => this.deleteNodeAfterIndex(newNumber)}
               >
                 Delete index
               </button>
