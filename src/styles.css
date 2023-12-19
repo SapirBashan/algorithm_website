@@ -45,7 +45,7 @@ body {
     margin-bottom: 10px;
     /*make the input and the button look better with pading and circuler radios*/
     border-radius: 10px;
-    border: 2px solid #0f063b;
+    border: 2px solid hsla(0, 7%, 11%, 0.55);
     padding: 5px;
     transition: background-color 0.5s ease; /* Add transition for background-color property */
   }

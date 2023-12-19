@@ -131,12 +131,12 @@
 
 .priorityQueueNode::before {
   top: 0;
-  background-color: #ffcc00; /* Color for the top half */
+  background-color: hsl(48, 100%, 50%); /* Color for the top half */
 }
 
 .priorityQueueNode::after {
   bottom: 0;
-  background-color: #ff9900; /* Color for the bottom half */
+  background-color: hsl(38, 100%, 50%); /* Color for the bottom half */
   border-top: 2px solid #000; /* Divider line */
 }
 
