@@ -28,6 +28,7 @@ class LinkedList extends React.Component {
       deleted: false,
       found: false,
       inProcess: false,
+      action: "",
     };
   }
 
@@ -43,19 +44,26 @@ class LinkedList extends React.Component {
 
   //this function is used to insert a node into the linked list
   insertNode(value) {
-    const { newNumber, frontNodes, backNodes } = this.state;
+    const { newNumber, frontNodes, backNodes, inProcess, action } = this.state;
     const linkedList = [...backNodes];
+
+    if (inProcess) {
+      toast.info(action + " in progress. Please wait.");
+      return;
+    }
 
     if (value === "") {
       toast.error("Please enter a number");
       this.state.newNumber = "";
       return;
     }
+
     if (isNaN(value)) {
       toast.error("Please enter a number");
       this.state.newNumber = "";
       return;
     }
+
     //i want that if the head is null i will ad a node to the head
     if (this.state.head === null) {
       //delete the head node
@@ -98,7 +106,13 @@ class LinkedList extends React.Component {
           frontNodes: [...addedArray, newNode], // Update nodes with the new data
           backNodes: [...addedArray, newNode], // Update nodes with the new data , the three dots are used to spread the array meaning that the array will be expanded meaning that the elements of the array will be added to the new array
           newNumber: "",
+          inProcess: true,
+          action: "insertion",
         });
+
+        setTimeout(() => {
+          this.setState({ inProcess: false, action: "" });
+        }, 1000);
       }
     }
   }
@@ -106,12 +120,13 @@ class LinkedList extends React.Component {
   // This function is used to delete the node after the specified index from the linked list
   deleteNodeAfterIndex(index) {
     // update the frontNodes to be the backNodes
-    const { frontNodes, deleted, backNodes, head, inProcess } = this.state;
+    const { frontNodes, deleted, backNodes, head, inProcess, action } =
+      this.state;
 
     index = parseInt(index);
     // Check if deletion is already in progress
     if (inProcess) {
-      toast.info("Deletion in progress. Please wait.");
+      toast.info(action + " in progress. Please wait.");
       return;
     }
 
@@ -120,8 +135,9 @@ class LinkedList extends React.Component {
       return;
     }
 
-    if (index === undefined) {
-      toast.error("Please enter an index");
+    if (index === "" || index === null || index === undefined || isNaN(index)) {
+      toast.error("Please enter a number");
+      this.state.newNumber = "";
       return;
     }
 
@@ -136,7 +152,7 @@ class LinkedList extends React.Component {
     }
 
     // Ensure that the index is valid
-    if (index < 0 || index >= backNodes.length - 1) {
+    if (index < 0 || index > backNodes.length - 1) {
       toast.error("Invalid index for deletion.");
       return;
     }
@@ -190,14 +206,19 @@ class LinkedList extends React.Component {
       backNodes: backNodes.filter((_, i) => i !== index),
       deleted: !deleted,
       inProcess: true,
+      action: "deletion",
     });
 
     // Reset the inProcess flag after 6 seconds
     setTimeout(() => {
       this.cleanArray(backNodes);
+      if (index === backNodes.length - 1) {
+        backNodes[backNodes.length - 2].showPointer = false;
+      }
       this.setState({
         frontNodes: backNodes.filter((_, i) => i !== index),
         inProcess: false,
+        action: "",
       });
     }, 6000);
   }
@@ -205,11 +226,12 @@ class LinkedList extends React.Component {
   //this function is used to delete the first node from the linked list
   deleteFirstNode() {
     // update the frontNodes to be the backNodes
-    const { frontNodes, deleted, backNodes, head, inProcess } = this.state;
+    const { frontNodes, deleted, backNodes, head, inProcess, action } =
+      this.state;
 
     // Check if deletion is already in progress
     if (inProcess) {
-      toast.info("Deletion in progress. Please wait.");
+      toast.info(action + " in progress. Please wait.");
       return;
     }
 
@@ -220,6 +242,8 @@ class LinkedList extends React.Component {
         frontNodes: [],
         backNodes: [],
         newNumber: "",
+        action: "",
+        inProcess: false,
       });
       return;
     }
@@ -272,6 +296,7 @@ class LinkedList extends React.Component {
       backNodes: backNodes.slice(1),
       deleted: !deleted,
       inProcess: true,
+      action: "deletion",
     });
 
     setTimeout(() => {
@@ -279,18 +304,27 @@ class LinkedList extends React.Component {
       this.setState({
         frontNodes: backNodes.slice(1),
         inProcess: false,
+        action: "",
       });
     }, 6000);
   }
 
   //this function is used to find a node in the linked list
   findNode() {
-    const { newNumber, frontNodes, backNodes, head, found } = this.state;
+    const { newNumber, frontNodes, backNodes, head, found, inProcess, action } =
+      this.state;
+
+    if (inProcess) {
+      toast.info(action + " in progress. Please wait.");
+      return;
+    }
+
     this.cleanArray(frontNodes);
     this.cleanArray(backNodes);
     const linkedList = [...backNodes];
     const movment = [];
     const color = [];
+
     if (head === null || linkedList.length === 0) {
       toast.error("The linked list is empty");
       this.state.newNumber = "";
@@ -347,10 +381,12 @@ class LinkedList extends React.Component {
       backNodes: backNodes,
       found: !found,
       newNumber: "",
+      inProcess: true,
+      action: "search",
     });
 
     setTimeout(() => {
-      this.setState({ frontNodes: frontNodes });
+      this.setState({ frontNodes: frontNodes, inProcess: false, action: "" });
     }, linkedList.length * 1000 + 3000);
   }
 
