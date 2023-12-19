@@ -16,7 +16,7 @@
     float: left;
     /* Adjust height and spacing as needed */
     line-height: 45px;
-    color: #0094fa;
+    color: hsl(208, 100%, 50%);
     font-weight: bold;
   }
   
@@ -31,8 +31,8 @@
     /* Adjust height and spacing so it will alaways be the same */
     height: 129px;
     width: 700px; /* Adjust the width of the queue display */
-    border-bottom: 4px solid #0094FA;
-    border-top: 4px solid #0094FA;
+    border-bottom: 4px solid hsl(208, 100%, 50%);
+    border-top: 4px solid hsl(208, 100%, 50%);
     border-radius: 5px;
     padding: 4px;
     box-sizing: border-box;
