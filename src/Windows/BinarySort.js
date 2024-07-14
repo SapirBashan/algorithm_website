@@ -15,13 +15,13 @@ class BinarySort extends React.Component{
         backNodes: [],
         frontNodes: [],
         newNumber: "",
-        duration: 3,
+        duration: 2,
       };
     }
 
-      handleInput = (e) => {
-         this.setState({ newNumber: e.target.value });
-         }
+    handleInsert = () => {
+      this.insert(this.state.newNumber);
+    }
 
       handleKeyPress = (e) => {
          if (e.key === "Enter") {
@@ -34,7 +34,7 @@ class BinarySort extends React.Component{
          if (myNumber === "") {
            toast.error("Please enter a number", {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -47,7 +47,7 @@ class BinarySort extends React.Component{
          if (myNumber < -9 || myNumber > 99) {
            toast.error("Please enter a number between -9 and 99", {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -114,7 +114,7 @@ class BinarySort extends React.Component{
            frontNodes: clonedNodes,
            backNodes: clonedNodes,
            newNumber: "",
-           doration: amountofsteps * 3,
+           doration: amountofsteps * 2,
          });
        }
        
@@ -138,30 +138,30 @@ class BinarySort extends React.Component{
                low = mid + 1;
 
                toast(`${nodes[mid].data} <= ${myNumber}`, {
-                  position: "top-center",
-                  autoClose: 3000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-               });
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
             } else if (nodes[mid].data > myNumber) {
                steps.push(amountofsteps * (nodes.length + 1) * 60);
                amountofsteps = amountofsteps / 2;
                high = mid - 1;
 
                toast(`${nodes[mid].data} > ${myNumber}`, {
-                  position: "top-center",
-                  autoClose: 3000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-               });
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
             } else {
                // If the number already exists, place it on the right
                steps.push(-0.25 * (nodes.length + 1) * 60);
@@ -223,17 +223,18 @@ class BinarySort extends React.Component{
       <div className="BinarySort">
          <UpperMenu nameOfPage = {"Binary Sort"} search = {false}/>
          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-         />
+          position="top-center"
+          autoClose={2000}
+          limit={1}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          />
          <GenericPage
          //  explanation={explanation}
          //  pythonCode={pythonCode}
@@ -249,12 +250,20 @@ class BinarySort extends React.Component{
             value={this.state.newNumber}
             placeholder="Enter a number"
             onChange={this.handleInput}
-            onKeyPress={this.handleKeyPress}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                this.handleInsert();
+              }
+            }}
           />
           <button className="side-button" onClick={() => this.insert(this.state.newNumber)}>Insert</button>
           <button className="side-button" onClick={() => this.random()}>Random</button>
           <button className="side-button" onClick={() => this.clear()}>Clear</button>
-        </div>}
+        </div>
+         
+        
+      
+      }
         
         presentational={
         <div className="binary-sort-container">
