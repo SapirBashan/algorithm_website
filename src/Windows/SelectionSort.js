@@ -147,6 +147,18 @@ class SelectionSort extends Component {
       for (let k = i + 1; k < n; k++) {
         this.addXMovementToNode(k, 0, nodes, blue);
       }
+
+      // this process ensures that elements before the current index (i) have the same amount of movements (0 movements)),
+      // and the movement for each of these elements is determined by subtracting the cumulative
+      // number of movements of preceding elements from the number of movements of the element at index i.
+      // movment(k<i).movment.size = element(i).movement - elements(k<i).movement
+
+      for (let k = 0; k < i; k++) {
+        let size = nodes[i].Xmovment.length - nodes[k].Xmovment.length;
+        for (let j = 0; j < size; j++) {
+          this.addXMovementToNode(k, 0, nodes, yellow);
+        }
+      }
     }
 
     this.setState({
